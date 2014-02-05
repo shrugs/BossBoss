@@ -9,6 +9,8 @@ class OCModel(Model):
         database = db
 
 
+
+
 class Department(OCModel):
     DeptID = PrimaryKeyField(primary_key=True, auto_increment=True)
     Dept = CharField(100)
@@ -23,7 +25,7 @@ class College(OCModel):
 
 class Term(OCModel):
     TermID = PrimaryKeyField(primary_key=True, auto_increment=True)
-    Quarter = CharField(20)
+    Quarter = CharField()
     Year = IntegerField()
 
 
