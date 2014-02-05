@@ -50,6 +50,8 @@ for subject in subjects:
 
     for course in courses:
         # for each course, click on it and save that html
+        if ' ' in course:
+            course = course.replace(' ', '')
         try:
            open('classes/' + course + '.html', 'r')
            print "skipping: " + course

@@ -45,7 +45,7 @@ class Course(OCModel):
 class Teacher(OCModel):
     TeacherID = PrimaryKeyField(primary_key=True, auto_increment=True)
     Name = CharField()
-    Website = TextField(default=None)
+    Website = TextField(null=True)
     College = ForeignKeyField(College, related_name='Teachers')
 
 class Building(OCModel):
@@ -56,7 +56,7 @@ class Building(OCModel):
 
 class Room(OCModel):
     RoomID = PrimaryKeyField(primary_key=True, auto_increment=True)
-    RoomNum = IntegerField()
+    RoomNum = CharField()
     Building = ForeignKeyField(Building, related_name='Rooms')
 
 class Class(OCModel):
@@ -72,4 +72,6 @@ class Class(OCModel):
     Room = ForeignKeyField(Room, related_name='Classes')
     Teacher = ForeignKeyField(Teacher, related_name='Classes')
     Term = ForeignKeyField(Term, related_name='Classes')
+    FromDate = DateTimeField()
+    ToDate = DateTimeField()
     TSAdded = DateTimeField(default=datetime.datetime.now)
