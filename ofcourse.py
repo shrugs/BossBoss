@@ -107,7 +107,7 @@ def default(term=''):
 
     t = getTerm(term)
 
-    for c in Course.select().where((Course.Term==t) & (Course.College==College.get(College.CollegeID==5))).limit(10):
+    for c in Course.select().where((Course.Term==t) & (Course.CourseCode % 'ENGR-%')).limit(10):
         r.append(c.jsonify())
 
     return json.dumps(r)
@@ -167,16 +167,22 @@ def search():
 
 
 @app.route('/api/1/classes/', methods=['GET', 'OPTIONS'])
+@app.route('/api/1/classes', methods=['GET', 'OPTIONS'])
 def classes():
     courseCodes = request.args.getlist('courseCodes')
+    courseCodes = [str(c) for c in courseCodes]
     print courseCodes
     if len(courseCodes) == 0:
+        print "LENGTH 0"
         return json.dumps([])
     else:
         r = []
-        for c in Course.select().where(Course.CourseCode << courseCodes).limit(20):
+        for i,c in enumerate(Course.select().where(Course.CourseCode << courseCodes).limit(20)):
+            r.append(c.jsonify())
+            r[i]['Classes'] = []
             for cl in c.Classes:
-                r.append(cl.jsonify())
+                r[i]['Classes'].append(cl.jsonify())
+
 
         return json.dumps(r)
 

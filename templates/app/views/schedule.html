@@ -3,7 +3,20 @@
 
 </div>
 <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-    <div class="row" ng-repeat="c in classes" class="class-choice-container">
-
+    <h2>Select a Class from each Course to Create your Schedule</h2>
+    <div class="row class-choice-container" ng-repeat="course in courses">
+        <h4>{{course.CourseCode}} - {{course.Course}}</h4>
+        <div class="col-lg-2 class-info" ng-repeat="c in course.Classes" ng-click="selectClass(course, $index)" ng-class="getClassClass(course, c)">
+            <div class="row">
+                {{c.Teacher.Name}}
+            </div>
+            <div class="row">
+                {{c.TimeStart}} -> {{c.TimeEnd}}
+            </div>
+        </div>
     </div>
+</div>
+
+<div ng-show="selectedEverything()">
+    <button class="btn btn-lg btn-success">DONE</button>
 </div>

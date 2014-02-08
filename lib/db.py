@@ -78,6 +78,7 @@ class Course(OCModel):
             'Description': self.Description if 'Description' not in n else None,
             'Dept': self.Dept.jsonify() if 'Dept' not in n else None,
             'Subject': self.Subject.jsonify() if 'Subject' not in n else None
+            # 'Classes': [x.jsonify() for x in self.Classes] if 'Classes' in n else None
             # 'Term': self.Term,
             # 'TSAdded': datetime.strftime(self.TSAdded, '%Y-%m-%d') if 'TSAdded' not in n else None
         }

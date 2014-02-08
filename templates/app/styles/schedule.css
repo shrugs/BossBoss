@@ -4,3 +4,21 @@
     height: 30%;
     max-height: 500px;
 }
+
+
+.class-info {
+    border-right: 1px solid #009BCC;
+    border-left: 1px solid #009BCC;
+    text-align: center;
+}
+
+.class-choice-container {
+    margin-top: 10px;
+    margin-bottom: 10px;
+    cursor: pointer;
+}
+
+.class-selected,
+.class-info:hover {
+    background-color: rgb(219, 255, 222);
+}
