@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, make_response, current_app
+from flask import Flask, render_template, request, make_response, current_app, jsonify
 import json
 from datetime import timedelta
 from functools import update_wrapper
@@ -77,13 +77,31 @@ def index():
     return "Hello World"
 
 
+def getTerm(term):
+    # get term passed by api or
+    try:
+        return Term.get((Term.Quarter==term.split('-')[0]) & (Term.Year==int(term.split('-')[1])))
+    except:
+        return Term.select().order_by(Term.StartDate.desc()).limit(1).get()
+
 
 @app.route('/api/1/pending', methods=['GET', 'POST', 'OPTIONS'])
 @app.route('/api/1/pending/<int:pendingID>/', methods=['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'])
 @crossdomain(origin='*', headers=['Origin', 'X-Requested-With', 'Content-Type', 'Accept'])
-def pending(pendingID=None):
+def test(pendingID=None):
     pass
+
+@app.route('/api/1/default/<term>', methods=['GET', 'OPTIONS'])
+def default(term):
+    r = []
+
+    t = getTerm(term)
+
+    for c in Course.select().where((Course.Term==t) & (Course.College==College.get(College.CollegeID==5))).limit(10):
+        r.append(c.jsonify())
+
+    return json.dumps(r)
 
 
 if __name__ == '__main__':
-    app.run(host='0.0.0.0', port=80, debug=True)
+    app.run(host='0.0.0.0', port=8081, debug=True)
