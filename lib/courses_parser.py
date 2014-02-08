@@ -1,5 +1,5 @@
 
-from .db import *
+from db import *
 import re
 
 def find_key(key, text):
@@ -38,7 +38,7 @@ for subject in subjects:
     subject = subject.rstrip()
 
     try:
-        with open(subject + '.html') as h:
+        with open('courses/' + subject + '.html') as h:
             h = h.read()
             print "PARSING: " + subject + "\n"
             # page = BS(h)
@@ -87,6 +87,9 @@ for subject in subjects:
                 # print this_course
                 # print "\n\n"
                 CourseCode = find_key("CourseID", this_course)
+                if ' ' in CourseCode:
+                    CourseCode = CourseCode.replace(' ', '')
+
                 CourseName = find_key("CourseTitle", this_course)
                 College_str = find_key("College", this_course)
                 Department_str = find_key("Dept", this_course)
@@ -112,7 +115,7 @@ for subject in subjects:
 
                 # COLLEGE
                 try:
-                    db_college = College.select().where(College.College == College).get()
+                    db_college = College.select().where(College.College == College_str).get()
                 except:
                     db_college = College.create(College=College_str)
 

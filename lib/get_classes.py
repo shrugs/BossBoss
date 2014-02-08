@@ -50,11 +50,12 @@ for subject in subjects:
 
     for course in courses:
         # for each course, click on it and save that html
+        correct_course = course
         if ' ' in course:
-            course = course.replace(' ', '')
+            correct_course = course.replace(' ', '')
         try:
-           open('classes/' + course + '.html', 'r')
-           print "skipping: " + course
+           open('classes/' + correct_course + '.html', 'r')
+           print "skipping: " + correct_course
            continue
         except:
            pass
@@ -68,7 +69,7 @@ for subject in subjects:
             error = driver.find_element_by_css_selector(".errortext")
         except:
             # now save file
-            myFile = open('classes/' + course + ".html",'w')
+            myFile = open('classes/' + correct_course + ".html",'w')
             myFile.write((driver.page_source).encode('utf-8'))
             myFile.close()
 
