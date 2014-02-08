@@ -44,6 +44,7 @@ class Term(OCModel):
     TermID = PrimaryKeyField(primary_key=True, auto_increment=True)
     Quarter = CharField()
     Year = IntegerField()
+    StartDate = DateTimeField(default=datetime.datetime.now)
 
     def jsonify(self):
         return {
@@ -70,15 +71,15 @@ class Course(OCModel):
         return {
             'CourseID': self.CourseID if 'CourseID' not in n else None,
             'Course': self.Course if 'Course' not in n else None,
-            'College': self.College if 'College' not in n else None,
+            'College': self.College.jsonify() if 'College' not in n else None,
             'CourseCode': self.CourseCode if 'CourseCode' not in n else None,
             'CreditsMax': self.CreditsMax if 'CreditsMax' not in n else None,
             'CreditsMin': self.CreditsMin if 'CreditsMin' not in n else None,
             'Description': self.Description if 'Description' not in n else None,
-            'Dept': self.Dept if 'Dept' not in n else None,
-            'Subject': self.Subject if 'Subject' not in n else None,
+            'Dept': self.Dept.jsonify() if 'Dept' not in n else None,
+            'Subject': self.Subject.jsonify() if 'Subject' not in n else None
             # 'Term': self.Term,
-            'TSAdded': self.TSAdded if 'TSAdded' not in n else None
+            # 'TSAdded': datetime.strftime(self.TSAdded, '%Y-%m-%d') if 'TSAdded' not in n else None
         }
 
 class Teacher(OCModel):
@@ -92,7 +93,7 @@ class Teacher(OCModel):
             'TeacherID': self.TeacherID if 'TeacherID' not in n else None,
             'Name': self.Name if 'Name' not in n else None,
             'Website': self.Website if 'Website' not in n else None,
-            'College': self.College if 'College' not in n else None
+            # 'College': self.College.jsonify() if 'College' not in n else None
         }
 
 class Building(OCModel):
@@ -117,7 +118,7 @@ class Room(OCModel):
         return {
             'RoomID': self.RoomID,
             'RoomNum': self.RoomNum,
-            'Building': self.Building,
+            'Building': self.Building.jsonify()
         }
 
 class Class(OCModel):
@@ -142,16 +143,16 @@ class Class(OCModel):
             'ClassID': self.ClassID if 'ClassID' not in n else None,
             'SectionID': self.SectionID if 'SectionID' not in n else None,
             'CallNum': self.CallNum if 'CallNum' not in n else None,
-            'Course': self.Course if 'Course' not in n else None,
+            'Course': self.Course.jsonify() if 'Course' not in n else None,
             'Days': self.Days if 'Days' not in n else None,
-            'TimeStart': self.TimeStart if 'TimeStart' not in n else None,
-            'TimeEnd': self.TimeEnd if 'TimeEnd' not in n else None,
+            'TimeStart': str(self.TimeStart) if 'TimeStart' not in n else None,
+            'TimeEnd': str(self.TimeEnd) if 'TimeEnd' not in n else None,
             'ClassType': self.ClassType if 'ClassType' not in n else None,
-            'Building': self.Building if 'Building' not in n else None,
-            'Room': self.Room if 'Room' not in n else None,
-            'Teacher': self.Teacher if 'Teacher' not in n else None,
-            'Term': self.Term if 'Term' not in n else None,
-            'FromDate': self.FromDate if 'FromDate' not in n else None,
-            'ToDate': self.ToDate if 'ToDate' not in n else None,
-            'TSAdded': self.TSAdded if 'TSAdded' not in n else None
+            # 'Building': self.Building.jsonify() if 'Building' not in n else None,
+            'Room': self.Room.jsonify() if 'Room' not in n else None,
+            'Teacher': self.Teacher.jsonify() if 'Teacher' not in n else None,
+            # 'Term': self.Term.jsonify() if 'Term' not in n else None,
+            'FromDate': datetime.datetime.strftime(self.FromDate, '%Y-%m-%d') if 'FromDate' not in n else None,
+            'ToDate': datetime.datetime.strftime(self.ToDate, '%Y-%m-%d') if 'ToDate' not in n else None,
+            # 'TSAdded': datetime.strftime(self.TSAdded, '%Y-%m-%d') if 'TSAdded' not in n else None
         }
