@@ -16,7 +16,7 @@ angular.module('BossBossApp')
     });
 
     $scope.$watch('selectedCourses', function() {
-        localStorageService.add('selectedCourses', $scope.selectedCourses.map(function(c){return c.CourseCode;}));
+        localStorageService.add('selectedCourses', $scope.selectedCourses);
     }, true);
 
     $scope.$watch('searchText', $debounce(function() {
