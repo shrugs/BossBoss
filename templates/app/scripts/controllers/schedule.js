@@ -37,4 +37,18 @@ angular.module('BossBossApp')
         return true;
     };
 
+    $scope.presentCallNums = function() {
+        $scope.shouldPresent = true;
+    };
+
+    $scope.callnums =function() {
+        var nums = [];
+        for (var i = 0; i < $scope.courses.length; i++) {
+            if ($scope.selectedClasses[$scope.courses[i].CourseCode] !== undefined) {
+                nums.push($scope.selectedClasses[$scope.courses[i].CourseCode].CallNum);
+            }
+        }
+        return nums;
+    };
+
 });

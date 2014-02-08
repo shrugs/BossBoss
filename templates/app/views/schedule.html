@@ -18,5 +18,11 @@
 </div>
 
 <div ng-show="selectedEverything()">
-    <button class="btn btn-lg btn-success">DONE</button>
+    <button class="btn btn-lg btn-success" ng-click="presentCallNums()">DONE</button>
+</div>
+
+<div ng-show="shouldPresent">
+    <div ng-repeat="num in callnums()">
+        {{num}}
+    </div>
 </div>
