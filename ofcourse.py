@@ -1,5 +1,5 @@
 from flask import Flask, render_template, request, make_response, current_app, jsonify, url_for
-import json
+import json, re
 from datetime import timedelta
 from functools import update_wrapper
 
@@ -84,6 +84,16 @@ def getTerm(term):
     except:
         return Term.select().order_by(Term.StartDate.desc()).limit(1).get()
 
+def isNum(str):
+    try:
+        int(str)
+        return True
+    except ValueError:
+        return False
+
+def isCourseCode(str):
+    return str == re.search('\w+-\w+', str)
+
 
 @app.route('/api/1/pending', methods=['GET', 'POST', 'OPTIONS'])
 @app.route('/api/1/pending/<int:pendingID>/', methods=['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'])
@@ -92,7 +102,7 @@ def test(pendingID=None):
     pass
 
 @app.route('/api/1/default/<term>', methods=['GET', 'OPTIONS'])
-def default(term):
+def default(term=''):
     r = []
 
     t = getTerm(term)
@@ -106,10 +116,69 @@ def default(term):
 def search():
     q = request.args.get('q', '')
     if q == '':
-        return url_for(default)
+        return default()
     else:
-        pass
+        r = []
+        if isNum(q):
+            # is num, query CourseCodes
+            for c in Course.select().where(Course.CourseCode ** ('%-'+q)).limit(50):
+                r.append(c.jsonify())
 
+            for c in Class.select().where(Class.CallNum == int(q)).limit(2):
+                r.append(c.Course.jsonify())
+
+            return json.dumps(r)
+
+        else:
+            q = '%'+q+'%'
+            # is string, check for CourseCode
+            if isCourseCode(q):
+                for c in Course.select().where(Course.CourseCode ** q).limit(50):
+                    r.append(c.jsonify())
+
+                return json.dumps(r)
+            else:
+                # search CourseCodes, teachers, and Subject and descriptions
+
+                # SUBJECTS
+                for s in Subject.select().where((Subject.Subject ** q)).limit(2):
+                    for c in s.Courses.limit(10):
+                        r.append(c.jsonify())
+
+                # COURSE NAMES
+                for c in Course.select().where(Course.Course ** q).limit(10):
+                    r.append(c.jsonify())
+
+                # COURSE CODES
+                for c in Course.select().where(Course.CourseCode ** q).limit(20):
+                    r.append(c.jsonify())
+
+                # TEACHERS
+                for t in Teacher.select().where((Teacher.Name ** q)).limit(10):
+                    for c in t.Classes:
+                        r.append(c.Course.jsonify())
+
+
+                # DESCS
+                for c in Course.select().where(Course.Description ** q).limit(20):
+                    r.append(c.jsonify())
+
+                return json.dumps(r[:20])
+
+
+@app.route('/api/1/classes/', methods=['GET', 'OPTIONS'])
+def classes():
+    courseCodes = request.args.getlist('courseCodes')
+    print courseCodes
+    if len(courseCodes) == 0:
+        return json.dumps([])
+    else:
+        r = []
+        for c in Course.select().where(Course.CourseCode << courseCodes).limit(20):
+            for cl in c.Classes:
+                r.append(cl.jsonify())
+
+        return json.dumps(r)
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=8081, debug=True)
