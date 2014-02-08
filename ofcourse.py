@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, make_response, current_app, jsonify
+from flask import Flask, render_template, request, make_response, current_app, jsonify, url_for
 import json
 from datetime import timedelta
 from functools import update_wrapper
@@ -101,6 +101,14 @@ def default(term):
         r.append(c.jsonify())
 
     return json.dumps(r)
+
+@app.route('/api/1/search/', methods=['GET', 'OPTIONS'])
+def search():
+    q = request.args.get('q', '')
+    if q == '':
+        return url_for(default)
+    else:
+        pass
 
 
 if __name__ == '__main__':
