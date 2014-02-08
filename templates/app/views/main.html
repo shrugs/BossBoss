@@ -1,0 +1,27 @@
+
+
+<div class="col-lg-3 selected-courses-container">
+    <header>Selected Courses</header>
+    <div class="filterBox">
+        <input class="form-control" type="search" ng-model="selectedCoursesFilterText" placeholder="Filter">
+    </div>
+    <ul class="selected-courses">
+        <li class="animate-repeat" ng-repeat="course in selectedCourses | filter:selectedCoursesFilterText">
+            {{course.Course}}
+        </li>
+        <div ng-show="selectedCourses.length == 0">
+            No Courses Selected Yet...
+            Why not search for some to the right?
+        </div>
+    </ul>
+</div>
+
+
+<div class="col-lg-9">
+
+    <header>
+        Find and Select Courses
+        <input type="search" ng-model="searchText" class="form-control" placeholder="'ENGR-121', 'Swanbom', 'scuba', '31652'">
+    </header>
+
+</div>

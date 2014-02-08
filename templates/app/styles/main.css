@@ -1,0 +1,129 @@
+.navbar-bb {
+  background-color: #009BCC;
+  border-color: #e7e7e7;
+  border: none;
+  border-radius: 0;
+}
+
+.navbar-bb .navbar-brand {
+    padding-left: 50px;
+    font-size: 30px;
+    color: #E7E7E7;
+}
+
+.navbar-bb .navbar-brand:hover,
+.navbar-bb .navbar-brand:focus {
+  color: #FFF;
+  background-color: transparent;
+}
+
+.navbar-bb .navbar-text {
+  color: #E7E7E7;
+}
+
+.navbar-bb .navbar-nav > li > a {
+  color: #E7E7E7;
+}
+
+.navbar-bb .navbar-nav > li > a:hover,
+.navbar-bb .navbar-nav > li > a:focus {
+  color: #FFF;
+  background-color: transparent;
+}
+
+.navbar-bb .navbar-nav > .active > a,
+.navbar-bb .navbar-nav > .active > a:hover,
+.navbar-bb .navbar-nav > .active > a:focus {
+  color: #E7E7E7;
+  background-color: #AC00E2;
+}
+
+.navbar-bb .navbar-nav > .disabled > a,
+.navbar-bb .navbar-nav > .disabled > a:hover,
+.navbar-bb .navbar-nav > .disabled > a:focus {
+  color: #cccccc;
+  background-color: transparent;
+}
+
+.navbar-bb .navbar-toggle {
+  border-color: #dddddd;
+}
+
+.navbar-bb .navbar-toggle:hover,
+.navbar-bb .navbar-toggle:focus {
+  background-color: #00B4CC;
+}
+
+.navbar-bb .navbar-toggle .icon-bar {
+  background-color: #cccccc;
+}
+
+.navbar-bb .navbar-collapse,
+.navbar-bb .navbar-form {
+  border-color: #e7e7e7;
+}
+
+.navbar-bb .navbar-nav > .open > a,
+.navbar-bb .navbar-nav > .open > a:hover,
+.navbar-bb .navbar-nav > .open > a:focus {
+  color: #555555;
+  background-color: #e7e7e7;
+}
+
+@media (max-width: 767px) {
+  .navbar-bb .navbar-nav .open .dropdown-menu > li > a {
+    color: #777777;
+  }
+  .navbar-bb .navbar-nav .open .dropdown-menu > li > a:hover,
+  .navbar-bb .navbar-nav .open .dropdown-menu > li > a:focus {
+    color: #333333;
+    background-color: transparent;
+  }
+  .navbar-bb .navbar-nav .open .dropdown-menu > .active > a,
+  .navbar-bb .navbar-nav .open .dropdown-menu > .active > a:hover,
+  .navbar-bb .navbar-nav .open .dropdown-menu > .active > a:focus {
+    color: #555555;
+    background-color: #e7e7e7;
+  }
+  .navbar-bb .navbar-nav .open .dropdown-menu > .disabled > a,
+  .navbar-bb .navbar-nav .open .dropdown-menu > .disabled > a:hover,
+  .navbar-bb .navbar-nav .open .dropdown-menu > .disabled > a:focus {
+    color: #cccccc;
+    background-color: transparent;
+  }
+}
+
+.navbar-bb .navbar-link {
+  color: #777777;
+}
+
+.navbar-bb .navbar-link:hover {
+  color: #333333;
+}
+
+html, body {
+    height: 100%;
+}
+
+
+
+
+.main-container {
+    margin: 0;
+    height: 100%;
+}
+
+
+.selected-courses-container {
+    height: 100%;
+    border-right: 3px solid gray;
+}
+
+.selected-courses-container > header {
+    font-size: 2em;
+}
+
+.selected-courses {
+    list-style: none;
+    padding-left: 0;
+}
