@@ -1,27 +1,61 @@
 
 
-<div class="col-lg-3 selected-courses-container">
+
+
+<div class="col-lg-8 search-results-container">
+
+    <header class="search-header">
+        <h3>Find and Select Courses</h3>
+        <input type="search" ng-model="searchText" class="form-control" placeholder="Examples: 'ENGR-121', 'Swanbom', 'scuba', '31652'">
+        <div class="ajax-loader" ng-show="loading">
+            <img src="images/ajax-loader.gif">
+        </div>
+    </header>
+    <div class="course-results-container">
+        <div class="course-result-container animate-repeat" ng-repeat="course in searchResults">
+            <div class="row course-result" ng-click="addCourse($index)">
+                <div class="col-xs-1 col-sm-1 col-md-1 col-lg-1 plus-sign-container">
+                    <div class="plus-sign"><span class="glyphicon glyphicon-plus"></span></div>
+                </div>
+                <div class="col-xs-11 col-sm-11 col-md-11 col-lg-11">
+                    <div class="row">
+                        {{course.CourseCode}} - {{course.Subject.Subject}}
+                    </div>
+                    <div class="row truncate desc-text">
+                        <span>{{course.Description}}</span>
+                        <span ng-if="course.Description == ''">{{course.Course}}</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<div class="col-lg-4 selected-courses-container">
     <header>Selected Courses</header>
     <div class="filterBox">
         <input class="form-control" type="search" ng-model="selectedCoursesFilterText" placeholder="Filter">
     </div>
-    <ul class="selected-courses">
-        <li class="animate-repeat" ng-repeat="course in selectedCourses | filter:selectedCoursesFilterText">
-            {{course.Course}}
-        </li>
+    <div class="selected-courses">
+        <div class="animate-repeat" ng-repeat="course in selectedCourses | filter:selectedCoursesFilterText">
+
+            <div class="row selected-course" ng-click="removeCourse($index)">
+                <div class="col-xs-1 col-sm-1 col-md-1 col-lg-1 minus-sign-container">
+                    <div class="minus-sign"><span class="glyphicon glyphicon-minus"></span></div>
+                </div>
+                <div class="col-xs-11 col-sm-11 col-md-11 col-lg-11">
+                    <span>{{course.CourseCode}} - {{course.Course}}</span>
+                </div>
+            </div>
+
+        </div>
         <div ng-show="selectedCourses.length == 0">
             No Courses Selected Yet...
-            Why not search for some to the right?
+            Why not search for some to the left?
         </div>
-    </ul>
-</div>
-
-
-<div class="col-lg-9">
-
-    <header>
-        Find and Select Courses
-        <input type="search" ng-model="searchText" class="form-control" placeholder="'ENGR-121', 'Swanbom', 'scuba', '31652'">
-    </header>
-
+        <div ng-show="selectedCourses.length > 0">
+            <button class="btn btn-lg btn-success choose-schedule-btn">Choose Schedule</button>
+        </div>
+    </div>
 </div>

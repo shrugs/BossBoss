@@ -108,15 +108,21 @@ html, body {
 
 
 
-.main-container {
+
+
+
+
+
+/*.main-container {
     margin: 0;
-    height: 100%;
-}
+    height: 90%;
+}*/
 
 
 .selected-courses-container {
     height: 100%;
-    border-right: 3px solid gray;
+    border-left: 2px solid #009BCC;
+    overflow: auto;
 }
 
 .selected-courses-container > header {
@@ -126,4 +132,150 @@ html, body {
 .selected-courses {
     list-style: none;
     padding-left: 0;
+}
+
+.selected-course {
+    margin-top: 5px;
+    padding-top: 5px;
+    height: 30px;
+}
+
+.selected-course:hover {
+    background-color: rgb(253, 184, 184);
+}
+
+.minus-sign {
+    margin-top: 2px;
+    width: 16px;
+    height: 16px;
+    border-radius: 15px;
+    background-color: rgb(250, 150, 150);
+    color: #E7E7E7;
+}
+
+.minus-sign:hover {
+    background-color: red;
+    color: #FFF;
+}
+
+.minus-sign > span {
+    position:absolute;
+    top: 12%;
+    left: 50%;
+}
+
+.choose-schedule-btn {
+    margin-top: 20px;
+    width: 100%;
+}
+
+.ajax-loader > img {
+    margin: 10px auto;
+    display: block;
+}
+
+.search-header > h3 {
+    margin-top: 5px;
+}
+
+
+.plus-sign-container {
+    padding-right: 5px;
+    max-width: 60px;
+    padding-left: 30px;
+}
+
+.plus-sign {
+    width: 30px;
+    height: 30px;
+    color: #E7E7E7;
+    background-color: rgb(80, 189, 80);
+    border-radius: 15px;
+    margin: 10px -4px;
+    margin-top: 6px;
+}
+
+.plus-sign:hover {
+    color: #FFF;
+    background-color: rgb(4, 199, 4);
+    margin-top: 5px;
+
+}
+
+.plus-sign > span {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    margin: -9px 0 0 5px;
+}
+
+
+
+
+
+
+
+.course-result {
+    width: 102%;
+    height: 50px;
+    max-height: 50px;
+    overflow: hidden;
+    margin-bottom: 6px;
+    /*border: 1px solid red;*/
+}
+
+.course-result:hover {
+    background-color: rgb(219, 255, 222);
+}
+
+.course-results-container {
+    margin-top: 2%;
+    overflow: auto;
+}
+
+.desc-text {
+    width: 100%;
+}
+
+.desc-text > span {
+    font-size: 0.8em;
+}
+
+.truncate {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+
+
+
+
+
+
+
+@media (max-width: 1200px) {
+
+    .main-container {
+        margin: 0;
+        /*height: 100%;*/
+    }
+
+
+    .selected-courses-container {
+        height: 40%;
+        /*border-right: 3px solid gray;*/
+        border: none;
+        margin-top: 5%;
+    }
+
+    .plus-sign > span {
+        margin: -8px 0 0 -3px;
+    }
+
+    .plus-sign-container {
+        padding-left: 20px;
+    }
+
+
 }

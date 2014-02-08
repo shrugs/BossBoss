@@ -5,7 +5,8 @@ angular.module('BossBossApp', [
   'ngResource',
   'ngRoute',
   'ngAnimate',
-  'ngDebounce'
+  'ngDebounce',
+  'underscore'
 ])
 .config(function ($routeProvider) {
     $routeProvider.when('/', {
