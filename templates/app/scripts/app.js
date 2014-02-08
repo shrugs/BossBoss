@@ -6,36 +6,30 @@ angular.module('BossBossApp', [
   'ngRoute',
   'ngAnimate',
   'ngDebounce',
-  'underscore'
+  'underscore',
+  'LocalStorageModule'
 ])
 .config(function ($routeProvider) {
     $routeProvider.when('/', {
         templateUrl: 'views/main.html',
         controller: 'MainCtrl'
     })
+    .when('/schedule', {
+        templateUrl: 'views/schedule.html',
+        controller: 'ScheduleCtrl'
+    })
     .otherwise({
         redirectTo: '/'
     });
 })
-.factory('StateService', function() {
-    var state = {};
-    var setState = function(s) {
-        state = s;
-    };
-    var getState = function() {
-        return state;
-    };
-
-    return {
-        getState: getState,
-        setState: setState
-    };
-}).directive('bbnav', function () {
+.directive('bbnav', function () {
     return {
         templateUrl: 'views/bbnav.html',
         restrict: 'E'
     };
 })
+
+
 
 .factory('DefaultClasses', function($resource) {
     return $resource(
@@ -58,6 +52,14 @@ angular.module('BossBossApp', [
 .factory('Search', function($resource) {
     return $resource(
         'http://bossboss.tk/api/1/search/',
+        {},
+        {
+            get: {method: 'GET', isArray: true}
+        }
+    );
+}).factory('Classes', function($resource) {
+    return $resource(
+        'http://bossboss.tk/api/1/classes/',
         {},
         {
             get: {method: 'GET', isArray: true}

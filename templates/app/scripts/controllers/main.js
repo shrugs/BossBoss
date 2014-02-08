@@ -1,9 +1,9 @@
 'use strict';
 
 angular.module('BossBossApp')
-.controller('MainCtrl', function ($scope, DefaultClasses, $debounce, Search, _) {
+.controller('MainCtrl', function ($scope, DefaultClasses, $debounce, Search, _, localStorageService) {
     $scope.searchResults = DefaultClasses.get();
-    $scope.selectedCourses = [];
+    $scope.selectedCourses = localStorageService.get('selectedCourses') || [];
     $scope.loading = false;
 
     $scope.$watch('searchResults', function() {
@@ -14,6 +14,10 @@ angular.module('BossBossApp')
             clearInterval(a);
         }, 1000);
     });
+
+    $scope.$watch('selectedCourses', function() {
+        localStorageService.add('selectedCourses', $scope.selectedCourses.map(function(c){return c.CourseCode;}));
+    }, true);
 
     $scope.$watch('searchText', $debounce(function() {
         $scope.searchResults = [];
@@ -39,6 +43,8 @@ angular.module('BossBossApp')
         }
 
         $scope.selectedCourses.splice(i, 1);
-
     };
+
+
+
 });
