@@ -108,7 +108,7 @@ for subject in subjects:
 
                 # DEPT
                 try:
-                    db_dept = Department.select().where(Department.Dept == Department).get()
+                    db_dept = Department.select().where(Department.Dept == Department_str).get()
                 except:
                     db_dept = Department.create(Dept=Department_str)
 
