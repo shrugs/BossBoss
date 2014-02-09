@@ -11,13 +11,13 @@
             <img src="images/ajax-loader.gif">
         </div>
     </header>
-    <div class="course-results-container">
+    <div>
         <div class="course-result-container fade-in-out" ng-repeat="course in searchResults">
             <div class="row course-result" ng-click="addCourse($index)">
                 <div class="col-xs-1 col-sm-1 col-md-1 col-lg-1 plus-sign-container">
                     <div class="plus-sign"><span class="glyphicon glyphicon-plus"></span></div>
                 </div>
-                <div class="col-xs-11 col-sm-11 col-md-11 col-lg-11">
+                <div class="col-xs-10 col-sm-10 col-md-11 col-lg-11 course-result-title">
                     <div class="row">
                         {{course.CourseCode}} - {{course.Course}} - {{course.Subject.Subject}}
                     </div>
@@ -44,7 +44,7 @@
                 <div class="col-xs-1 col-sm-1 col-md-1 col-lg-1 minus-sign-container">
                     <div class="minus-sign"><span class="glyphicon glyphicon-minus main-minus-fix"></span></div>
                 </div>
-                <div class="col-xs-11 col-sm-11 col-md-11 col-lg-11">
+                <div class="col-xs-10 col-sm-10 col-md-11 col-lg-11">
                     <span>{{course.CourseCode}} - {{course.Course}}</span>
                 </div>
             </div>

@@ -90,7 +90,7 @@ for course_code in glob.glob('*.html'):
         Time = find_key('Time', this_class)
         if Time != '' and Time != 'Arrange':
             TimeStart, TimeEnd = Time.split('-')
-            TimeStart += 'AM' if (int(TimeStart[:2]) > 7) else 'PM'
+            TimeStart += 'AM' if (7 < int(TimeStart[:2]) < 12) else 'PM'
             TimeStart = time.strftime('%H:%M', time.strptime(TimeStart, '%I:%M%p'))
             try:
                 TimeEnd = time.strftime('%H:%M', time.strptime(TimeEnd, '%I:%M%p'))

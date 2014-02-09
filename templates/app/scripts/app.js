@@ -83,7 +83,17 @@ angular.module('BossBossApp', [
                     return $scope.calEvents[day][i].style;
                 }
             };
+            var colors = [
+                'rgb(255, 84, 84)',
+                'rgb(47, 47, 255)',
+                'rgb(52, 134, 52)',
+                'rgb(139, 137, 137)',
+                'rgb(235, 101, 247)',
+                'rgb(143, 135, 97)',
+                'rgb(203, 122, 214)',
+                'rgb(84, 221, 255)'
 
+            ];
             $scope.$watch('selectedClasses', function() {
                 // every time selectedClasses changes, we want to update the calendar
 
@@ -91,7 +101,7 @@ angular.module('BossBossApp', [
                 var h = element.parent().height()*0.90;
                 var hourHeight = Math.floor(h/$scope.hours.length);
 
-                var colors = ['red', 'blue', 'green', 'gray'];
+
                 var startTime = new Date(0,0,0, 7, 0, 0, 0);
 
                 $scope.hourStyle = {
@@ -129,7 +139,7 @@ angular.module('BossBossApp', [
 
                         ev.style = {
                             height: deltaTDuration*hourHeight + 'px',
-                            top: deltaTStart*hourHeight + 'px',
+                            top: (deltaTStart*hourHeight+hourHeight/2) + 'px',
                             backgroundColor: colors[count]
                         };
 
@@ -138,7 +148,11 @@ angular.module('BossBossApp', [
                             $scope.calEvents[day].push(ev);
                         });
 
-                        count ++;
+                        if (count < colors.length-1) {
+                            count ++;
+                        } else {
+                            count =0;
+                        }
                     });
                 };
 

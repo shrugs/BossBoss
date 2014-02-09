@@ -184,11 +184,11 @@ def classes():
 
 
 
-# @app.route('/', defaults={'path': ''})
-# # @app.route('/<path:path>')
-# @crossdomain(origin='*', headers=['Origin', 'X-Requested-With', 'Content-Type', 'Accept'], methods=['GET', 'OPTIONS'])
-# def index(path):
-#     return "Hello World"
+@app.route('/', defaults={'path': ''})
+# @app.route('/<path:path>')
+@crossdomain(origin='*', headers=['Origin', 'X-Requested-With', 'Content-Type', 'Accept'], methods=['GET', 'OPTIONS'])
+def index(path):
+    return "Hello World"
     # return make_response(open('templates/index.html').read())
     # return send_file('templates/index.html')
 

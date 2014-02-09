@@ -7,8 +7,8 @@
 
 
 .class-info {
-    border-right: 1px solid #009BCC;
-    border-left: 1px solid #009BCC;
+    border-right: 1px solid #0052CC;
+    border-left: 1px solid #0052CC;
     text-align: center;
 }
 
@@ -20,11 +20,11 @@
 
 .class-selected,
 .class-info:hover {
-    background-color: rgb(219, 255, 222);
+    background-color: #B3D2FF;
 }
 
 .call-num-container {
-    border-left: 2px solid #009BCC;
+    border-left: 2px solid #0052CC;
 }
 
 .done-btn-container {

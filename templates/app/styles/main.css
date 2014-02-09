@@ -1,5 +1,5 @@
 .navbar-bb {
-  background-color: #009BCC;
+  background-color: #0052CC;
   border-color: #e7e7e7;
   border: none;
   border-radius: 0;
@@ -121,7 +121,7 @@ html, body {
 
 .selected-courses-container {
     height: 100%;
-    border-left: 2px solid #009BCC;
+    border-left: 2px solid #0052CC;
     overflow: auto;
 }
 

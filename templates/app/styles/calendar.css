@@ -22,9 +22,10 @@
     cursor: pointer;
     color: #E7E7E7;
     font-size: 0.7em;
-    width: 90%;
+    min-width: 18%;
     display: block;
     border-radius: 5px;
+    border: 1px solid #333333;
 }
 
 table.table > tbody {
@@ -35,13 +36,15 @@ table.table th {
     text-align: center;
 }
 
+.cal-container {
+    height: 100%;
+}
 
 
 
-
-.fade-in-out.ng-move,
-.fade-in-out.ng-enter,
-.fade-in-out.ng-leave {
+.cal-fade-in-out.ng-move,
+.cal-fade-in-out.ng-enter,
+.cal-fade-in-out.ng-leave {
   -webkit-transition:all cubic-bezier(0.250, 0.460, 0.450, 0.940) 400ms;
   -moz-transition:all cubic-bezier(0.250, 0.460, 0.450, 0.940) 400ms;
   -o-transition:all cubic-bezier(0.250, 0.460, 0.450, 0.940) 400ms;
@@ -49,14 +52,14 @@ table.table th {
 }
 
 
-.fade-in-out.ng-leave.ng-leave-active,
-.fade-in-out.ng-move,
-.fade-in-out.ng-enter {
+.cal-fade-in-out.ng-leave.ng-leave-active,
+.cal-fade-in-out.ng-move,
+.cal-fade-in-out.ng-enter {
     opacity: 0;
 }
 
-.fade-in-out.ng-leave,
-.fade-in-out.ng-move.ng-move-active,
-.fade-in-out.ng-enter.ng-enter-active {
-  opacity: 1;
+.cal-fade-in-out.ng-leave,
+.cal-fade-in-out.ng-move.ng-move-active,
+.cal-fade-in-out.ng-enter.ng-enter-active {
+  opacity: 0.8;
 }

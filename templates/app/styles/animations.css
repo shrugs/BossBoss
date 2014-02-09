@@ -1,34 +1,22 @@
 
-
-
-.animate-repeat.ng-move,
-.animate-repeat.ng-enter,
-.animate-repeat.ng-leave
-{
-    -webkit-transition: 400ms cubic-bezier(0.250, 0.250, 0.750, 0.750) all;
-    -moz-transition: 400ms cubic-bezier(0.250, 0.250, 0.750, 0.750) all;
-    -ms-transition: 400ms cubic-bezier(0.250, 0.250, 0.750, 0.750) all;
-    -o-transition: 400ms cubic-bezier(0.250, 0.250, 0.750, 0.750) all;
-    transition: 400ms cubic-bezier(0.250, 0.250, 0.750, 0.750) all;
-    position: relative;
-    display: block;
-    overflow: hidden;
-    text-overflow: clip;
-    white-space:nowrap;
+.fade-in-out.ng-move,
+.fade-in-out.ng-enter,
+.fade-in-out.ng-leave {
+  -webkit-transition:all cubic-bezier(0.250, 0.460, 0.450, 0.940) 400ms;
+  -moz-transition:all cubic-bezier(0.250, 0.460, 0.450, 0.940) 400ms;
+  -o-transition:all cubic-bezier(0.250, 0.460, 0.450, 0.940) 400ms;
+  transition:all cubic-bezier(0.250, 0.460, 0.450, 0.940) 400ms;
 }
 
-.animate-repeat.ng-leave.ng-leave-active,
-.animate-repeat.ng-move,
-.animate-repeat.ng-enter {
+
+.fade-in-out.ng-leave.ng-leave-active,
+.fade-in-out.ng-move,
+.fade-in-out.ng-enter {
     opacity: 0;
-    width: 0px;
-    height: 0px;
 }
 
-.animate-repeat.ng-leave,
-.animate-repeat.ng-move.ng-move-active,
-.animate-repeat.ng-enter.ng-enter-active {
-    opacity: 1;
-    width: 150px;
-    height: 30px;
+.fade-in-out.ng-leave,
+.fade-in-out.ng-move.ng-move-active,
+.fade-in-out.ng-enter.ng-enter-active {
+  opacity: 1;
 }
