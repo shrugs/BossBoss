@@ -287,3 +287,10 @@ html, body {
 
 
 }
+
+
+.la-tech-text {
+    margin-top: 0;
+    margin-bottom: 0;
+    font-size: 30px;
+}
