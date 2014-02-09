@@ -12,6 +12,14 @@ angular.module('BossBossApp')
         if ($scope.courses.length === 0) {
             $scope.noCourses = true;
         }
+
+        angular.forEach($scope.courses, function(course) {
+            angular.forEach(course.Classes, function(c) {
+                c.TimeStart = new Date(0,0,0,c.TimeStart.split(':')[0], c.TimeStart.split(':')[1], 0, 0);
+                c.TimeEnd = new Date(0,0,0,c.TimeEnd.split(':')[0], c.TimeEnd.split(':')[1], 0, 0);
+            });
+        });
+
     }, function() {
         // nay
         $scope.loading = false;

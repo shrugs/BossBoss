@@ -10,13 +10,18 @@ angular.module('BossBossApp', [
   'LocalStorageModule'
 ])
 .config(function ($routeProvider) {
-    $routeProvider.when('/', {
+    $routeProvider
+    .when('/', {
         templateUrl: 'views/main.html',
         controller: 'MainCtrl'
     })
     .when('/schedule', {
         templateUrl: 'views/schedule.html',
         controller: 'ScheduleCtrl'
+    })
+    .when('/about', {
+        templateUrl: 'views/about.html',
+        controller: 'AboutCtrl'
     })
     .otherwise({
         redirectTo: '/'
@@ -73,21 +78,68 @@ angular.module('BossBossApp', [
         restrict: 'AE',
         templateUrl: 'views/bbcal.html',
         link: function($scope, element, attrs) {
+
+            $scope.getStyle = function(day, i) {
+                if ($scope.calEvents !== undefined && i < $scope.calEvents[day].length) {
+                    return $scope.calEvents[day][i].style;
+                }
+            };
+
             $scope.$watch('selectedClasses', function() {
                 // every time selectedClasses changes, we want to update the calendar
 
                 $scope.hours = ['7:00AM', '8:00AM', '9:00AM', '10:00AM', '11:00AM', '12:00PM', '1:00PM', '2:00PM', '3:00PM', '4:00PM', '5:00PM', '6:00PM', '7:00PM', '8:00PM'];
-                var h = element.parent().height();
-                var hourHeight = h/$scope.hours.length;
+                var h = element.parent().height()*0.90;
+                var hourHeight = Math.floor(h/$scope.hours.length);
 
-                angular.element('.col-hour-header').css({
+                var colors = ['red', 'blue', 'green', 'gray'];
+                var startTime = new Date(0,0,0, 7, 0, 0, 0);
+
+                $scope.hourStyle = {
                     height: hourHeight.toString()+'px'
-                });
+                };
+
+                var dTime = function(d) {
+                    return d.getHours() + d.getMinutes()/60;
+                };
+
 
                 var updateCalendar = function(classes) {
 
+                    var count = 0;
+
+                    $scope.calEvents = {
+                        'M': [],
+                        'T': [],
+                        'W': [],
+                        'R': [],
+                        'F': []
+                    };
+
                     angular.forEach(classes, function(c) {
-                        // for each class, we want to make an element
+                        // for each class, we want to make an element on the calendar
+                        var ev = {
+                            title: c.Course.CourseCode + '-' + c.SectionID,
+                            description: c.Course.Course,
+                            from: c.TimeStart,
+                            to: c.TimeEnd,
+                        };
+
+                        var deltaTDuration = dTime(ev.to) - dTime(ev.from);
+                        var deltaTStart = dTime(ev.from) - dTime(startTime);
+
+                        ev.style = {
+                            height: deltaTDuration*hourHeight + 'px',
+                            top: deltaTStart*hourHeight + 'px',
+                            backgroundColor: colors[count]
+                        };
+
+                        angular.forEach(c.Days.split(''), function(day) {
+                            // for each day that the class is on, make and event
+                            $scope.calEvents[day].push(ev);
+                        });
+
+                        count ++;
                     });
                 };
 

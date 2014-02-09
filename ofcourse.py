@@ -107,7 +107,7 @@ def default(term=''):
 
     t = getTerm(term)
 
-    for c in Course.select().where((Course.Term==t) & (Course.CourseCode % 'ENGR-%')).limit(10):
+    for c in Course.select().where((Course.Term==t) & (Course.CourseCode % 'BIEN-%')).limit(10):
         r.append(c.jsonify())
 
     return json.dumps(r)

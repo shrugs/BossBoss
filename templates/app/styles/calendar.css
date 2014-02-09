@@ -3,3 +3,60 @@
 .cal-col {
     height: 100%;
 }
+
+.times-col {
+    width: 1px;
+    border-right: 1px solid #dddddd;
+}
+
+.cal-col {
+    width: 19%;
+    position: relative;
+}
+
+.cal-event {
+    opacity: 0.8;
+    position: absolute;
+    text-align: center;
+    overflow: hidden;
+    cursor: pointer;
+    color: #E7E7E7;
+    font-size: 0.7em;
+    width: 90%;
+    display: block;
+    border-radius: 5px;
+}
+
+table.table > tbody {
+    border: 1px solid #dddddd;
+}
+
+table.table th {
+    text-align: center;
+}
+
+
+
+
+
+.fade-in-out.ng-move,
+.fade-in-out.ng-enter,
+.fade-in-out.ng-leave {
+  -webkit-transition:all cubic-bezier(0.250, 0.460, 0.450, 0.940) 400ms;
+  -moz-transition:all cubic-bezier(0.250, 0.460, 0.450, 0.940) 400ms;
+  -o-transition:all cubic-bezier(0.250, 0.460, 0.450, 0.940) 400ms;
+  transition:all cubic-bezier(0.250, 0.460, 0.450, 0.940) 400ms;
+}
+
+
+.fade-in-out.ng-leave.ng-leave-active,
+.fade-in-out.ng-move,
+.fade-in-out.ng-enter {
+    opacity: 0;
+}
+
+.fade-in-out.ng-leave,
+.fade-in-out.ng-move.ng-move-active,
+.fade-in-out.ng-enter.ng-enter-active {
+  opacity: 1;
+}

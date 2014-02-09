@@ -26,3 +26,16 @@
 .call-num-container {
     border-left: 2px solid #009BCC;
 }
+
+.done-btn-container {
+    margin-top: 10px;
+    margin-bottom: 30px;
+}
+
+.select-title {
+    margin-top: 10px;
+}
+
+.select-classes-container {
+    margin-top: 15px;
+}
