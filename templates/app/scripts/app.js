@@ -143,6 +143,8 @@ angular.module('BossBossApp', [
                             backgroundColor: colors[count]
                         };
 
+
+
                         angular.forEach(c.Days.split(''), function(day) {
                             // for each day that the class is on, make and event
                             $scope.calEvents[day].push(ev);

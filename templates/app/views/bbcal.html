@@ -13,53 +13,63 @@
         <td class="times-col">
             <div class="col-hour-header" ng-style="hourStyle" ng-repeat="hour in hours">{{hour}}</div>
         </td>
-        <td class="cal-col">
-            <div class="cal-event cal-fade-in-out" ng-repeat="event in calEvents['M']" ng-style="getStyle('M', $index)">
-                <div class="cal-event-title">
-                    <span>{{event.title}}</span>
-                </div>
-                <div class="cal-event-body">
-                    <span>{{event.description}}</span>
-                </div>
-            </div>
-        </td>
-        <td class="cal-col">
-            <div class="cal-event cal-fade-in-out" ng-repeat="event in calEvents['T']" ng-style="getStyle('T', $index)">
-                <div class="cal-event-title">
-                    <span>{{event.title}}</span>
-                </div>
-                <div class="cal-event-body">
-                    <span>{{event.description}}</span>
+        <td>
+            <div class="cal-col">
+                <div class="cal-event cal-fade-in-out" ng-repeat="event in calEvents['M']" ng-style="getStyle('M', $index)">
+                    <div class="cal-event-title">
+                        <span>{{event.title}}</span>
+                    </div>
+                    <div class="cal-event-body">
+                        <span>{{event.description}}</span>
+                    </div>
                 </div>
             </div>
         </td>
-        <td class="cal-col">
-            <div class="cal-event cal-fade-in-out" ng-repeat="event in calEvents['W']" ng-style="getStyle('W', $index)">
-                <div class="cal-event-title">
-                    <span>{{event.title}}</span>
-                </div>
-                <div class="cal-event-body">
-                    <span>{{event.description}}</span>
-                </div>
-            </div>
-        </td>
-        <td class="cal-col">
-            <div class="cal-event cal-fade-in-out" ng-repeat="event in calEvents['R']" ng-style="getStyle('R', $index)">
-                <div class="cal-event-title">
-                    <span>{{event.title}}</span>
-                </div>
-                <div class="cal-event-body">
-                    <span>{{event.description}}</span>
+        <td>
+            <div class="cal-col">
+                <div class="cal-event cal-fade-in-out" ng-repeat="event in calEvents['T']" ng-style="getStyle('T', $index)">
+                    <div class="cal-event-title">
+                        <span>{{event.title}}</span>
+                    </div>
+                    <div class="cal-event-body">
+                        <span>{{event.description}}</span>
+                    </div>
                 </div>
             </div>
         </td>
-        <td class="cal-col">
-            <div class="cal-event cal-fade-in-out" ng-repeat="event in calEvents['F']" ng-style="getStyle('F', $index)">
-                <div class="cal-event-title">
-                    <span>{{event.title}}</span>
+        <td>
+            <div class="cal-col">
+                <div class="cal-event cal-fade-in-out" ng-repeat="event in calEvents['W']" ng-style="getStyle('W', $index)">
+                    <div class="cal-event-title">
+                        <span>{{event.title}}</span>
+                    </div>
+                    <div class="cal-event-body">
+                        <span>{{event.description}}</span>
+                    </div>
                 </div>
-                <div class="cal-event-body">
-                    <span>{{event.description}}</span>
+            </div>
+        </td>
+        <td>
+            <div class="cal-col">
+                <div class="cal-event cal-fade-in-out" ng-repeat="event in calEvents['R']" ng-style="getStyle('R', $index)">
+                    <div class="cal-event-title">
+                        <span>{{event.title}}</span>
+                    </div>
+                    <div class="cal-event-body">
+                        <span>{{event.description}}</span>
+                    </div>
+                </div>
+            </div>
+        </td>
+        <td>
+            <div class="cal-col">
+                <div class="cal-event cal-fade-in-out" ng-repeat="event in calEvents['F']" ng-style="getStyle('F', $index)">
+                    <div class="cal-event-title">
+                        <span>{{event.title}}</span>
+                    </div>
+                    <div class="cal-event-body">
+                        <span>{{event.description}}</span>
+                    </div>
                 </div>
             </div>
         </td>
