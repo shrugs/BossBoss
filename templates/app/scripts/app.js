@@ -30,7 +30,6 @@ angular.module('BossBossApp', [
 })
 
 
-
 .factory('DefaultClasses', function($resource) {
     return $resource(
         'http://bossboss.tk/api/1/default/:term',
@@ -65,5 +64,37 @@ angular.module('BossBossApp', [
             get: {method: 'GET', isArray: true}
         }
     );
+})
+
+.directive('bbcal', function() {
+
+    return {
+        remove: true,
+        restrict: 'AE',
+        templateUrl: 'views/bbcal.html',
+        link: function($scope, element, attrs) {
+            $scope.$watch('selectedClasses', function() {
+                // every time selectedClasses changes, we want to update the calendar
+
+                $scope.hours = ['7:00AM', '8:00AM', '9:00AM', '10:00AM', '11:00AM', '12:00PM', '1:00PM', '2:00PM', '3:00PM', '4:00PM', '5:00PM', '6:00PM', '7:00PM', '8:00PM'];
+                var h = element.parent().height();
+                var hourHeight = h/$scope.hours.length;
+
+                angular.element('.col-hour-header').css({
+                    height: hourHeight.toString()+'px'
+                });
+
+                var updateCalendar = function(classes) {
+
+                    angular.forEach(classes, function(c) {
+                        // for each class, we want to make an element
+                    });
+                };
+
+
+                updateCalendar($scope.selectedClasses);
+            }, true);
+        }
+    };
 });
 

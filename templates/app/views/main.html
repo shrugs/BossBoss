@@ -42,7 +42,7 @@
 
             <div class="row selected-course" ng-click="removeCourse($index)">
                 <div class="col-xs-1 col-sm-1 col-md-1 col-lg-1 minus-sign-container">
-                    <div class="minus-sign"><span class="glyphicon glyphicon-minus"></span></div>
+                    <div class="minus-sign"><span class="glyphicon glyphicon-minus main-minus-fix"></span></div>
                 </div>
                 <div class="col-xs-11 col-sm-11 col-md-11 col-lg-11">
                     <span>{{course.CourseCode}} - {{course.Course}}</span>
@@ -51,10 +51,12 @@
 
         </div>
         <div ng-show="selectedCourses.length == 0">
-            No Courses Selected Yet...
-            Why not search for some to the left?
+            <br>
+            <p>No Courses Selected Yet...
+            Why not add some from the left?</p>
         </div>
         <div ng-show="selectedCourses.length > 0">
+            <button class="btn btn-xs btn-danger clear-all-btn pull-right" ng-click="clearAll()">Clear All</button>
             <a href='#/schedule' class="btn btn-lg btn-success choose-schedule-btn">Choose Schedule</a>
         </div>
     </div>

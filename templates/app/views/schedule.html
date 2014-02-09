@@ -1,28 +1,50 @@
 
-<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 calendar-container">
-
+<div class="row calendar-container">
+    <bbcal></bbcal>
 </div>
-<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-    <h2>Select a Class from each Course to Create your Schedule</h2>
-    <div class="row class-choice-container" ng-repeat="course in courses">
-        <h4>{{course.CourseCode}} - {{course.Course}}</h4>
-        <div class="col-lg-2 class-info" ng-repeat="c in course.Classes" ng-click="selectClass(course, $index)" ng-class="getClassClass(course, c)">
-            <div class="row">
-                {{c.Teacher.Name}}
+<div class="row">
+    <div class="col-xs-10 col-sm-10 col-md-10 col-lg-10">
+        <h2>Select a Class from each Course to Create your Schedule</h2>
+        <div class="ajax-loader" ng-show="loading">
+            <img src="images/ajax-loader.gif">
+        </div>
+        <div ng-show="noCourses">
+            <p>No courses selected.</p>
+            <a href="#/" class="btn btn-lg btn-success">Find Courses</a>
+        </div>
+        <div class="row class-choice-container" ng-repeat="course in courses">
+            <h4>{{course.CourseCode}} - {{course.Course}}</h4>
+            <div class="col-lg-2 class-info" ng-repeat="c in course.Classes" ng-click="selectClass(course, $index)" ng-class="getClassClass(course, c)">
+                <div class="row">
+                    {{c.Teacher.Name}}
+                </div>
+                <div class="row">
+                    {{c.Days}} {{c.TimeStart}}->{{c.TimeEnd}}
+                </div>
             </div>
-            <div class="row">
-                {{c.TimeStart}} -> {{c.TimeEnd}}
+            <div ng-show="course.Classes.length == 0">
+                <div class="minus-sign-container pull-left" ng-click="removeCourse($index)">
+                    <div class="minus-sign"><span class="glyphicon glyphicon-minus"></span></div>
+                </div>
+                <p>No Classes for this Course this Term.</p>
             </div>
+        </div>
+
+        <div ng-show="selectedEverything()">
+            <button class="btn btn-lg btn-success btn-super" ng-click="presentCallNums()">DONE</button>
+        </div>
+    </div>
+
+    <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2 call-num-container">
+        <div ng-show="shouldPresent">
+            <h3>Call Numbers</h3>
+            <p>These are the numbers you'll want to write down and enter into boss to register for classes.</p>
+            <ul class="list-group">
+                <li class="list-group-item" ng-repeat="c in callnums()">
+                    {{c.Course.CourseCode}}-{{c.SectionID}}<br><b>{{c.CallNum}}</b>
+                </li>
+            <ul>
         </div>
     </div>
 </div>
 
-<div ng-show="selectedEverything()">
-    <button class="btn btn-lg btn-success" ng-click="presentCallNums()">DONE</button>
-</div>
-
-<div ng-show="shouldPresent">
-    <div ng-repeat="num in callnums()">
-        {{num}}
-    </div>
-</div>

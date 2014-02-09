@@ -1,7 +1,7 @@
 
 
 .calendar-container {
-    height: 30%;
+    height: 400px;
     max-height: 500px;
 }
 
@@ -21,4 +21,8 @@
 .class-selected,
 .class-info:hover {
     background-color: rgb(219, 255, 222);
+}
+
+.call-num-container {
+    border-left: 2px solid #009BCC;
 }

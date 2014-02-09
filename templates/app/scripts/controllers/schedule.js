@@ -2,9 +2,28 @@
 
 angular.module('BossBossApp')
 .controller('ScheduleCtrl', function ($scope, localStorageService, Classes) {
-    $scope.selectedCourses = localStorageService.get('selectedCourses');
+    $scope.selectedCourses = localStorageService.get('selectedCourses') || [];
+    $scope.loading = true;
+    $scope.noCourses = false;
     // now get all of the class info for those courses
-    $scope.courses = Classes.get({courseCodes: $scope.selectedCourses.map(function(obj){return obj.CourseCode;})});
+    $scope.courses = Classes.get({courseCodes: $scope.selectedCourses.map(function(obj){return obj.CourseCode;})}, function(){
+        // yay
+        $scope.loading = false;
+        if ($scope.courses.length === 0) {
+            $scope.noCourses = true;
+        }
+    }, function() {
+        // nay
+        $scope.loading = false;
+        $scope.noCourses = true;
+    });
+
+    $scope.$watch('courses', function() {
+        if ($scope.courses.length > 0) {
+            localStorageService.add('selectedCourses', $scope.courses);
+        }
+    }, true);
+
     $scope.selectedClasses = {};
 
     $scope.selectClass = function(course, i) {
@@ -41,14 +60,18 @@ angular.module('BossBossApp')
         $scope.shouldPresent = true;
     };
 
-    $scope.callnums =function() {
+    $scope.callnums = function() {
         var nums = [];
         for (var i = 0; i < $scope.courses.length; i++) {
             if ($scope.selectedClasses[$scope.courses[i].CourseCode] !== undefined) {
-                nums.push($scope.selectedClasses[$scope.courses[i].CourseCode].CallNum);
+                nums.push($scope.selectedClasses[$scope.courses[i].CourseCode]);
             }
         }
         return nums;
+    };
+
+    $scope.removeCourse = function(i) {
+        $scope.courses.splice(i, 1);
     };
 
 });

@@ -45,6 +45,16 @@ angular.module('BossBossApp')
         $scope.selectedCourses.splice(i, 1);
     };
 
+    $scope.clearAll = function() {
+        for (var i = 0; i < $scope.selectedCourses.length; i++) {
+            if (_.find($scope.searchResults, function(obj){return obj.CourseID === $scope.selectedCourses[i].CourseID;}) === undefined) {
+                $scope.searchResults.push($scope.selectedCourses[i]);
+            }
+        }
+
+        $scope.selectedCourses = [];
+    };
+
 
 
 });
