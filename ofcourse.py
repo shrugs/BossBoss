@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, make_response, current_app, jsonify, url_for
+from flask import Flask, render_template, request, make_response, current_app, jsonify, url_for, send_file
 import json, re
 from datetime import timedelta
 from functools import update_wrapper
@@ -9,7 +9,8 @@ from lib.db import *
 # from flask_peewee.auth import Auth
 # from flask_peewee.db import Database
 
-def crossdomain(origin=None, methods=None, headers=None, max_age=21600, attach_to_all=True, automatic_options=True):
+
+def crossdomain(origin='*', methods=None, headers=None, max_age=21600, attach_to_all=True, automatic_options=True):
     if methods is not None:
         methods = ', '.join(sorted(x.upper() for x in methods))
     if headers is not None and not isinstance(headers, basestring):
@@ -36,10 +37,12 @@ def crossdomain(origin=None, methods=None, headers=None, max_age=21600, attach_t
                 return resp
 
             h = resp.headers
-
             h['Access-Control-Allow-Origin'] = origin
             h['Access-Control-Allow-Methods'] = get_methods()
             h['Access-Control-Max-Age'] = str(max_age)
+            h['Access-Control-Allow-Credentials'] = 'true'
+            h['Access-Control-Allow-Headers'] = \
+                "Origin, X-Requested-With, Content-Type, Accept, Authorization"
             if headers is not None:
                 h['Access-Control-Allow-Headers'] = headers
             return resp
@@ -47,7 +50,6 @@ def crossdomain(origin=None, methods=None, headers=None, max_age=21600, attach_t
         f.provide_automatic_options = False
         return update_wrapper(wrapped_function, f)
     return decorator
-
 
 
 
@@ -72,10 +74,6 @@ app = Flask(__name__)
 # api.setup()
 
 
-@app.route('/')
-def index():
-    return "Hello World"
-
 
 def getTerm(term):
     # get term passed by api or
@@ -95,24 +93,21 @@ def isCourseCode(str):
     return str == re.search('\w+-\w+', str)
 
 
-@app.route('/api/1/pending', methods=['GET', 'POST', 'OPTIONS'])
-@app.route('/api/1/pending/<int:pendingID>/', methods=['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'])
-@crossdomain(origin='*', headers=['Origin', 'X-Requested-With', 'Content-Type', 'Accept'])
-def test(pendingID=None):
-    pass
 
 @app.route('/api/1/default/<term>', methods=['GET', 'OPTIONS'])
+@crossdomain(origin='*', headers=['Origin', 'X-Requested-With', 'Content-Type', 'Accept'], methods=['GET', 'OPTIONS'])
 def default(term=''):
     r = []
 
     t = getTerm(term)
 
-    for c in Course.select().where((Course.Term==t) & (Course.CourseCode % 'BIEN-%')).limit(10):
+    for c in Course.select().where((Course.Term==t) & (Course.CourseCode % 'ENGR-1%')).limit(10):
         r.append(c.jsonify())
 
     return json.dumps(r)
 
 @app.route('/api/1/search/', methods=['GET', 'OPTIONS'])
+@crossdomain(origin='*', headers=['Origin', 'X-Requested-With', 'Content-Type', 'Accept'], methods=['GET', 'OPTIONS'])
 def search():
     q = request.args.get('q', '')
     if q == '':
@@ -168,6 +163,7 @@ def search():
 
 @app.route('/api/1/classes/', methods=['GET', 'OPTIONS'])
 @app.route('/api/1/classes', methods=['GET', 'OPTIONS'])
+@crossdomain(origin='*', headers=['Origin', 'X-Requested-With', 'Content-Type', 'Accept'], methods=['GET', 'OPTIONS'])
 def classes():
     courseCodes = request.args.getlist('courseCodes')
     courseCodes = [str(c) for c in courseCodes]
@@ -185,6 +181,16 @@ def classes():
 
 
         return json.dumps(r)
+
+
+
+# @app.route('/', defaults={'path': ''})
+# # @app.route('/<path:path>')
+# @crossdomain(origin='*', headers=['Origin', 'X-Requested-With', 'Content-Type', 'Accept'], methods=['GET', 'OPTIONS'])
+# def index(path):
+#     return "Hello World"
+    # return make_response(open('templates/index.html').read())
+    # return send_file('templates/index.html')
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=8081, debug=True)

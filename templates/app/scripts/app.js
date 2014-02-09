@@ -20,8 +20,7 @@ angular.module('BossBossApp', [
         controller: 'ScheduleCtrl'
     })
     .when('/about', {
-        templateUrl: 'views/about.html',
-        controller: 'AboutCtrl'
+        templateUrl: 'views/about.html'
     })
     .otherwise({
         redirectTo: '/'
@@ -37,7 +36,7 @@ angular.module('BossBossApp', [
 
 .factory('DefaultClasses', function($resource) {
     return $resource(
-        'http://bossboss.tk/api/1/default/:term',
+        'http://api.bossboss.tk/api/1/default/:term',
         {term: 'Spring-2014'},
         {
             get: {method: 'GET', isArray: true}
@@ -55,7 +54,7 @@ angular.module('BossBossApp', [
 })
 .factory('Search', function($resource) {
     return $resource(
-        'http://bossboss.tk/api/1/search/',
+        'http://api.bossboss.tk/api/1/search/',
         {},
         {
             get: {method: 'GET', isArray: true}
@@ -63,7 +62,7 @@ angular.module('BossBossApp', [
     );
 }).factory('Classes', function($resource) {
     return $resource(
-        'http://bossboss.tk/api/1/classes/',
+        'http://api.bossboss.tk/api/1/classes/',
         {},
         {
             get: {method: 'GET', isArray: true}

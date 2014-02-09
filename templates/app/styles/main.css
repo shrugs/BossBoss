@@ -289,8 +289,18 @@ html, body {
 }
 
 
+
+
 .la-tech-text {
-    margin-top: 0;
-    margin-bottom: 0;
-    font-size: 30px;
+    margin-top: 2px;
+    margin-bottom: 2px;
+    font-size: 26px;
+}
+
+
+@media (max-width: 768px) {
+    .la-tech-text {
+        margin-top: -2px;
+        margin-right: 35px;
+    }
 }

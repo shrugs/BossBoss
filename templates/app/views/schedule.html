@@ -1,16 +1,17 @@
 
-<div class="row calendar-container">
+<div ng-show="noCourses" class="row">
+    <div class="alert alert-danger"><b>Wait a sec...</b> You didn't select any courses yet.</div>
+    <a href="#/" class="btn btn-lg btn-success">Find Courses</a>
+</div>
+
+<div class="row calendar-container" ng-hide="noCourses">
     <bbcal></bbcal>
 </div>
-<div class="row select-classes-container">
+<div class="row select-classes-container" ng-hide="noCourses">
     <div class="col-xs-8 col-sm-8 col-md-10 col-lg-10">
         <h2 class="select-title">Select a Class from each Course to Create your Schedule</h2>
         <div class="ajax-loader" ng-show="loading">
             <img src="images/ajax-loader.gif">
-        </div>
-        <div ng-show="noCourses">
-            <p>No courses selected.</p>
-            <a href="#/" class="btn btn-lg btn-success">Find Courses</a>
         </div>
         <div class="row class-choice-container fade-in-out" ng-repeat="course in courses">
             <h4>{{course.CourseCode}} - {{course.Course}}</h4>
@@ -46,7 +47,7 @@
 <div class="row done-btn-container">
     <div class="col-xs-10 col-sm-10 col-md-10 col-lg-10 col-xs-offset-1 col-sm-offset-1 col-md-offset-1 col-lg-offset-1">
         <div ng-show="selectedEverything()" class="fade-in-out">
-            <button class="btn btn-lg btn-success btn-super" ng-click="presentCallNums()">DONE</button>
+            <button class="btn btn-lg btn-success btn-super" ng-click="presentCallNums()">Show Call Numbers</button>
         </div>
     </div>
 </div>
