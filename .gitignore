@@ -3,3 +3,4 @@ sftp-config.json
 lib/classes
 lib/courses
 *.pyc
+.DS_Store
