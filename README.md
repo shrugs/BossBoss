@@ -20,3 +20,11 @@ It has some nifty features that make it better than the existing <a href="http:/
 - Is always available
     - Unlike Boss, Boss'Boss doesn't need lunch breaks.
 - Was not made circa 1990
+
+# The webapp
+
+The webapp was made in angular with scaffolding by Yo. It's pretty nice. It's in the /templates folder, but flask doesn't serve the files.
+
+The bossboss.tk domain is a simple apache virtualhost. The api.bossboss.tk domain is running on a gunicorn server on a different port. The vitualhost does a proxypass for that subdomain to redirect queries to the flask server.
+
+The flask server and the db creation scripts use the peewee orm form database calls. I quite like it.
