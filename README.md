@@ -1,5 +1,4 @@
 #Boss'Boss
-
 is a Course Discovery and Schedule Management tool for LA Tech students.
 
 
