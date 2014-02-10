@@ -52,6 +52,8 @@ angular.module('BossBossApp')
             }
         }
 
+        localStorageService.clearAll();
+
         $scope.selectedCourses = [];
     };
 

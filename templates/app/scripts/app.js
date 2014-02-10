@@ -144,11 +144,13 @@ angular.module('BossBossApp', [
                         };
 
 
+                        if (c.Days.indexOf('Arranged') === -1) {
+                            angular.forEach(c.Days.split(''), function(day) {
+                                // for each day that the class is on, make and event
+                                $scope.calEvents[day].push(ev);
+                            });
 
-                        angular.forEach(c.Days.split(''), function(day) {
-                            // for each day that the class is on, make and event
-                            $scope.calEvents[day].push(ev);
-                        });
+                        }
 
                         if (count < colors.length-1) {
                             count ++;
