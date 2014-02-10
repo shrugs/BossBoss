@@ -178,6 +178,11 @@ html, body {
     display: block;
 }
 
+.no-results {
+    margin: 10px auto;
+    display: block;
+}
+
 .search-header > h3 {
     margin-top: 5px;
 }

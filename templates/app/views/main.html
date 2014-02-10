@@ -7,11 +7,14 @@
     <header class="search-header">
         <h3>Find and Select Courses</h3>
         <input type="search" ng-model="searchText" class="form-control" placeholder="Examples: 'ENGR-121', 'Swanbom', 'scuba', '31652'">
-        <div class="ajax-loader" ng-show="loading">
+        <div class="ajax-loader" ng-show="searchResults.length == 0" ng-hide="noResults">
             <img src="images/ajax-loader.gif">
         </div>
     </header>
     <div>
+        <div ng-show="noResults">
+            <div class="no-results">No results.</div>
+        </div>
         <div class="course-result-container fade-in-out" ng-repeat="course in searchResults">
             <div class="row course-result" ng-click="addCourse($index)">
                 <div class="col-xs-1 col-sm-1 col-md-1 col-lg-1 plus-sign-container">
