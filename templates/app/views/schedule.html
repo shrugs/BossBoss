@@ -39,7 +39,7 @@
             <h3>Call Numbers</h3>
             <p>These are the numbers you'll want to write down and enter into boss to register for classes.</p>
             <ul class="list-group">
-                <li class="list-group-item" ng-repeat="c in callnums()">
+                <li class="list-group-item" ng-repeat="c in callnums() track by $index">
                     {{c.Course.CourseCode}}-{{c.SectionID}}<br><b>{{c.CallNum}}</b>
                 </li>
             <ul>

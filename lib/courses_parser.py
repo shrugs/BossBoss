@@ -30,7 +30,7 @@ with open('subjects.txt') as f:
 
 done = False
 
-this_term = Term.get((Term.Quarter == 'Spring') & (Term.Year==2014))
+this_term = Term.get((Term.Quarter == 'Fall') & (Term.Year==2014))
 
 for subject in subjects:
     if done:
@@ -121,7 +121,7 @@ for subject in subjects:
 
                 # COURSE
                 try:
-                    db_course = Course.select().where(Course.CourseCode == CourseCode).get()
+                    db_course = Course.select().where((Course.CourseCode == CourseCode) & (Course.Term==this_term)).get()
                 except:
                     db_course = Course.create(CourseCode=CourseCode,
                                                Course=CourseName,

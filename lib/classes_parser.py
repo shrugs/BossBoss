@@ -27,7 +27,7 @@ def find_all_keys(key, text):
 n = datetime.datetime.now()
 
 
-this_term = Term.get((Term.Quarter == 'Spring') & (Term.Year==2014))
+this_term = Term.get((Term.Quarter == 'Fall') & (Term.Year==2014))
 os.chdir('classes')
 for course_code in glob.glob('*.html'):
     # print glob.glob('*.html')
@@ -131,7 +131,7 @@ for course_code in glob.glob('*.html'):
 
         # COURSE
         try:
-            db_course = Course.get(Course.CourseCode == course_code)
+            db_course = Course.get((Course.CourseCode == course_code) & (Course.Term==this_term))
         except:
             # this should never happen
             pdb.set_trace()
@@ -159,7 +159,7 @@ for course_code in glob.glob('*.html'):
             db_class = Class.get(((Class.Course==db_course) & (Class.SectionID == SectionID)) & (Class.Term == this_term))
         except:
             print "Subject: " + subject
-            print "course_code" + course_code
+            print "course_code: " + course_code
             print "SectionID: " + SectionID
             print "CallNum: " + str(CallNum)
             print "db_course: " + db_course.Course

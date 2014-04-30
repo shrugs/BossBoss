@@ -4,10 +4,14 @@ angular.module('BossBossApp')
 .controller('MainCtrl', function ($scope, DefaultClasses, $debounce, Search, _, localStorageService) {
     $scope.searchResults = DefaultClasses.get();
     $scope.selectedCourses = localStorageService.get('selectedCourses') || [];
+    $scope.term = localStorageService.get('term') || 'Spring-2014';
 
     $scope.$watch('selectedCourses', function() {
+        localStorageService.clearAll();
         localStorageService.add('selectedCourses', $scope.selectedCourses);
+        localStorageService.add('term', 'Fall-2014');
     }, true);
+
 
     $scope.$watch('searchText', $debounce(function() {
         $scope.searchResults = [];
@@ -54,6 +58,12 @@ angular.module('BossBossApp')
 
         $scope.selectedCourses = [];
     };
+
+    if ($scope.term !== 'Fall-2014') {
+        // reset courses
+        $scope.clearAll();
+    }
+
 
 
 

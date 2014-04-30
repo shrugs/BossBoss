@@ -37,7 +37,7 @@ angular.module('BossBossApp', [
 .factory('DefaultClasses', function($resource) {
     return $resource(
         'http://api.bossboss.tk/api/1/default/:term',
-        {term: 'Spring-2014'},
+        {term: 'Fall-2014'},
         {
             get: {method: 'GET', isArray: true}
         }
