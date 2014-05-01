@@ -12,3 +12,5 @@
     + also add more information do you can differentiate classes by the same teacher
 - redo mobile interface?
     + slide out chosen list thing?
+- write regex to detect char[3,4]_n[3]
+    - replace space with hyphen and then search
