@@ -1,6 +1,7 @@
 $icon-font-path: "/bower_components/bootstrap-sass-official/vendor/assets/fonts/bootstrap/";
 
 @import 'bootstrap-sass-official/vendor/assets/stylesheets/bootstrap';
+$fb-blue: #3b5998;
 
 .browsehappy {
     margin: 0.2em 0;
@@ -9,83 +10,39 @@ $icon-font-path: "/bower_components/bootstrap-sass-official/vendor/assets/fonts/
     padding: 0.2em 0;
 }
 
-/* Space out content a bit */
-body {
-    padding-top: 20px;
-    padding-bottom: 20px;
+.navbar-bossboss {
+    margin-top: 5px;
+    background-color: #FFF;
+    border-radius: 0;
+    border-color: #FFF;
+
 }
 
-/* Everything but the jumbotron gets side spacing for mobile first views */
-.header,
-.marketing,
-.footer {
-    padding-left: 15px;
-    padding-right: 15px;
+.nav > li {
+    margin-left: 10px;
 }
 
-/* Custom page header */
-.header {
-    border-bottom: 1px solid #e5e5e5;
-}
+.navbar-nav > li.btn-facebook {
+    background-color: $fb-blue;
+    margin-top: 4px;
+    margin-bottom: 4px;
+    margin-right: 10px;
 
-/* Make the masthead heading the same height as the navigation */
-.header h3 {
-    margin-top: 0;
-    margin-bottom: 0;
-    line-height: 40px;
-    padding-bottom: 19px;
-}
 
-/* Custom page footer */
-.footer {
-    padding-top: 19px;
-    color: #777;
-    border-top: 1px solid #e5e5e5;
-}
-
-.container-narrow > hr {
-    margin: 30px 0;
-}
-
-/* Main marketing message and sign up button */
-.jumbotron {
-    text-align: center;
-    border-bottom: 1px solid #e5e5e5;
-}
-
-.jumbotron .btn {
-    font-size: 21px;
-    padding: 14px 24px;
-}
-
-/* Supporting marketing content */
-.marketing {
-    margin: 40px 0;
-}
-
-.marketing p + h4 {
-    margin-top: 28px;
-}
-
-/* Responsive: Portrait tablets and up */
-@media screen and (min-width: 768px) {
-    .container {
-        max-width: 730px;
+    :hover {
+        box-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125);
     }
 
-    /* Remove the padding we set earlier */
-    .header,
-    .marketing,
-    .footer {
-        padding-left: 0;
-        padding-right: 0;
+    :active {
+        box-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125);
     }
-    /* Space out the masthead */
-    .header {
-        margin-bottom: 30px;
+
+    a {
+        padding-top: 11px;
+        padding-bottom: 11px;
     }
-    /* Remove the bottom border on the jumbotron for visual effect */
-    .jumbotron {
-        border-bottom: 0;
-    }
+}
+
+.fb-icon {
+    height: 20px;
 }

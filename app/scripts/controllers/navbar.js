@@ -8,6 +8,10 @@ angular.module('bossBossApp')
         });
     };
 
+    $scope.hideNav = function() {
+        angular.element('#navbar-collapse').collapse('hide');
+    };
+
     $scope.login = function() {
         window.location.replace('/api/auth/facebook');
     };

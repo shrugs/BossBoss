@@ -1,4 +1,4 @@
-<nav class="navbar navbar-default" role="navigation">
+<nav class="navbar navbar-default navbar-bossboss" role="navigation">
     <div class="container-fluid">
         <div class="navbar-header">
             <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar-collapse">
@@ -11,10 +11,12 @@
         </div>
 
         <div class="collapse navbar-collapse" id="navbar-collapse">
-            <ul class="nav navbar-nav pull-right">
+            <ul class="nav navbar-nav pull-left">
                 <li ng-class="{active: isActive('/')}"><a href="/">Browse</a></li>
                 <li ng-class="{active: isActive('/schedule')}"><a href="/schedule">Schedule</a></li>
-                <li ng-hide="currentUser"><a href="" ng-click="login()">Login</a></li>
+            </ul>
+            <ul class="nav navbar-nav pull-right">
+                <li ng-hide="currentUser" class="btn-facebook" ng-click="login()"><a><img src="/images/fbconnect.png" class="fb-icon"></a></li>
                 <li ng-show="currentUser"><a href="" ng-click="logout()">Logout</a></li>
             </ul>
         </div>
