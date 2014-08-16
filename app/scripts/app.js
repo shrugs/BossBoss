@@ -12,10 +12,6 @@ angular.module('bossBossApp', [
             templateUrl: 'partials/main',
             controller: 'MainCtrl'
         })
-        .when('/login', {
-            templateUrl: 'partials/login',
-            controller: 'LoginCtrl'
-        })
         .when('/signup', {
             templateUrl: 'partials/signup',
             controller: 'SignupCtrl'

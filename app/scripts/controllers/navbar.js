@@ -9,15 +9,18 @@ angular.module('bossBossApp')
       'title': 'Settings',
       'link': '/settings'
     }];
-    
+
     $scope.logout = function() {
-      Auth.logout()
-      .then(function() {
-        $location.path('/login');
-      });
+        Auth.logout().then(function() {
+            $location.path('/');
+        });
     };
-    
+
+    $scope.login = function() {
+        window.location.replace('/api/auth/facebook');
+    };
+
     $scope.isActive = function(route) {
-      return route === $location.path();
+        return route === $location.path();
     };
   });
