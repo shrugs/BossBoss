@@ -21,6 +21,10 @@ angular.module('bossBossApp', [
             controller: 'SettingsCtrl',
             authenticate: true
         })
+        .when('/schedule', {
+            templateUrl: 'partials/schedule',
+            controller: 'ScheduleCtrl'
+        })
         .otherwise({
             redirectTo: '/'
         });
