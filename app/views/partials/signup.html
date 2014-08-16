@@ -16,7 +16,7 @@
         <p class="help-block" ng-show="form.name.$error.required && submitted">
           A name is required
         </p>
-      </div>   
+      </div>
 
       <div class="form-group" ng-class="{ 'has-success': form.email.$valid && submitted,
                                           'has-error': form.email.$invalid && submitted }">
@@ -39,7 +39,7 @@
       <div class="form-group" ng-class="{ 'has-success': form.password.$valid && submitted,
                                           'has-error': form.password.$invalid && submitted }">
         <label>Password</label>
-        
+
         <input type="password" name="password" class="form-control" ng-model="user.password"
                ng-minlength="3"
                required
