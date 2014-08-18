@@ -39,25 +39,25 @@ class Department(BaseModel):
 
 
 class Subject(BaseModel):
-    name = CharField() # Mathematics
-    code = CharField() # MATH
-    desc = TextField() # whatever
+    name = CharField()           # Mathematics
+    code = CharField()           # MATH
+    desc = TextField(default='') # whatever
 
     department = ForeignKeyField(Department, related_name='subjects')
 
 
 class Campus(BaseModel):
-    name = CharField()     # South Campus
-    location = TextField() # Coordinates?
+    name = CharField()               # South Campus
+    location = TextField(default='') # Coordinates?
 
     school = ForeignKeyField(School, related_name='campuses')
 
 
 class Course(BaseModel):
-    name = CharField()    # Princ Of Financial Accounting
-    code = CharField()    # ACCT-201
-    credits = TextField() # {min: num, max: num, exactly: num}
-    desc = TextField()    # blah blah
+    name = CharField()                          # Princ Of Financial Accounting
+    code = CharField()                          # ACCT-201
+    credits = TextField(default='{}')           # {min: num, max: num, exactly: num}
+    desc = TextField(default='')    # blah blah
 
     subject = ForeignKeyField(Subject, related_name='courses')
 
@@ -70,8 +70,8 @@ class Teacher(BaseModel):
 
 
 class Building(BaseModel):
-    name = CharField() # Lambright Sports Center
-    desc = TextField() # Sport Center with blah blah
+    name = CharField()           # Lambright Sports Center
+    desc = TextField(default='') # Sport Center with blah blah
 
     campus = ForeignKeyField(Campus, related_name='buildings')
 
@@ -88,7 +88,7 @@ class Class(BaseModel):
     activity = CharField()           # Lecture (or Lab)
     seats_max = IntegerField()       # 40
     seats_available = IntegerField() # 11
-    times = TextField()              # {"S": {start: "<time>", end: "<time>"}, "M": {start: "<time>", end: "<time>"}}
+    times = TextField(default='{}')  # {"S": {start: "<time>", end: "<time>"}, "M": {start: "<time>", end: "<time>"}}
     date_from = DateTimeField()      # When the class is offered from.
     date_to = DateTimeField()        # When the class stops being offered.
 
@@ -101,7 +101,7 @@ def create_tables():
         try:
             obj.create_table()
         except OperationalError:
-            print "Table %s already exists." % (obj)
+            print "Table for %s already exists." % (obj)
 
 
 def drop_tables(ex):
@@ -119,6 +119,6 @@ if __name__ == '__main__':
         drop_tables(sys.argv[2:])
         print "Dropped tables."
     elif sys.argv[1] == 'reset':
-        drop_tables()
+        drop_tables(sys.argv[2:])
         create_tables()
         print "Dropped and then created tables."

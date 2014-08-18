@@ -1,50 +1,50 @@
-from selenium import webdriver
+# pylint: disable-msg=C0103
+
 import time
-import os
-import sys
-from common import *
-from ..db import *
+import json
+import re
+from selenium.common.exceptions import NoSuchElementException
+from .common import find_key, find_all_keys, select_and_submit, get_short_name, get_driver, get_debug, remove_dupe_space
+from ..db import School, College, Department, Subject, Course
 
 # VARS
 debug = get_debug()
 shortname = get_short_name()
 
-latech = School.get(School.shortname==shortname)
+# get School DB object
+latech = School.get(School.shortname == shortname)
 
+# init driver
 driver = get_driver(debug)
 driver.get("http://boss.latech.edu")
 
 # course catalog
 catalog = driver.find_element_by_xpath("html/body/table/tbody/tr[5]/td/table/tbody/tr/td[1]/table/tbody/tr/td[1]/div/a[11]").click()
-time.sleep(2)
+time.sleep(1)
 
+# get a list of all of the subject keys
 all_subjects_select = driver.find_element_by_css_selector("select[name='Subject']")
-subject = [x.get_attribute("value") for x in all_subjects_select.find_elements_by_tag_name("option")]
+subjects = [(x.get_attribute("value"), x.text.strip()) for x in all_subjects_select.find_elements_by_tag_name("option")]
 
-for subject in subject:
+for subject, subject_name in subjects:
     # loop through all of the subjects
     select_and_submit(driver, subject)
     time.sleep(1)
 
     try:
         error = driver.find_element_by_css_selector(".errortext")
-    except Exception, e:
+    except NoSuchElementException:
         # good, get metadata about courses
         h = driver.page_source
         re_course_info_comments_start = re.compile("""\<!-- \"\"-->\n<!-- \"\"--\>""")
         course_info_comments_start = re_course_info_comments_start.search(h)
         start_index = course_info_comments_start.start()
 
-        # <!-- Campus pipeline not enabled-->
         re_course_info_comments_end = re.compile("""\<!-- Campus pipeline not enabled-->""")
         course_info_comments_end = re_course_info_comments_end.search(h)
         end_index = course_info_comments_end.start()
 
         h = h[start_index:end_index]
-        # print h
-
-        # get subject name
-        subj = find_key('ColCatHdrSubject', h)
 
         CourseID_indexes = []
         for m in re.finditer("""\<!-- \"CourseID\"--\>""", h):
@@ -53,7 +53,7 @@ for subject in subject:
         c = len(CourseID_indexes)
         for i, CourseID in enumerate(CourseID_indexes):
             this_course_index = CourseID
-            if (i <= c - 2):
+            if i <= c - 2:
                 next_course_index = CourseID_indexes[i + 1]
                 this_course = h[this_course_index:next_course_index]
             else:
@@ -67,39 +67,95 @@ for subject in subject:
             college_name = find_key("College", this_course)
             dept_name = find_key("Dept", this_course)
             credit_str = find_key("Credit", this_course)
-            subject_desc = find_key("SubjDesc", this_course)
-            desc = ''.join(find_all_keys("ItemLine", this_course))
+            desc = ' '.join(find_all_keys("ItemLine", this_course))
 
             if desc.find(course_name) == 0:
                 desc = desc.split(course_name, 1)[1].strip()
                 # also, remove until the first period
                 desc = desc.split('.', 1)[1].strip()
 
-            credits = {}
+            desc = remove_dupe_space(desc)
 
-            if ('to' in credit_str):
+            credits_obj = {}
+
+            if 'to' in credit_str:
                 credits_arr = credit_str.split('to')
-                credits['max'] = float(credits_arr[1].strip())
-                credits['min'] = float(credits_arr[0].strip())
+                credits_obj['max'] = float(credits_arr[1].strip())
+                credits_obj['min'] = float(credits_arr[0].strip())
             else:
-                credits['exactly'] = float(credit_str.strip())
+                credits_obj['exactly'] = float(credit_str.strip())
+
+            credits_str = json.dumps(credits_obj)
 
             course = {
-                "code": course_code,
                 "name": course_name,
+                "code": course_code,
+                "credits": credits_str,
                 "desc": desc,
                 "college": college_name,
                 "department": dept_name,
-                "credits": credits,
-                "subject": subj,
-                "subjectdesc": subject_desc
+                "subject": subject_name,
             }
 
-            if debug: print course
+            # COLLEGE
+            try:
+                db_college = College.get(
+                    College.name == college_name
+                )
+            except College.DoesNotExist:
+                db_college = College.create(
+                    name=college_name,
+                    school=latech
+                )
+
+            try:
+                db_dept = Department.get(
+                    Department.name == dept_name,
+                    Department.college == db_college
+                )
+            except Department.DoesNotExist:
+                db_dept = Department.create(
+                    name=dept_name,
+                    college=db_college
+                )
+
+            try:
+                db_subject = Subject.get(
+                    Subject.name == subject_name,
+                    Subject.code == subject,
+                    Subject.department == db_dept
+                )
+            except Subject.DoesNotExist:
+                db_subject = Subject.create(
+                    name=subject_name,
+                    code=subject,
+                    department=db_dept
+                )
+
+            try:
+                db_course = Course.get(
+                    Course.code == course_code,
+                    Course.subject == db_subject
+                )
+            except Course.DoesNotExist:
+                db_course = Course.create(
+                    name=course_name,
+                    code=course_code,
+                    credits=credits_str,
+                    desc=desc,
+                    subject=db_subject
+                )
+
+            db_course.name = course_name
+            db_course.credits = credits_str
+            db_course.desc = desc
+            db_course.save()
+
+            # if debug: print course
 
     finally:
         driver.find_element_by_xpath('html/body/div[3]/form/div[2]/span/a').click()
-        time.sleep(2)
+        time.sleep(1)
 
-
+driver.close()
 print "Finished scraping %s's courses." % (latech.name)

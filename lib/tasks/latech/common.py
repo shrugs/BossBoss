@@ -1,3 +1,4 @@
+from selenium import webdriver
 import re
 import os
 
@@ -34,4 +35,10 @@ def get_driver(debug):
     return driver
 
 def get_debug():
-    return True if os.environ['BB_DEBUG'] else False
+    if 'BB_DEBUG' in os.environ:
+        return os.environ['BB_DEBUG'] != ''
+
+    return False
+
+def remove_dupe_space(str):
+    return ' '.join(str.split())
