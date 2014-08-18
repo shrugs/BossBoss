@@ -11,74 +11,79 @@ class BaseModel(Model):
 
 class School(BaseModel):
     name = CharField()
+    shortname = CharField()
     location = CharField()
 
 
 class Term(BaseModel):
-    term = CharField()
-    year = IntegerField()
+    name = CharField()    # Fall 2014
+    key = CharField()     # 2014f, for example
+    season = CharField()  # Fall
+    year = IntegerField() # 2014
 
     school = ForeignKeyField(School, related_name='terms')
 
 
 class College(BaseModel):
-    name = CharField()
+    name = CharField() # College of Engineering
 
 
 class Department(BaseModel):
-    name = CharField()
+    name = CharField() # Computer Science
 
 
 class Subject(BaseModel):
-    name = CharField()
+    name = CharField() # Mathematics
+    code = CharField() # MATH
+    desc = TextField() # whatever
 
 
 class Campus(BaseModel):
-    name = CharField()
-    location = TextField()
+    name = CharField()     # South Campus
+    location = TextField() # Coordinates?
 
 
 class Course(BaseModel):
-    name = CharField()
-    code = CharField()
-    credits = TextField()
-    desc = TextField()
+    name = CharField()    # Princ Of Financial Accounting
+    code = CharField()    # ACCT-201
+    credits = TextField() # {min: num, max: num, exactly: num}
+    desc = TextField()    # blah blah
 
     department = ForeignKeyField(Department, related_name='courses')
     college = ForeignKeyField(College, related_name='courses')
     subject = ForeignKeyField(Subject, related_name='courses')
-    term = ForeignKeyField(Term, related_name='courses')
 
 
 class Teacher(BaseModel):
-    name = CharField()
-    website = CharField()
+    name = CharField()    # SWANBOM M
+    website = CharField() # idk
 
 
 class Building(BaseModel):
-    name = CharField()
-    desc = TextField()
+    name = CharField() # Lambright Sports Center
+    desc = TextField() # Sport Center with blah blah
 
     campus = ForeignKeyField(Campus, related_name='buildings')
 
 
 class Room(BaseModel):
-    name = CharField()
+    name = CharField() # 202A
 
     building = ForeignKeyField(Building, related_name='rooms')
 
 
 class Class(BaseModel):
-    section = CharField()
-    callnum = CharField()
-    activity = CharField()
-    seats_max = IntegerField()
-    seats_available = IntegerField()
-    time = TextField()
-    date_from = DateTimeField()
-    date_to = DateTimeField()
+    section = CharField()            # 001
+    callnum = CharField()            # 12345
+    activity = CharField()           # Lecture (or Lab)
+    seats_max = IntegerField()       # 40
+    seats_available = IntegerField() # 11
+    times = TextField()              # {"S": {start: "<time>", end: "<time>"}, "M": {start: "<time>", end: "<time>"}}
+    date_from = DateTimeField()      # When the class is offered from.
+    date_to = DateTimeField()        # When the class stops being offered.
 
     course = ForeignKeyField(Course, related_name='classes')
+    term = ForeignKeyField(Term, related_name='classes')
 
 
 def create_tables():
@@ -94,5 +99,11 @@ if __name__ == '__main__':
 
     if sys.argv[1] == 'create':
         create_tables()
+        print "Created tables."
     elif sys.argv[1] == 'drop':
         drop_tables()
+        print "Dropped tables."
+    elif sys.argv[1] == 'reset':
+        drop_tables()
+        create_tables()
+        print "Dropped and then created tables."
