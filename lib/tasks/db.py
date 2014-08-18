@@ -97,11 +97,16 @@ class Class(BaseModel):
 
 
 def create_tables():
-    db.create_tables([School, Term, College, Department, Subject, Campus, Course, Teacher, Building, Room, Class])
+    for obj in [School, Term, College, Department, Subject, Campus, Course, Teacher, Building, Room, Class]:
+        try:
+            obj.create_table()
+        except OperationalError:
+            print "Table %s already exists." % (obj)
 
 
-def drop_tables():
-    db.drop_tables([School, Term, College, Department, Subject, Campus, Course, Teacher, Building, Room, Class])
+def drop_tables(ex):
+    tables = [School, Term, College, Department, Subject, Campus, Course, Teacher, Building, Room, Class]
+    db.drop_tables(list(set(tables).difference([eval(e) for e in ex])))
 
 
 if __name__ == '__main__':
@@ -111,7 +116,7 @@ if __name__ == '__main__':
         create_tables()
         print "Created tables."
     elif sys.argv[1] == 'drop':
-        drop_tables()
+        drop_tables(sys.argv[2:])
         print "Dropped tables."
     elif sys.argv[1] == 'reset':
         drop_tables()
