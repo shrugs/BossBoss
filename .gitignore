@@ -8,3 +8,4 @@ heroku
 dist
 info.js
 info.py
+*.pyc
