@@ -1,0 +1,4 @@
+SQLAlchemy==0.9.7
+pymongo==2.7.2
+selenium==2.42.1
+wsgiref==0.1.2

@@ -7,3 +7,4 @@ heroku
 /views
 dist
 info.js
+info.py
