@@ -1,10 +1,12 @@
 from peewee import *
 from info import *
+import json
 
 db = MySQLDatabase(db_name, user=db_user, passwd=db_pass, host=db_host)
 
 
 class BaseModel(Model):
+
     class Meta:
         database = db
 
@@ -27,9 +29,13 @@ class Term(BaseModel):
 class College(BaseModel):
     name = CharField() # College of Engineering
 
+    school = ForeignKeyField(School, related_name='colleges')
+
 
 class Department(BaseModel):
     name = CharField() # Computer Science
+
+    college = ForeignKeyField(College, related_name='departments')
 
 
 class Subject(BaseModel):
@@ -37,10 +43,14 @@ class Subject(BaseModel):
     code = CharField() # MATH
     desc = TextField() # whatever
 
+    department = ForeignKeyField(Department, related_name='subjects')
+
 
 class Campus(BaseModel):
     name = CharField()     # South Campus
     location = TextField() # Coordinates?
+
+    school = ForeignKeyField(School, related_name='campuses')
 
 
 class Course(BaseModel):
@@ -49,14 +59,14 @@ class Course(BaseModel):
     credits = TextField() # {min: num, max: num, exactly: num}
     desc = TextField()    # blah blah
 
-    department = ForeignKeyField(Department, related_name='courses')
-    college = ForeignKeyField(College, related_name='courses')
     subject = ForeignKeyField(Subject, related_name='courses')
 
 
 class Teacher(BaseModel):
     name = CharField()    # SWANBOM M
     website = CharField() # idk
+
+    school = ForeignKeyField(School, related_name='teachers')
 
 
 class Building(BaseModel):

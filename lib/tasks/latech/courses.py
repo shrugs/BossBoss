@@ -3,18 +3,15 @@ import time
 import os
 import sys
 from common import *
+from ..db import *
 
-if len(sys.argv) < 3:
-    exit("Requires shortname and term")
+# VARS
+debug = get_debug()
+shortname = get_short_name()
 
-debug = True if os.environ['BB_DEBUG'] else False
-shortname = sys.argv[1] or 'latech'
-term_key = sys.argv[2] or '2014f'
+latech = School.get(School.shortname==shortname)
 
-
-driver = webdriver.Firefox() if debug else webdriver.PhantomJS()
-driver.set_window_size(1024, 768)
-
+driver = get_driver(debug)
 driver.get("http://boss.latech.edu")
 
 # course catalog
@@ -73,6 +70,11 @@ for subject in subject:
             subject_desc = find_key("SubjDesc", this_course)
             desc = ''.join(find_all_keys("ItemLine", this_course))
 
+            if desc.find(course_name) == 0:
+                desc = desc.split(course_name, 1)[1].strip()
+                # also, remove until the first period
+                desc = desc.split('.', 1)[1].strip()
+
             credits = {}
 
             if ('to' in credit_str):
@@ -85,7 +87,7 @@ for subject in subject:
             course = {
                 "code": course_code,
                 "name": course_name,
-                "desc": desc
+                "desc": desc,
                 "college": college_name,
                 "department": dept_name,
                 "credits": credits,
@@ -93,8 +95,11 @@ for subject in subject:
                 "subjectdesc": subject_desc
             }
 
-            print course
+            if debug: print course
 
     finally:
         driver.find_element_by_xpath('html/body/div[3]/form/div[2]/span/a').click()
         time.sleep(2)
+
+
+print "Finished scraping %s's courses." % (latech.name)

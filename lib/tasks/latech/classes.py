@@ -1,20 +1,34 @@
 from selenium import webdriver
 import time
 import os
+from common import *
 
-debug = True if os.environ['BB_DEBUG'] else False
+if len(sys.argv) < 2:
+    exit("Requires term")
 
-driver = webdriver.Firefox() if debug else webdriver.PhantomJS()
-driver.set_window_size(1024, 768)
+# VARS
+debug = get_debug()
+term_key = sys.argv[1]
+shortname = get_short_name()
 
-catalog = driver.find_element_by_xpath("html/body/table/tbody/tr[5]/td/table/tbody/tr/td[1]/table/tbody/tr/td[1]/div/a[9]").get_attribute('href').click()
+# get school from DB; must be in here before hand
+latech = School.get(School.shortname==shortname)
+
+# create driver and navigate to BOSS
+driver = get_driver(debug)
+driver.get("http://boss.latech.edu")
+
+# go to the "Available Course Offerings" tab
+driver.find_element_by_xpath("html/body/table/tbody/tr[5]/td/table/tbody/tr/td[1]/table/tbody/tr/td[1]/div/a[9]").click()
 # @TODO(Shrugs) make this sleep shit a little more intelligent
 time.sleep(1)
 
-# select the most recent quarter
-submit = driver.find_element_by_css_selector('input[name="submitbutton"]')
+# @TODO(Shrugs) create all the terms in the database after this
 this_semester = driver.find_element_by_css_selector('select[name="Term"]').find_elements_by_tag_name("option").get_attribute("value")
-submit.click()
+print this_semester
+
+# select the most recent quarter
+driver.find_element_by_css_selector('input[name="submitbutton"]').click()
 
 time.sleep(1)
 
