@@ -9,7 +9,9 @@
     "passport": "~0.2.0",
     "passport-local": "~0.1.6",
     "ejs": "~0.8.4",
-    "spooky": "~0.2.4"
+    "spooky": "~0.2.4",
+    "mysql": "~2.4.2",
+    "q": "~1.0.1"
   },
   "devDependencies": {
     "grunt": "~0.4.1",
