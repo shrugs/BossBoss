@@ -2,6 +2,8 @@ from peewee import *
 from info import *
 import json
 
+
+# @TODO(Shrugs) this code could be better with multi-column indexes and primary keys or something
 db = MySQLDatabase(db_name, user=db_user, passwd=db_pass, host=db_host)
 
 
@@ -44,6 +46,8 @@ class Subject(BaseModel):
     desc = TextField(default='') # whatever
 
     department = ForeignKeyField(Department, related_name='subjects')
+    # I hate to mess up my perfect structure, but I need it for queries
+    school = ForeignKeyField(School, related_name='subjects')
 
 
 class Campus(BaseModel):
@@ -57,21 +61,22 @@ class Course(BaseModel):
     name = CharField()                          # Princ Of Financial Accounting
     code = CharField()                          # ACCT-201
     credits = TextField(default='{}')           # {min: num, max: num, exactly: num}
-    desc = TextField(default='')    # blah blah
+    desc = TextField(null=True, default=None)                # blah blah
+    notes = TextField(null=True, default=None)               # signature needed, etc
 
     subject = ForeignKeyField(Subject, related_name='courses')
 
 
 class Teacher(BaseModel):
-    name = CharField()    # SWANBOM M
-    website = CharField() # idk
+    name = CharField()             # SWANBOM M
+    website = CharField(null=True) # idk
 
     school = ForeignKeyField(School, related_name='teachers')
 
 
 class Building(BaseModel):
     name = CharField()           # Lambright Sports Center
-    desc = TextField(default='') # Sport Center with blah blah
+    desc = TextField(null=True, default=None) # Sport Center with blah blah
 
     campus = ForeignKeyField(Campus, related_name='buildings')
 
@@ -86,14 +91,18 @@ class Class(BaseModel):
     section = CharField()            # 001
     callnum = CharField()            # 12345
     activity = CharField()           # Lecture (or Lab)
-    seats_max = IntegerField()       # 40
-    seats_available = IntegerField() # 11
+    seats_status = CharField()       # Open/Closed
+    seats_max = IntegerField(null=True, default=None)       # 40
+    seats_available = IntegerField(null=True, default=None) # 11
+    session = CharField()            # Normal Academic Term
     times = TextField(default='{}')  # {"S": {start: "<time>", end: "<time>"}, "M": {start: "<time>", end: "<time>"}}
     date_from = DateTimeField()      # When the class is offered from.
     date_to = DateTimeField()        # When the class stops being offered.
 
     course = ForeignKeyField(Course, related_name='classes')
     term = ForeignKeyField(Term, related_name='classes')
+    room = ForeignKeyField(Room, related_name='classes')
+    teacher = ForeignKeyField(Teacher, related_name='classes')
 
 
 def create_tables():

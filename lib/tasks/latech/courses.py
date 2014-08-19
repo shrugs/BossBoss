@@ -12,7 +12,9 @@ debug = get_debug()
 shortname = get_short_name()
 
 # get School DB object
-latech = School.get(School.shortname == shortname)
+latech = School.get(
+    (School.shortname == shortname)
+)
 
 # init driver
 driver = get_driver(debug)
@@ -28,6 +30,7 @@ subjects = [(x.get_attribute("value"), x.text.strip()) for x in all_subjects_sel
 
 for subject, subject_name in subjects:
     # loop through all of the subjects
+    print "Scraping %s (%s)..." % (subject, subject_name)
     select_and_submit(driver, subject)
     time.sleep(1)
 
@@ -75,6 +78,7 @@ for subject, subject_name in subjects:
                 desc = desc.split('.', 1)[1].strip()
 
             desc = remove_dupe_space(desc)
+            course_name = course_name.title()
 
             credits_obj = {}
 
@@ -100,7 +104,7 @@ for subject, subject_name in subjects:
             # COLLEGE
             try:
                 db_college = College.get(
-                    College.name == college_name
+                    (College.name == college_name)
                 )
             except College.DoesNotExist:
                 db_college = College.create(
@@ -110,8 +114,8 @@ for subject, subject_name in subjects:
 
             try:
                 db_dept = Department.get(
-                    Department.name == dept_name,
-                    Department.college == db_college
+                    (Department.name == dept_name),
+                    (Department.college == db_college)
                 )
             except Department.DoesNotExist:
                 db_dept = Department.create(
@@ -121,21 +125,23 @@ for subject, subject_name in subjects:
 
             try:
                 db_subject = Subject.get(
-                    Subject.name == subject_name,
-                    Subject.code == subject,
-                    Subject.department == db_dept
+                    (Subject.name == subject_name),
+                    (Subject.code == subject),
+                    (Subject.department == db_dept),
+                    (Subject.school == latech)
                 )
             except Subject.DoesNotExist:
                 db_subject = Subject.create(
                     name=subject_name,
                     code=subject,
-                    department=db_dept
+                    department=db_dept,
+                    school=latech
                 )
 
             try:
                 db_course = Course.get(
-                    Course.code == course_code,
-                    Course.subject == db_subject
+                    (Course.code == course_code),
+                    (Course.subject == db_subject)
                 )
             except Course.DoesNotExist:
                 db_course = Course.create(

@@ -5,7 +5,7 @@ import os
 def find_key(key, text):
     new_re = '\<!-- \"' + key + '\"-->\n\<!-- \"(?P<value>.+)\"--\>'
     m = re.search(new_re, text)
-    if (m):
+    if m:
         return m.group('value').strip()
     else:
         return ""
@@ -42,3 +42,6 @@ def get_debug():
 
 def remove_dupe_space(str):
     return ' '.join(str.split())
+
+def normalize(str):
+    return remove_dupe_space(str.strip())
