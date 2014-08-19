@@ -3,7 +3,8 @@
 var express = require('express'),
     path = require('path'),
     fs = require('fs'),
-    mongoose = require('mongoose');
+    mongoose = require('mongoose'),
+    mysql = require('mysql');
 
 /**
  * Main application file
@@ -15,8 +16,10 @@ process.env.NODE_ENV = process.env.NODE_ENV || 'development';
 // Application Config
 var config = require('./lib/config/config');
 
-// Connect to database
+// Connect to databases
 var db = mongoose.connect(config.mongo.uri, config.mongo.options);
+var conn = mysql.createConnection(config.mysql);
+conn.connect();
 
 // Bootstrap models
 var modelsPath = path.join(__dirname, 'lib/models');
@@ -35,7 +38,7 @@ var app = express();
 require('./lib/config/express')(app);
 
 // Routing
-require('./lib/routes')(app, passport);
+require('./lib/routes')(app, passport, conn);
 
 // Start server
 app.listen(config.port, function () {
