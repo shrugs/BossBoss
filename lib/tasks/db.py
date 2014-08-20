@@ -63,6 +63,7 @@ class Course(BaseModel):
     credits = TextField(default='{}')           # {min: num, max: num, exactly: num}
     desc = TextField(null=True, default=None)                # blah blah
     notes = TextField(null=True, default=None)               # signature needed, etc
+    activity = CharField(null=True, default=None)           # Lecture (or Lab)
 
     subject = ForeignKeyField(Subject, related_name='courses')
 
@@ -90,7 +91,6 @@ class Room(BaseModel):
 class Class(BaseModel):
     section = CharField()            # 001
     callnum = CharField()            # 12345
-    activity = CharField()           # Lecture (or Lab)
     seats_status = CharField()       # Open/Closed
     seats_max = IntegerField(null=True, default=None)       # 40
     seats_available = IntegerField(null=True, default=None) # 11

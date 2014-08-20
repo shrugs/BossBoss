@@ -269,7 +269,11 @@ for subject in subjects:
 
                 if db_course.notes is None and course_notes is not '':
                     db_course.notes = course_notes
-                    db_course.save()
+
+                if db_course.activity is None and activity is not '':
+                    db_course.activity = activity
+
+                db_course.save()
 
                 # CLASS
                 try:
@@ -282,7 +286,6 @@ for subject in subjects:
                     db_class = Class.create(
                         section=section,
                         callnum=callnum,
-                        activity=activity,
                         seats_status=seats_status,
                         seats_max=seats_max,
                         seats_available=seats_available,
