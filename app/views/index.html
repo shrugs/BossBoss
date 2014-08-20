@@ -7,7 +7,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <base href="/">
-    <title></title>
+    <title>Boss'Boss v2</title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width">
     <link href='http://fonts.googleapis.com/css?family=Lato' rel='stylesheet' type='text/css'>
@@ -31,12 +31,8 @@
     <div class="container-fluid">
         <div class="row">
             <div class="col-xs-11 col-sm-11 col-md-8 col-lg-8" ng-view=""></div>
-            <div class="col-xs-1 col-sm-1 hidden-md hidden-lg">
-                <div bb-drawer></div>
-            </div>
-            <div class="col-md-4 col-lg-4 hidden-xs hidden-sm">
-                <div bb-drawer></div>
-            </div>
+            <div bb-drawer class="col-xs-1 col-sm-1 hidden-md hidden-lg drawer mobile"></div>
+            <div bb-drawer class="col-md-4 col-lg-4 hidden-xs hidden-sm drawer"></div>
         </div>
     </div>
 

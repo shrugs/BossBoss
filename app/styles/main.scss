@@ -64,3 +64,20 @@ h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
     border-bottom: 2px solid $latech-blue;
 
 }
+
+.drawer {
+    background-color: #FFF;
+
+    &.mobile {
+        position: absolute;
+        right: 0;
+
+        .drawer-handle {
+            cursor: pointer;
+        }
+    }
+}
+
+.max {
+    min-height: 100%;
+}

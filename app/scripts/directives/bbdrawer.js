@@ -1,13 +1,24 @@
 'use strict';
 
 angular.module('bossBossApp')
-.directive('bbDrawer', function ($rootScope) {
+.directive('bbDrawer', function ($rootScope, $window) {
     return {
         templateUrl: 'partials/bbdrawer.html',
         restrict: 'AE',
-        link: function postLink($scope, element, attrs) {
+        link: function postLink($scope, element) {
 
-            $scope.drawerState = element.width() > 100;
+
+            $scope.handleWindow = function() {
+                $scope.drawerState = element.width() > 100;
+                $scope.chevronHeight = (angular.element($window).height() / 2).toString() + 'px';
+                angular.element('.drawer-handle').height(angular.element($window).height() - angular.element('.navbar').first().height() - 50);
+            };
+
+            $scope.handleWindow();
+            angular.element($window).bind('resize', function() {
+                $scope.handleWindow();
+                return $scope.$apply();
+            });
 
             $scope.removeCourse = function(i) {
 
@@ -15,12 +26,19 @@ angular.module('bossBossApp')
 
             $scope.open = function() {
                 $scope.drawerState = true;
+                var md = angular.element('.drawer.mobile');
+                md.removeClass('col-xs-1').addClass('col-xs-12');
+                md.removeClass('col-md-1').addClass('col-md-12');
             };
             $scope.close = function() {
                 $scope.drawerState = false;
+                var md = angular.element('.drawer.mobile');
+                md.removeClass('col-xs-12').addClass('col-xs-1');
+                md.removeClass('col-md-12').addClass('col-md-1');
             };
 
             $scope.toggle = function() {
+                console.log('Toggle');
                 if ($scope.drawerState) {
                     $scope.close();
                 } else {
