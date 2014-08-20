@@ -50,8 +50,8 @@ angular.module('bossBossApp', [
         };
     }]);
 })
-.run(function ($rootScope, $location, Auth) {
-
+.run(function ($rootScope, $location, Auth, State) {
+    State.start();
     // Redirect to login if route requires auth and you're not logged in
     $rootScope.$on('$routeChangeStart', function (event, next) {
 

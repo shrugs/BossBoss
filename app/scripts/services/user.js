@@ -6,9 +6,8 @@ angular.module('bossBossApp')
         id: '@id'
     }, { //parameters default
         update: {
-        method: 'PUT',
-        params: {}
-    },
+            method: 'PUT'
+        },
         get: {
             method: 'GET',
             params: {

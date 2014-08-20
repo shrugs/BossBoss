@@ -38,7 +38,6 @@ angular.module('bossBossApp')
             };
 
             $scope.toggle = function() {
-                console.log('Toggle');
                 if ($scope.drawerState) {
                     $scope.close();
                 } else {
