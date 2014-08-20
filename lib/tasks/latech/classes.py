@@ -180,6 +180,7 @@ for subject in subjects:
                 room_name = normalize(find_key('Room', this_class))
                 teacher_name = find_key('Instructor', this_class)
                 building_name = normalize(find_key('Building', this_class))
+                is_www = 'www' in course_notes.lower()
 
                 if '<br' in teacher_name:
                     teacher_name = teacher_name.split('<br')[0]
@@ -292,7 +293,8 @@ for subject in subjects:
                         course=db_course,
                         term=term,
                         room=db_room,
-                        teacher=db_teacher
+                        teacher=db_teacher,
+                        is_www=is_www
                     )
 
                 # update relevant info in the event of a re-scrape
