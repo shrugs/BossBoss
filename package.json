@@ -11,7 +11,8 @@
     "ejs": "~0.8.4",
     "spooky": "~0.2.4",
     "mysql": "~2.4.2",
-    "q": "~1.0.1"
+    "q": "~1.0.1",
+    "underscore": "~1.6.0"
   },
   "devDependencies": {
     "grunt": "~0.4.1",
