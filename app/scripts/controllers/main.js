@@ -3,17 +3,12 @@
 angular.module('bossBossApp')
 .controller('MainCtrl', function ($scope, $http, $rootScope) {
 
-    $rootScope.state = $rootScope.currentUser.state || {};
-    $rootScope.state = {
-        test: 'true'
-    };
-
     $rootScope.$watch('state', function() {
         console.log('Main.js knows rootscope changed!');
     }, true);
 
     $scope.changeShit = function() {
-        $rootScope.state = {test: "false"};
+        $rootScope.state.test = true;
     };
 
 });

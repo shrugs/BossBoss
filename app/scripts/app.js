@@ -52,11 +52,21 @@ angular.module('bossBossApp', [
 })
 .run(function ($rootScope, $location, Auth, State) {
     State.start();
+    $rootScope.state = $rootScope.currentUser.state || {};
+
+    // Auth.currentUser().$promise.then(function(user) {
+    //     if (user.state.route) {
+    //         $location.path(user.state.route);
+    //     }
+    // });
     // Redirect to login if route requires auth and you're not logged in
     $rootScope.$on('$routeChangeStart', function (event, next) {
 
         if (next.authenticate && !Auth.isLoggedIn()) {
             $location.path('/login');
         }
+
+        // save to state
+        // $rootScope.state.route = $location.path();
     });
 });

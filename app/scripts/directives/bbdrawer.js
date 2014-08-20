@@ -28,13 +28,13 @@ angular.module('bossBossApp')
                 $scope.drawerState = true;
                 var md = angular.element('.drawer.mobile');
                 md.removeClass('col-xs-1').addClass('col-xs-12');
-                md.removeClass('col-md-1').addClass('col-md-12');
+                md.removeClass('col-sm-1').addClass('col-sm-12');
             };
             $scope.close = function() {
                 $scope.drawerState = false;
                 var md = angular.element('.drawer.mobile');
                 md.removeClass('col-xs-12').addClass('col-xs-1');
-                md.removeClass('col-md-12').addClass('col-md-1');
+                md.removeClass('col-sm-12').addClass('col-sm-1');
             };
 
             $scope.toggle = function() {

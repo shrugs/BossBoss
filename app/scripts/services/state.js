@@ -1,11 +1,11 @@
 'use strict';
 
 angular.module('bossBossApp')
-.factory('State', function ($rootScope, Auth, User) {
+.factory('State', function ($rootScope, Auth, User, $cookieStore) {
 
     return {
         start: function() {
-            $rootScope.$watch('state', function(newValue, oldValue) {
+            $rootScope.$watch('state', function(newValue) {
                 if (angular.isUndefined(newValue)) {
                     return;
                 }
