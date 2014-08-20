@@ -10,6 +10,8 @@
     <title></title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width">
+    <link href='http://fonts.googleapis.com/css?family=Lato' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
     <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
     <!-- build:css(app) styles/vendor.css -->
     <!-- bower:css -->
@@ -28,9 +30,13 @@
     <div ng-include="'partials/navbar'" ng-controller="NavbarCtrl"></div>
     <div class="container-fluid">
         <div class="row">
-            <div class="col-xs-11 col-sm-11 col-md-8 col-lg-8" ng-view="">
+            <div class="col-xs-11 col-sm-11 col-md-8 col-lg-8" ng-view=""></div>
+            <div class="col-xs-1 col-sm-1 hidden-md hidden-lg">
+                <div bb-drawer></div>
             </div>
-            <div class="col-xs-1 col-sm-1 col-md-4 col-lg-4"></div>
+            <div class="col-md-4 col-lg-4 hidden-xs hidden-sm">
+                <div bb-drawer></div>
+            </div>
         </div>
     </div>
 
@@ -75,6 +81,7 @@
         <script src="scripts/directives/mongooseError.js"></script>
         <script src="scripts/controllers/Schedule.js"></script>
         <script src="scripts/services/State.js"></script>
+        <script src="scripts/directives/bbDrawer.js"></script>
         <!-- endbuild -->
 </body>
 </html>

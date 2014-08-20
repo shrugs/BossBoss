@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('bossBossApp')
-.factory('State', function () {
+.factory('State', function ($rootScope) {
     var state = {};
 
     function getState() {

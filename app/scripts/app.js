@@ -26,8 +26,8 @@ angular.module('bossBossApp', [
             controller: 'ScheduleCtrl'
         })
         .when('/Schedule', {
-          templateUrl: 'partials/schedule',
-          controller: 'ScheduleCtrl'
+            templateUrl: 'partials/schedule',
+            controller: 'ScheduleCtrl'
         })
         .otherwise({
             redirectTo: '/'

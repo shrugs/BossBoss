@@ -2,6 +2,15 @@ $icon-font-path: "/bower_components/bootstrap-sass-official/vendor/assets/fonts/
 
 @import 'bootstrap-sass-official/vendor/assets/stylesheets/bootstrap';
 $fb-blue: #3b5998;
+$latech-blue: #0052CC;
+
+body {
+    font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+
+h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
+    font-family: "Lato";
+}
 
 .browsehappy {
     margin: 0.2em 0;
@@ -45,4 +54,13 @@ $fb-blue: #3b5998;
 
 .fb-icon {
     height: 20px;
+}
+
+.navbar-default .navbar-nav > .active > a,
+.navbar-default .navbar-nav > .active > a:hover,
+.navbar-default .navbar-nav > .active > a:focus {
+    color: inherit;
+    background-color: inherit;
+    border-bottom: 2px solid $latech-blue;
+
 }

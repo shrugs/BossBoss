@@ -1,19 +1,19 @@
 'use strict';
 
 angular.module('bossBossApp')
-  .factory('User', function ($resource) {
+.factory('User', function ($resource) {
     return $resource('/api/users/:id', {
-      id: '@id'
+        id: '@id'
     }, { //parameters default
-      update: {
+        update: {
         method: 'PUT',
         params: {}
-      },
-      get: {
-        method: 'GET',
-        params: {
-          id:'me'
+    },
+        get: {
+            method: 'GET',
+            params: {
+                id:'me'
+            }
         }
-      }
-	  });
-  });
+	});
+});
