@@ -96,8 +96,8 @@ class Class(BaseModel):
     seats_available = IntegerField(null=True, default=None) # 11
     session = CharField()            # Normal Academic Term
     times = TextField(default='{}')  # {"S": {start: "<time>", end: "<time>"}, "M": {start: "<time>", end: "<time>"}}
-    date_from = DateTimeField()      # When the class is offered from.
-    date_to = DateTimeField()        # When the class stops being offered.
+    date_from = DateTimeField(null=True, default=None)      # When the class is offered from.
+    date_to = DateTimeField(null=True, default=None)        # When the class stops being offered.
     is_www = BooleanField(default=False)
 
     course = ForeignKeyField(Course, related_name='classes')
