@@ -5,7 +5,7 @@
 ## Development
 
 ### Scraping
-Run the scraping scripts from `/lib` with `python -m tasks.latech.courses 2014f` and `python -m tasks.latech.classes 2014f`
+Run the scraping scripts from `/lib` with `python -m tasks.latech.courses` and `python -m tasks.latech.classes 20151` (for Fall Quarter 2014)
 
 
 ### @TODO

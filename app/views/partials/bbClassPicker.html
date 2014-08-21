@@ -3,6 +3,9 @@
     <!-- <span class="glyphicon glyphicon-chevron-up"></span> -->
   </span>
   <ul class="dropdown-menu dropdown-menu-right" role="menu" aria-labelledby="dropdownMenu1">
-    <li role="presentation" ng-repeat="(key, class) in classes"><a ng-click="onChoice(class)" role="menuitem" tabindex="-1">{{class.section}}</a></li>
+    <li role="presentation" ng-repeat="(key, class) in classes"><a ng-click="onChoice(class)" role="menuitem" tabindex="-1">
+        <span class="label label-success">{{class.teacher_name}}</span>
+        <span class="label label-danger">{{class.times | times}}</span>
+    </a></li>
   </ul>
 </div>
