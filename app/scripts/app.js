@@ -5,7 +5,8 @@ angular.module('bossBossApp', [
     'ngResource',
     'ngSanitize',
     'ngRoute',
-    'ui.select2'
+    'ui.select2',
+    'debounce'
 ])
 .config(function ($routeProvider, $locationProvider, $httpProvider) {
     $routeProvider

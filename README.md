@@ -12,6 +12,8 @@ Run the scraping scripts from `/lib` with `python -m tasks.latech.courses 2014f`
 
 run this: `select * FROM class WHERE seats_available=0 AND seats_status LIKE "%open%"`, question results
 
+Question why q='', subjects=Accounting and campuses=Main Campus
+
 
 ### Use-cases
 

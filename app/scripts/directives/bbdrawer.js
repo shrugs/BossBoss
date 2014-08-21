@@ -10,7 +10,6 @@ angular.module('bossBossApp')
             $scope.handleWindow = function() {
                 // 300 happens to be the width of a col-md-4 and is conveniently also below smartphone min-width
                 $scope.drawerState = element.width() >= 300;
-                console.log(element.width());
                 $scope.chevronHeight = (angular.element($window).height() / 2).toString() + 'px';
                 angular.element('.drawer-handle').height(angular.element($window).height() - angular.element('.navbar').first().height() - 50);
             };
