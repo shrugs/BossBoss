@@ -14,8 +14,13 @@
         }
     }
 
+    .pager {
+        margin-bottom: 0;
+    }
+
     .pager li > a, .pager li > span {
         border: none;
         color: #333333;
+        padding-left: 0;
     }
 }

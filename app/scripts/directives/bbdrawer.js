@@ -1,17 +1,20 @@
 'use strict';
 
 angular.module('bossBossApp')
-.directive('bbDrawer', function ($rootScope, $window) {
+.directive('bbDrawer', function ($rootScope, $window, debounce, Course, where) {
     return {
         templateUrl: 'partials/bbdrawer.html',
         restrict: 'AE',
         link: function postLink($scope, element) {
 
+            $scope.classes = {};
+            $scope.courses = {};
+
             $scope.handleWindow = function() {
                 // 300 happens to be the width of a col-md-4 and is conveniently also below smartphone min-width
                 $scope.drawerState = element.width() >= 300;
-                $scope.chevronHeight = (angular.element($window).height() / 2).toString() + 'px';
-                angular.element('.drawer-handle').height(angular.element($window).height() - angular.element('.navbar').first().height() - 50);
+                $scope.chevronHeight = (angular.element($window).height()*0.3).toString() + 'px';
+                angular.element('.drawer-handle').height(angular.element($window).height() - angular.element('.navbar').first().height() - 100);
             };
 
             $scope.handleWindow();
@@ -21,7 +24,7 @@ angular.module('bossBossApp')
             });
 
             $scope.removeCourse = function(i) {
-                $rootScope.data.courses.splice(i, 1);
+                $rootScope.state.cart.splice(i, 1);
             };
 
             $scope.open = function() {
@@ -39,6 +42,11 @@ angular.module('bossBossApp')
                 }
             };
 
+            $scope.chooseClass = function(c) {
+                var i = $rootScope.state.cart.indexOf(where($rootScope.state.cart, 'id', c.course_id));
+                $rootScope.state.cart[i].class.id = c.id;
+            };
+
             $scope.$watch('drawerState', function(s) {
                 var md = angular.element('.drawer.mobile');
                 if (s) {
@@ -50,9 +58,21 @@ angular.module('bossBossApp')
                 }
             });
 
-            $rootScope.$watch('state', function() {
-                $scope.state = $rootScope.state;
-            }, true);
+            $rootScope.$watch('state.cart', debounce(function() {
+                angular.forEach($scope.state.cart, function(c) {
+                    if ($scope.classes[c.id] === undefined) {
+                        Course.get({id: c.id}).$promise.then(function(course) {
+                            var classes_by_id = {};
+                            angular.forEach(course.classes, function(c) {
+                                classes_by_id[c.id] = c;
+                            });
+                            $scope.classes[course.id] = classes_by_id;
+                            console.log($scope.classes);
+                            $scope.courses[course.id] = course;
+                        });
+                    }
+                });
+            }, 200), true);
 
         }
     };

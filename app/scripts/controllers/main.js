@@ -1,21 +1,7 @@
 'use strict';
 
 angular.module('bossBossApp')
-.controller('MainCtrl', function ($scope, $http, $rootScope, Search, Params, debounce) {
-
-    function where(arr, key, val) {
-        for (var i = 0; i < arr.length; i++) {
-            if (arr[i][key] === val) {
-                return arr[i];
-            }
-        }
-        return;
-    }
-
-
-    $rootScope.$watch('state', function() {
-        console.log('Main.js knows rootscope changed!');
-    }, true);
+.controller('MainCtrl', function ($scope, $http, $rootScope, Search, Params, debounce, where) {
 
     $scope.$watch('searchParams', debounce(function(p) {
         if (angular.isUndefined(p)) {
@@ -30,10 +16,6 @@ angular.module('bossBossApp')
 
     $scope.searchParams = {
         q: 'scuba'
-    };
-
-    $scope.changeShit = function() {
-        $rootScope.state.test = false;
     };
 
     $scope.addCourse = function(i) {

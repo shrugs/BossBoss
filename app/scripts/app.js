@@ -62,7 +62,9 @@ angular.module('bossBossApp', [
 })
 .run(function ($rootScope, $location, Auth, State) {
     State.start();
-    $rootScope.state = {};
+    $rootScope.state = {
+        cart: []
+    };
 
     // Auth.currentUser().$promise.then(function(user) {
     //     if (user.state.route) {

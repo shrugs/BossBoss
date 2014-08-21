@@ -1,28 +1,22 @@
 'use strict';
 
 angular.module('bossBossApp')
-.directive('bbIndicator', function ($window, $timeout) {
+.directive('bbAddCourse', function ($window) {
     return {
-        template: '<div style="padding: 0 2px; height: 100%; width: 20%;" ng-style="{backgroundColor: color}"></div>',
+        template: '<span class="glyphicon glyphicon-plus" ng-style="{marginTop: marginTop}" style="padding-left: 0;"></span>',
         restrict: 'AE',
-        scope: {
-            status: '@'
-        },
         link: function postLink($scope, element) {
             $scope.handleWindow = function() {
                 element.height(0);
                 element.height(element.parents('.class').height());
+                $scope.marginTop = (element.height()/2) - element.find('span').first().height()/2;
             };
 
-            $timeout($scope.handleWindow, 400);
+            $scope.handleWindow();
             angular.element($window).bind('resize', function() {
                 $scope.handleWindow();
                 return $scope.$apply();
             });
-
-            var neg = $scope.status === 'Closed' || $scope.status === 'Cancelled';
-            $scope.color = !neg ? '#5cb85c' : '#777777';
-
         }
     };
 });

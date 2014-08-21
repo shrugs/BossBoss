@@ -77,6 +77,10 @@ h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
             cursor: pointer;
         }
     }
+
+    .courses {
+        margin-bottom: 200px;
+    }
 }
 
 .max {
@@ -100,19 +104,26 @@ h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
 }
 
 .indicator {
-    height: 100%;
+    padding-right: 5px;
+    padding-left: 5px;
+}
+
+.col-add-course {
+    padding-right: 5px;
+    padding-left: 5px;
+    cursor: pointer;
 }
 
 .classes-col {
     margin-top: 20px;
+    margin-bottom: 100px;
 
     .class {
         margin-bottom: 10px;
-        cursor: pointer;
 
-        &:hover {
-            background-color: #DDDDDD;
-        }
+        // &:hover {
+        //     background-color: #DDDDDD;
+        // }
     }
 }
 
@@ -121,9 +132,6 @@ h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
 
 /* Small devices (tablets, 768px and up) */
 @media (min-width: 768px) {
-    .classes-col {
-        margin-top: 0;
-    }
 }
 
 /* Medium devices (desktops, 992px and up) */
@@ -131,6 +139,9 @@ h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
     .main-container {
         // col-md-8 col-lg-8,
         width: 66.6666666667%;
+    }
+    .classes-col {
+        margin-top: 0;
     }
 }
 
