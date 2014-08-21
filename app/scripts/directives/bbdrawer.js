@@ -44,6 +44,9 @@ angular.module('bossBossApp')
 
             $scope.chooseClass = function(c) {
                 var i = $rootScope.state.cart.indexOf(where($rootScope.state.cart, 'id', c.course_id));
+                if ($rootScope.state.cart[i].class === undefined) {
+                    $rootScope.state.cart[i].class = {};
+                }
                 $rootScope.state.cart[i].class.id = c.id;
             };
 

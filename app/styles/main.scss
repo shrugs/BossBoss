@@ -87,6 +87,11 @@ h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
         padding: 0;
         background-color: transparent;
     }
+
+    .btn-show-calendar {
+        width: 100%;
+        margin-top: 15px;
+    }
 }
 
 .max {
@@ -131,6 +136,22 @@ h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
         //     background-color: #DDDDDD;
         // }
     }
+}
+
+.course {
+    margin-bottom: 10px;
+
+    &:hover {
+        background-color: #DDDDDD;
+    }
+}
+
+.class-header {
+    margin-bottom: 5px;
+}
+
+.class-labels {
+    margin-top: 5px;
 }
 
 /* Extra small devices (phones, less than 768px) */

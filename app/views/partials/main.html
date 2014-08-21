@@ -60,9 +60,25 @@
                 </select>
             </div>
         </div>
-        <div class="row" ng-repeat="course in results.courses">
-            <div class="col-xs-12">
-                <a ng-href="/course/{{course.id}}">{{course}}</a>
+        <div class="row class" ng-repeat="course in results.courses">
+            <div class="col-xs-2">
+                <div bb-add-course class="col-xs-6" ng-click="addCourse(course.id)">
+
+                </div>
+            </div>
+            <div class="col-xs-10">
+                <div class="row">
+                    <div class="col-xs-12">
+                        <h5 class="class-header">{{course.name}}</h5>
+                    </div>
+                </div>
+                <div class="row class-labels">
+                    <div class="col-xs-12">
+                        <span class="label label-info">{{course.code}}</span>
+                        <span class="label label-warning" ng-if="course.credits.exactly">{{course.credits.exactly}} Credits</span>
+                        <span class="label label-warning" ng-if="course.credits.min && course.credits.max">{{course.credits.min}} - {{course.credits.max}} Credits</span>
+                    </div>
+                </div>
             </div>
         </div>
         <div class="row" ng-repeat="teacher in results.teachers">
