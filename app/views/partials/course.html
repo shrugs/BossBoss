@@ -1,0 +1,60 @@
+<div class="row course">
+    <div class="col-xs-12">
+        <div class="row">
+            <div class="col-xs-12">
+                <ul class="pager">
+                    <li class="previous"><a href="/"><span class="glyphicon glyphicon-chevron-left"></span>Browse</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="row">
+            <!-- TITLE -->
+            <div class="col-xs-12 col-md-8 col-md-offset-4">
+                <h2 class="text-center">{{course.name}}</h2>
+            </div>
+        </div>
+        <div class="row text">
+            <!-- INFO -->
+            <div class="col-xs-12 col-md-8 col-md-push-4">
+                <!-- FACTS -->
+                <div class="row">
+                <!-- code, credits, notes, subject -->
+                    <div class="col-xs-6 col-md-3 text-center">
+                        <span class="label label-primary">{{course.department_name}}</span>
+                    </div>
+                    <div class="col-xs-6 col-md-3 text-center">
+                        <span class="label label-info">{{course.subject_name}}</span>
+                    </div>
+                    <div class="col-xs-6 col-md-3 text-center">
+                        <span class="label label-success">{{course.code}}</span>
+                    </div>
+                    <div class="col-xs-6 col-md-3 text-center">
+                        <span class="label label-warning" ng-if="course.credits.exactly">{{course.credits.exactly}} Credits</span>
+                        <span class="label label-warning" ng-if="course.credits.min && course.credits.max">{{course.credits.min}} - {{course.credits.max}} Credits</span>
+                    </div>
+                </div>
+
+                <!-- TEXT -->
+                <div class="row text">
+                    <div class="col-xs-12">
+                        <p>{{course.desc}}</p>
+                        <p ng-hide="course.desc" class="text-muted text-center">No Description provided.</p>
+                        <p class="text-muted">{{course.notes}}</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- CLASSES -->
+            <div class="col-xs-12 col-md-4 col-md-pull-8">
+                <h3 class="no-top-margin text-center">Classes</h3>
+                <p ng-if="course.classes.length === 0" class="text-muted text-center text">No available classes.</p>
+                <div class="row" ng-repeat="class in course.classes">
+                    <div class="col-xs-12">
+                        {{course.code}}-{{class.section}}
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>

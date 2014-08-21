@@ -62,7 +62,7 @@
         </div>
         <div class="row" ng-repeat="course in results.courses">
             <div class="col-xs-12">
-                {{course.code}}
+                <a ng-href="/course/{{course.id}}">{{course}}</a>
             </div>
         </div>
         <div class="row" ng-repeat="teacher in results.teachers">
