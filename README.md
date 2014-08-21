@@ -15,6 +15,10 @@ run this: `select * FROM class WHERE seats_available=0 AND seats_status LIKE "%o
 Question why q='', subjects=Accounting and campuses=Main Campus
 Filtering by main campus shouldn't do anything.
 
+Additionally, filtering by term makes the result smaller when it shouldn't.
+
+Need to devise a way to default to the most recent term. maybe just parse the dates (Fall 2014) with chronic and get a time
+
 
 ### Use-cases
 

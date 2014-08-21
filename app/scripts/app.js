@@ -35,6 +35,10 @@ angular.module('bossBossApp', [
           templateUrl: 'partials/course',
           controller: 'CourseCtrl'
         })
+        .when('/teacher/:id', {
+          templateUrl: 'partials/teacher',
+          controller: 'TeacherCtrl'
+        })
         .otherwise({
             redirectTo: '/'
         });

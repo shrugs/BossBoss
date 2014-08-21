@@ -77,6 +77,7 @@ class Teacher(BaseModel):
 
 class Building(BaseModel):
     name = CharField()           # Lambright Sports Center
+    shortname = CharField(null=True, default=None) #Lambright
     desc = TextField(null=True, default=None) # Sport Center with blah blah
 
     campus = ForeignKeyField(Campus, related_name='buildings')

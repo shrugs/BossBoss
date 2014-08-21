@@ -1,6 +1,17 @@
-.course {
+.course, .teacher {
     .text {
         margin-top: 20px;
+    }
+
+    .facts {
+        div {
+            margin-top: 5px;
+            overflow: hidden;
+
+            .label {
+                display: block;
+            }
+        }
     }
 
     .pager li > a, .pager li > span {
