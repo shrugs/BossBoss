@@ -1,7 +1,7 @@
 <div class="dropdown">
-  <span class="dropdown-toggle glyphicon glyphicon-chevron-up" id="dropdownMenu1" data-toggle="dropdown">
-    <!-- <span class="glyphicon glyphicon-chevron-up"></span> -->
-  </span>
+  <button class="dropdown-toggle btn-class-picker" type="button" id="dropdownMenu1" data-toggle="dropdown">
+      <span class="glyphicon glyphicon-chevron-up"></span>
+  </button>
   <ul class="dropdown-menu dropdown-menu-right" role="menu" aria-labelledby="dropdownMenu1">
     <li role="presentation" ng-repeat="(key, class) in classes"><a ng-click="onChoice(class)" role="menuitem" tabindex="-1">
         <span class="label label-success">{{class.teacher_name}}</span>

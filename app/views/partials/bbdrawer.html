@@ -19,10 +19,8 @@
                             </div>
                         </div>
                         <div class="row">
-                            <div class="col-xs-4 col-sm-3">
+                            <div class="col-xs-12">
                                 <span class="label label-info">{{courses[course.id].code}}</span>
-                            </div>
-                            <div class="col-xs-4 col-sm-3">
                                 <span class="label label-warning" ng-if="courses[course.id].credits.exactly">{{courses[course.id].credits.exactly}} Credits</span>
                                 <span class="label label-warning" ng-if="courses[course.id].credits.min && courses[course.id].credits.max">{{courses[course.id].credits.min}} - {{courses[course.id].credits.max}} Credits</span>
                             </div>
@@ -45,10 +43,8 @@
                             </div>
                         </div>
                         <div class="row">
-                            <div class="col-xs-5 col-sm-4">
+                            <div class="col-xs-12">
                                 <span class="label label-success">{{classes[course.id][course.class.id].teacher_name}}</span>
-                            </div>
-                            <div class="col-xs-7 col-sm-6">
                                 <span class="label label-danger">{{classes[course.id][course.class.id].times | times}}</span>
                             </div>
                         </div>
