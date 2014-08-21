@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('bossBossApp')
-.factory('State', function ($rootScope, Auth, User, $cookieStore) {
+.factory('State', function ($rootScope, Auth, User) {
 
     return {
         start: function() {

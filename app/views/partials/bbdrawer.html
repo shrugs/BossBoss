@@ -1,9 +1,14 @@
 <div class="row max">
-    <div class="col-xs-1 col-sm-1 col-md-1 col-lg-1 drawer-handle" ng-click="toggle()">
-        <span class="glyphicon glyphicon-chevron-left hidden-md hidden-lg" ng-hide="drawerState" ng-style="{top: chevronHeight}"></span>
-        <span class="glyphicon glyphicon-chevron-right hidden-md hidden-lg" ng-show="drawerState" ng-style="{top: chevronHeight}"></span>
+    <div class="col-xs-1 col-sm-1 hidden-md hidden-lg drawer-handle" ng-click="toggle()">
+        <div class="row">
+            <span class="glyphicon glyphicon-chevron-left hidden-md hidden-lg" ng-hide="drawerState" ng-style="{top: chevronHeight}"></span>
+            <span class="glyphicon glyphicon-chevron-right hidden-md hidden-lg" ng-show="drawerState" ng-style="{top: chevronHeight}"></span>
+        </div>
     </div>
-    <div class="col-xs-11 col-sm-11 col-md-11 col-lg-11" ng-show="drawerState">
+    <div class="col-xs-11 col-sm-11 col-md-12 col-lg-12" ng-show="drawerState">
         <h3 class="text-center">Course Cart</h3>
+        <div class="row" ng-repeat="course in data.courses">
+            {{state.courses}}
+        </div>
     </div>
 </div>

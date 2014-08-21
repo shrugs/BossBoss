@@ -1,15 +1,39 @@
-<div class="jumbotron">
-  <h1>'Allo, 'Allo <span ng-show="currentUser">{{ currentUser.name }}</span>!</h1>
-  <p class="lead">
-    Always a pleasure scaffolding your apps.
-  </p>
-  <p><a class="btn btn-lg btn-success" ng-click="changeShit()">Splendid!</a></p>
-</div>
-
-<div class="row marketing">
-{{currentUser.state}}
-</div>
-
-<div class="footer">
-  <p>♥ from the Yeoman team</p>
+<!-- @TODO(Shrugs) add padding to left and right and try not to mess up the cascade -->
+<div class="row">
+    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+        <div class="row">
+            <!-- SEARCH -->
+            <div class="form-group col-xs-6 col-sm-6 col-md-9 col-lg-9">
+                <div class="input-group">
+                    <input type="text" class="form-control" placeholder="Course Code (ENGR-122)">
+                    <div class="input-group-btn">
+                        <button class="btn btn-default" ng-click="shouldFilter = !shouldFilter">
+                        <span class="glyphicon glyphicon-chevron-down" ng-hide="shouldFilter"></span>
+                        <span class="glyphicon glyphicon-chevron-up" ng-show="shouldFilter"></span>
+                        Filter</button>
+                    </div>
+                </div>
+              </div>
+        </div>
+        <div class="row" ng-show="shouldFilter">
+            <!-- SUBJECTS -->
+            <div class="col-xs-4 col-sm-3 col-md-2 col-lg-2">
+                <select ui-select2 ng-model="searchParams.subjects" class="param" data-placeholder="Subject" multiple>
+                    <option ng-repeat="opt in params.subjects" ng-value="opt.id">{{opt.name}}</option>
+                </select>
+            </div>
+            <!-- CAMPUSES -->
+            <div class="col-xs-4 col-sm-3 col-md-2 col-lg-2">
+                <select ui-select2 ng-model="searchParams.campuses" class="param" data-placeholder="Campus" multiple>
+                    <option ng-repeat="opt in params.campuses" ng-value="opt.id">{{opt.name}}</option>
+                </select>
+            </div>
+        </div>
+        <div class="row" ng-repeat="course in results.courses">
+            {{course.code}}
+        </div>
+        <div class="row" ng-repeat="teacher in results.teachers">
+            {{teacher.name}}
+        </div>
+    </div>
 </div>

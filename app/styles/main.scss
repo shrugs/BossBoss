@@ -71,13 +71,63 @@ h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
     &.mobile {
         position: absolute;
         right: 0;
+        min-width: 60px;
 
         .drawer-handle {
             cursor: pointer;
         }
     }
+
+    &.desktop {
+        // margin-left: -25px;
+        // margin-right: -25px;
+    }
 }
 
 .max {
     min-height: 100%;
+}
+
+.param {
+    width: 100%;
+}
+
+.main-container {
+    width: 90.333333%;
+    // margin-right: 25px;
+    // margin-left: 25px;
+}
+
+.btn-filter {
+    background-color: transparent;
+
+    // &:active, &:focus, &:hover, &.active {
+    //     border-bottom: 1px solid $latech-blue;
+    // }
+}
+
+.select2-container {
+    margin-top: 5px;
+}
+
+
+/* Extra small devices (phones, less than 768px) */
+/* No media query since this is the default in Bootstrap */
+
+/* Small devices (tablets, 768px and up) */
+@media (min-width: 768px) {
+
+}
+
+/* Medium devices (desktops, 992px and up) */
+@media (min-width: 992px) {
+    .main-container {
+        // col-md-8 col-lg-8,
+        width: 66.6666666667%;
+    }
+}
+
+/* Large devices (large desktops, 1200px and up) */
+@media (min-width: 1200px) {
+
 }

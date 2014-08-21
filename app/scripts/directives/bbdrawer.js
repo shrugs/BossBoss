@@ -7,9 +7,10 @@ angular.module('bossBossApp')
         restrict: 'AE',
         link: function postLink($scope, element) {
 
-
             $scope.handleWindow = function() {
-                $scope.drawerState = element.width() > 100;
+                // 300 happens to be the width of a col-md-4 and is conveniently also below smartphone min-width
+                $scope.drawerState = element.width() >= 300;
+                console.log(element.width());
                 $scope.chevronHeight = (angular.element($window).height() / 2).toString() + 'px';
                 angular.element('.drawer-handle').height(angular.element($window).height() - angular.element('.navbar').first().height() - 50);
             };
@@ -21,20 +22,14 @@ angular.module('bossBossApp')
             });
 
             $scope.removeCourse = function(i) {
-
+                $rootScope.data.courses.splice(i, 1);
             };
 
             $scope.open = function() {
                 $scope.drawerState = true;
-                var md = angular.element('.drawer.mobile');
-                md.removeClass('col-xs-1').addClass('col-xs-12');
-                md.removeClass('col-sm-1').addClass('col-sm-12');
             };
             $scope.close = function() {
                 $scope.drawerState = false;
-                var md = angular.element('.drawer.mobile');
-                md.removeClass('col-xs-12').addClass('col-xs-1');
-                md.removeClass('col-sm-12').addClass('col-sm-1');
             };
 
             $scope.toggle = function() {
@@ -44,6 +39,17 @@ angular.module('bossBossApp')
                     $scope.open();
                 }
             };
+
+            $scope.$watch('drawerState', function(s) {
+                var md = angular.element('.drawer.mobile');
+                if (s) {
+                    md.removeClass('col-xs-1').addClass('col-xs-12');
+                    md.removeClass('col-sm-1').addClass('col-sm-12');
+                } else {
+                    md.removeClass('col-xs-12').addClass('col-xs-1');
+                    md.removeClass('col-sm-12').addClass('col-sm-1');
+                }
+            });
 
             $rootScope.$watch('state', function() {
                 $scope.state = $rootScope.state;

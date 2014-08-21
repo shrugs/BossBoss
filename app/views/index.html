@@ -15,6 +15,7 @@
     <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
     <!-- build:css(app) styles/vendor.css -->
     <!-- bower:css -->
+    <link rel="stylesheet" href="bower_components/select2/select2.css" />
     <!-- endbower -->
     <!-- endbuild -->
     <!-- build:css({.tmp,app}) styles/main.css -->
@@ -30,7 +31,7 @@
     <div ng-include="'partials/navbar'" ng-controller="NavbarCtrl"></div>
     <div class="container-fluid">
         <div class="row">
-            <div class="col-xs-11 col-sm-11 col-md-8 col-lg-8" ng-view=""></div>
+            <div class="col-xs-11 col-sm-11 col-md-8 col-lg-8 main-container" ng-view=""></div>
             <div bb-drawer class="col-xs-1 col-sm-1 hidden-md hidden-lg drawer mobile"></div>
             <div bb-drawer class="col-md-4 col-lg-4 hidden-xs hidden-sm drawer"></div>
         </div>
@@ -60,6 +61,8 @@
     <script src="bower_components/angular-cookies/angular-cookies.js"></script>
     <script src="bower_components/angular-sanitize/angular-sanitize.js"></script>
     <script src="bower_components/angular-route/angular-route.js"></script>
+    <script src="bower_components/select2/select2.js"></script>
+    <script src="bower_components/angular-ui-select2/src/select2.js"></script>
     <!-- endbower -->
     <script src="bower_components/bootstrap-sass-official/vendor/assets/javascripts/bootstrap/transition.js"></script>
     <script src="bower_components/bootstrap-sass-official/vendor/assets/javascripts/bootstrap/collapse.js"></script>
@@ -78,6 +81,10 @@
         <script src="scripts/controllers/Schedule.js"></script>
         <script src="scripts/services/State.js"></script>
         <script src="scripts/directives/bbDrawer.js"></script>
+        <script src="scripts/services/course.js"></script>
+        <script src="scripts/services/school.js"></script>
+        <script src="scripts/services/Search.js"></script>
+        <script src="scripts/services/Params.js"></script>
         <!-- endbuild -->
 </body>
 </html>

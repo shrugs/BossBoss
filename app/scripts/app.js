@@ -4,7 +4,8 @@ angular.module('bossBossApp', [
     'ngCookies',
     'ngResource',
     'ngSanitize',
-    'ngRoute'
+    'ngRoute',
+    'ui.select2'
 ])
 .config(function ($routeProvider, $locationProvider, $httpProvider) {
     $routeProvider
@@ -52,7 +53,7 @@ angular.module('bossBossApp', [
 })
 .run(function ($rootScope, $location, Auth, State) {
     State.start();
-    $rootScope.state = $rootScope.currentUser.state || {};
+    $rootScope.state = {};
 
     // Auth.currentUser().$promise.then(function(user) {
     //     if (user.state.route) {
