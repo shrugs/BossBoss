@@ -72,15 +72,11 @@ h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
         position: absolute;
         right: 0;
         min-width: 60px;
+        z-index: 9999;
 
         .drawer-handle {
             cursor: pointer;
         }
-    }
-
-    &.desktop {
-        // margin-left: -25px;
-        // margin-right: -25px;
     }
 }
 
@@ -94,20 +90,14 @@ h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
 
 .main-container {
     width: 90.333333%;
-    // margin-right: 25px;
-    // margin-left: 25px;
-}
-
-.btn-filter {
-    background-color: transparent;
-
-    // &:active, &:focus, &:hover, &.active {
-    //     border-bottom: 1px solid $latech-blue;
-    // }
 }
 
 .select2-container {
     margin-top: 5px;
+}
+
+.cart-header {
+    margin-top: 0;
 }
 
 
