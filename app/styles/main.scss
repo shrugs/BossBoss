@@ -89,7 +89,6 @@ h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
     }
 
     .btn-show-calendar {
-        width: 100%;
         margin-top: 15px;
     }
 }
@@ -140,10 +139,6 @@ h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
 
 .course {
     margin-bottom: 10px;
-
-    &:hover {
-        background-color: #DDDDDD;
-    }
 }
 
 .class-header {
@@ -152,6 +147,19 @@ h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
 
 .class-labels {
     margin-top: 5px;
+}
+
+.results {
+    .class {
+
+        margin-bottom: 10px;
+        padding-bottom: 10px;
+        cursor: pointer;
+
+        &:hover {
+            background-color: #DDDDDD;
+        }
+    }
 }
 
 /* Extra small devices (phones, less than 768px) */

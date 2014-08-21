@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('bossBossApp')
-.controller('MainCtrl', function ($scope, $http, $rootScope, Search, Params, debounce, where) {
+.controller('MainCtrl', function ($scope, $http, $rootScope, Search, Params, debounce, where, $location) {
 
     $scope.$watch('searchParams', debounce(function(p) {
         if (angular.isUndefined(p)) {
@@ -36,6 +36,10 @@ angular.module('bossBossApp')
 
     $scope.addCourse = function(i) {
         $rootScope.data.courses.push($scope.results[i]);
+    };
+
+    $scope.goToCourse = function(id) {
+        $location.path('/course/' + id);
     };
 
     $scope.$watch('searchParams.buildings', function(bids) {
