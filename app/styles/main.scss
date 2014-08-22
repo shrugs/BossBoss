@@ -150,7 +150,7 @@ h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
 }
 
 .results {
-    .class {
+    .class, .teacher {
 
         margin-bottom: 10px;
         padding-bottom: 10px;
@@ -160,6 +160,14 @@ h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
             background-color: #DDDDDD;
         }
     }
+
+    .course-chevron {
+        margin-top: 25px;
+    }
+
+    .bb-add-course {
+        padding-left: 0;
+    }
 }
 
 /* Extra small devices (phones, less than 768px) */
@@ -167,6 +175,11 @@ h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
 
 /* Small devices (tablets, 768px and up) */
 @media (min-width: 768px) {
+    .results {
+        .bb-add-course {
+            padding-left: 15px;
+        }
+    }
 }
 
 /* Medium devices (desktops, 992px and up) */

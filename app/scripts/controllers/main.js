@@ -38,8 +38,8 @@ angular.module('bossBossApp')
         $rootScope.data.courses.push($scope.results[i]);
     };
 
-    $scope.goToCourse = function(id) {
-        $location.path('/course/' + id);
+    $scope.goTo = function(url) {
+        $location.path(url);
     };
 
     $scope.$watch('searchParams.buildings', function(bids) {

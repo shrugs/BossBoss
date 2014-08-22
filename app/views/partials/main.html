@@ -64,11 +64,11 @@
             <div class="col-xs-12">
                 <div class="row class" ng-repeat="course in results.courses">
                     <div class="col-xs-1">
-                        <div bb-add-course class="col-xs-6" ng-click="addCourse(course.id)">
+                        <div bb-add-course class="col-xs-6 bb-add-course" ng-click="addCourse(course.id)">
 
                         </div>
                     </div>
-                    <div class="col-xs-10" ng-click="goToCourse(course.id)">
+                    <div class="col-xs-8" ng-click="goTo('/course/' + course.id)">
                         <div class="row">
                             <div class="col-xs-12">
                                 <h5 class="class-header">{{course.name}}</h5>
@@ -82,10 +82,25 @@
                             </div>
                         </div>
                     </div>
+                    <div class="col-xs-1">
+                        <span class="glyphicon glyphicon-chevron-right course-chevron"></span>
+                    </div>
                 </div>
-                <div class="row" ng-repeat="teacher in results.teachers">
-                    <div class="col-xs-12">
-                        {{teacher.name}}
+                <div class="row teacher" ng-repeat="teacher in results.teachers">
+                    <div class="col-xs-8 col-xs-offset-1" ng-click="goTo('/teacher/' + teacher.id)">
+                        <div class="row">
+                            <div class="col-xs-12">
+                                <h5 class="class-header">{{teacher.name}}</h5>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-xs-12">
+                                <span class="label label-info" ng-repeat="class in teacher.classes">{{class.course_code}}-{{class.section}}</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xs-1">
+                        <span class="glyphicon glyphicon-chevron-right course-chevron"></span>
                     </div>
                 </div>
             </div>
