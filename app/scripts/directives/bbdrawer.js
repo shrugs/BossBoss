@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('bossBossApp')
-.directive('bbDrawer', function ($rootScope, $window, debounce, Course, where) {
+.directive('bbDrawer', function ($rootScope, $window, debounce, Course, where, $location) {
     return {
         templateUrl: 'partials/bbdrawer.html',
         restrict: 'AE',
@@ -42,6 +42,10 @@ angular.module('bossBossApp')
                 }
             };
 
+            $scope.shouldShowSchedule = function() {
+                return $location.path() !== '/schedule';
+            };
+
             $scope.chooseClass = function(c) {
                 var i = $rootScope.state.cart.indexOf(where($rootScope.state.cart, 'id', c.course_id));
                 if ($rootScope.state.cart[i].class === undefined) {
@@ -63,15 +67,15 @@ angular.module('bossBossApp')
 
             $rootScope.$watch('state.cart', debounce(function() {
                 angular.forEach($scope.state.cart, function(c) {
-                    if ($scope.classes[c.id] === undefined) {
+                    if ($rootScope.classes[c.id] === undefined) {
                         Course.get({id: c.id}).$promise.then(function(course) {
                             var classes_by_id = {};
                             angular.forEach(course.classes, function(c) {
                                 classes_by_id[c.id] = c;
                             });
-                            $scope.classes[course.id] = classes_by_id;
-                            console.log($scope.classes);
-                            $scope.courses[course.id] = course;
+                            $rootScope.classes[course.id] = classes_by_id;
+                            console.log($rootScope.classes);
+                            $rootScope.courses[course.id] = course;
                         });
                     }
                 });
