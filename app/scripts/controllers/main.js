@@ -1,12 +1,18 @@
 'use strict';
 
 angular.module('bossBossApp')
-.controller('MainCtrl', function ($scope, $http, $rootScope, Search, Params, debounce, where, $location) {
+.controller('MainCtrl', function ($scope, $http, $rootScope, Search, Params, debounce, where, $location, localStorageService) {
+
+    var isFirstRun = true;
+
+    $scope.searchParams = localStorageService.get('searchParams') || {};
+    $scope.results = localStorageService.get('results') || undefined;
 
     $scope.$watch('searchParams', debounce(function(p) {
         if (angular.isUndefined(p)) {
             return;
         }
+        localStorageService.set('searchParams', p);
         // make sure at least one thing has values
         var hasParams = false;
         var ks = Object.keys(p);
@@ -16,6 +22,8 @@ angular.module('bossBossApp')
             if (k === 'q' && v !== '') {
                 hasParams = true;
                 break;
+            } else if (k === 'shouldFilter') {
+                continue;
             } else if (v.length !== 0) {
                 hasParams = true;
                 break;
@@ -27,11 +35,15 @@ angular.module('bossBossApp')
         }
 
 
-        console.log('Searching...', p);
-        Search.get(p).$promise.then(function(results) {
-            console.log(results);
-            $scope.results = results;
-        });
+        if (!isFirstRun || $scope.results === undefined) {
+            console.log('Searching...', p);
+            Search.get(p).$promise.then(function(results) {
+                console.log(results);
+                $scope.results = results;
+                localStorageService.set('results', results);
+            });
+        }
+        isFirstRun = false;
     }, 500, true), true);
 
     $scope.addCourse = function(i) {
@@ -67,8 +79,13 @@ angular.module('bossBossApp')
         }
     };
 
-
-    $scope.params = Params.get();
+    $scope.params = localStorageService.get('params') || undefined;
+    if ($scope.params === undefined) {
+        Params.get().$promise.then(function(params) {
+            $scope.params = params;
+            localStorageService.set('params', params);
+        });
+    }
 
 
 });

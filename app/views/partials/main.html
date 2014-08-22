@@ -5,17 +5,17 @@
             <!-- SEARCH -->
             <div class="form-group col-xs-12">
                 <div class="input-group">
-                    <input type="text" class="form-control" ng-model="searchParams.q" debounce="1500" placeholder="'scuba', 'ENGR-122'">
+                    <input type="text" class="form-control" ng-model="searchParams.q" debounce="900" placeholder="'scuba', 'ENGR-122'">
                     <div class="input-group-btn">
-                        <button class="btn btn-default" ng-click="shouldFilter = !shouldFilter">
-                        <span class="glyphicon glyphicon-chevron-down" ng-hide="shouldFilter"></span>
-                        <span class="glyphicon glyphicon-chevron-up" ng-show="shouldFilter"></span>
+                        <button class="btn btn-default" ng-click="searchParams.shouldFilter = !searchParams.shouldFilter">
+                        <span class="glyphicon glyphicon-chevron-down" ng-hide="searchParams.shouldFilter"></span>
+                        <span class="glyphicon glyphicon-chevron-up" ng-show="searchParams.shouldFilter"></span>
                         Filter</button>
                     </div>
                 </div>
               </div>
         </div>
-        <div class="row" ng-show="shouldFilter">
+        <div class="row" ng-show="searchParams.shouldFilter">
             <!-- SUBJECTS -->
             <div class="col-xs-6 col-sm-4">
                 <select ui-select2 ng-model="searchParams.subjects" class="param" data-placeholder="Subject" multiple>
@@ -86,7 +86,7 @@
                         <span class="glyphicon glyphicon-chevron-right course-chevron"></span>
                     </div>
                 </div>
-                <div class="row teacher" ng-repeat="teacher in results.teachers">
+                <div class="row teacher" ng-repeat="teacher in results.teachers | limitTo:4">
                     <div class="col-xs-8 col-xs-offset-1" ng-click="goTo('/teacher/' + teacher.id)">
                         <div class="row">
                             <div class="col-xs-12">

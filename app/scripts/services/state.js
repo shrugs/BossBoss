@@ -1,18 +1,29 @@
 'use strict';
 
 angular.module('bossBossApp')
-.factory('State', function ($rootScope, Auth, User) {
+.factory('State', function ($rootScope, Auth, User, localStorageService) {
 
     return {
         start: function() {
-            $rootScope.$watch('state', function(newValue) {
-                if (angular.isUndefined(newValue)) {
+
+            $rootScope.state = localStorageService.get('state') || {cart: []};
+
+            // get mongo state
+            if (Auth.isLoggedIn()) {
+                Auth.currentUser().$promise.then(function(user) {
+                    $rootScope.state = user.state;
+                });
+            }
+
+            $rootScope.$watch('state', function(state) {
+                if (angular.isUndefined(state) && state !== {cart: []}) {
                     return;
                 }
+                localStorageService.set('state', state);
                 if (Auth.isLoggedIn()) {
                     // if the user is logged in, save the state to Mongo
                     Auth.currentUser().$promise.then(function(user) {
-                        user.state = $rootScope.state;
+                        user.state = state;
                         User.update(user);
                     });
                 }

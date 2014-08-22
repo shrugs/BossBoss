@@ -6,9 +6,10 @@ angular.module('bossBossApp', [
     'ngSanitize',
     'ngRoute',
     'ui.select2',
-    'debounce'
+    'debounce',
+    'LocalStorageModule'
 ])
-.config(function ($routeProvider, $locationProvider, $httpProvider) {
+.config(function ($routeProvider, $locationProvider, $httpProvider, localStorageServiceProvider) {
     $routeProvider
         .when('/', {
             templateUrl: 'partials/main',
@@ -44,6 +45,7 @@ angular.module('bossBossApp', [
         });
 
     $locationProvider.html5Mode(true);
+    localStorageServiceProvider.setPrefix('BossBoss');
 
     // Intercept 401s and redirect you to login
     $httpProvider.interceptors.push(['$q', '$location', function($q, $location) {
@@ -60,11 +62,10 @@ angular.module('bossBossApp', [
         };
     }]);
 })
-.run(function ($rootScope, $location, Auth, State) {
+.run(function ($rootScope, $location, Auth, State, uiSelect2Config, localStorageService) {
+
+    uiSelect2Config.allowClear = true;
     State.start();
-    $rootScope.state = {
-        cart: []
-    };
 
     // Auth.currentUser().$promise.then(function(user) {
     //     if (user.state.route) {
