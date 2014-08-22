@@ -35,8 +35,11 @@
                     </div>
                 </div>
                 <!-- CLASS -->
-                <div class="row" ng-if="course.class">
-                    <div class="col-xs-8 col-xs-offset-2">
+                <div class="row class" ng-if="course.class">
+                    <div class="col-xs-1 col-xs-offset-1">
+                        <div></div>
+                    </div>
+                    <div class="col-xs-8">
                         <div class="row">
                             <div class="col-xs-12">
                                 <h5 class="class-header">{{courses[course.id].code}}-<span class="label label-info">{{classes[course.id][course.class.id].section}}</span> <span class="label label-default">{{classes[course.id][course.class.id].callnum}}</span></h5>

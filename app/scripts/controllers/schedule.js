@@ -63,6 +63,7 @@ angular.module('bossBossApp')
 
                 classesLoaded.promise.then(function(course) {
                     var c = $rootScope.classes[course.id][course.class.id];
+                    $rootScope.classes[course.id][course.class.id].color = colors[count];
                     course = $rootScope.courses[course.id];
                     // for each class, we want to make an element on the calendar for each day that it's in
                     if (c.times.info !== undefined) {

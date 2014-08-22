@@ -20,9 +20,6 @@ angular.module('bossBossApp')
                 return $scope.$apply();
             });
 
-            var neg = $scope.status === 'Closed' || $scope.status === 'Cancelled';
-            $scope.color = !neg ? '#5cb85c' : '#777777';
-
         }
     };
 });
