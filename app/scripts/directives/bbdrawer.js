@@ -68,6 +68,7 @@ angular.module('bossBossApp')
             $rootScope.$watch('state.cart', debounce(function() {
                 angular.forEach($scope.state.cart, function(c) {
                     if ($rootScope.classes[c.id] === undefined) {
+                        // @TODO(Shrugs) this is called multiple times because it doesn't wait for the original request to finish
                         Course.get({id: c.id}).$promise.then(function(course) {
                             var classes_by_id = {};
                             angular.forEach(course.classes, function(c) {
