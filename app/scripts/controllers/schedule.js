@@ -2,11 +2,13 @@
 
 angular.module('bossBossApp')
 .controller('ScheduleCtrl', function ($scope, $rootScope, $timeout, $interval, $q) {
+
     $scope.getStyle = function(day, i) {
         if ($scope.calEvents !== undefined && i < $scope.calEvents[day].length) {
             return $scope.calEvents[day][i].style;
         }
     };
+
     var colors = [
         'rgb(255, 84, 84)',
         'rgb(47, 47, 255)',
@@ -63,8 +65,8 @@ angular.module('bossBossApp')
 
                 classesLoaded.promise.then(function(course) {
                     var c = $rootScope.classes[course.id][course.class.id];
-                    $rootScope.classes[course.id][course.class.id].color = colors[count];
                     course = $rootScope.courses[course.id];
+                    $rootScope.courses[course.id].color = colors[count];
                     // for each class, we want to make an element on the calendar for each day that it's in
                     if (c.times.info !== undefined) {
                         // no time :(
