@@ -23,35 +23,16 @@
                 </select>
             </div>
             <!-- CAMPUSES -->
-            <div class="col-xs-6 col-sm-4">
+<!--             <div class="col-xs-6 col-sm-4">
                 <select ui-select2 ng-model="searchParams.campuses" class="param" data-placeholder="Campus" multiple>
                     <option ng-repeat="opt in params.campuses" ng-value="opt.id">{{opt.name}}</option>
                 </select>
-            </div>
+            </div> -->
             <!-- TEACHERS -->
             <div class="col-xs-6 col-sm-4">
                 <select ui-select2 ng-model="searchParams.teachers" class="param" data-placeholder="Teacher" multiple>
                     <option ng-repeat="opt in params.teachers" ng-value="opt.id">{{opt.name}}</option>
                 </select>
-            </div>
-            <!-- DEPTS -->
-            <div class="col-xs-6 col-sm-4">
-                <select ui-select2 ng-model="searchParams.depts" class="param" data-placeholder="Depts" multiple>
-                    <option ng-repeat="opt in params.depts" ng-value="opt.id">{{opt.name}}</option>
-                </select>
-            </div>
-            <!-- BUILDINGS+ROOMS -->
-            <div class="col-xs-12 col-sm-8">
-                <div class="row">
-                    <!-- BUILDINGS -->
-                    <select ui-select2 ng-model="searchParams.buildings" class="col-xs-6" data-placeholder="Building" multiple>
-                        <option ng-repeat="opt in params.buildings" ng-value="opt.id">{{opt.name}}</option>
-                    </select>
-                    <!-- ROOMS -->
-                    <select ui-select2 ng-model="searchParams.rooms" class="col-xs-6" data-placeholder="Room" multiple ng-disabled="possibleRooms.length === 0">
-                        <option ng-repeat="opt in possibleRooms" ng-value="opt.id">{{opt.building_name}} - {{opt.name}}</option>
-                    </select>
-                </div>
             </div>
             <!-- TERMS -->
             <div class="col-xs-6 col-sm-4">
@@ -59,6 +40,31 @@
                     <option ng-repeat="opt in params.terms" ng-value="opt.id">{{opt.name}}</option>
                 </select>
             </div>
+            <!-- JUST BUILDING -->
+            <div class="col-xs-6 col-sm-4">
+                <select ui-select2 ng-model="searchParams.buildings" class="param" data-placeholder="Building" multiple>
+                    <option ng-repeat="opt in params.buildings" ng-value="opt.id">{{opt.name}}</option>
+                </select>
+            </div>
+            <!-- DEPTS -->
+<!--             <div class="col-xs-6 col-sm-4">
+                <select ui-select2 ng-model="searchParams.depts" class="param" data-placeholder="Depts" multiple>
+                    <option ng-repeat="opt in params.depts" ng-value="opt.id">{{opt.name}}</option>
+                </select>
+            </div> -->
+            <!-- BUILDINGS+ROOMS -->
+<!--              <div class="col-xs-12 col-sm-8">
+                <div class="row"> -->
+                    <!-- BUILDINGS -->
+<!--                     <select ui-select2 ng-model="searchParams.buildings" class="col-xs-6" data-placeholder="Building" multiple>
+                        <option ng-repeat="opt in params.buildings" ng-value="opt.id">{{opt.name}}</option>
+                    </select> -->
+                    <!-- ROOMS -->
+<!--                     <select ui-select2 ng-model="searchParams.rooms" class="col-xs-6" data-placeholder="Room" multiple ng-disabled="possibleRooms.length === 0">
+                        <option ng-repeat="opt in possibleRooms" ng-value="opt.id">{{opt.building_name}} - {{opt.name}}</option>
+                    </select>
+                </div>
+            </div> -->
         </div>
         <div class="row results">
             <div class="col-xs-12">

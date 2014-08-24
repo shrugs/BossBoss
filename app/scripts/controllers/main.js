@@ -16,7 +16,8 @@ angular.module('bossBossApp')
 
         if (!isFirstRun || $scope.results === undefined) {
             console.log('Searching...', p);
-            $scope.results = Search.get(p).$promise.then(function(results) {
+            $scope.results = Search.get(p);
+            $scope.results.$promise.then(function(results) {
                 console.log(results);
                 localStorageService.set('results', results);
             });
