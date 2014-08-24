@@ -23,7 +23,7 @@ angular.module('bossBossApp')
 
             element.find('span').tooltip({
                 placement: 'right',
-                title: $scope.status,
+                title: 'Class' + $scope.status,
                 trigger: 'hover'
             });
         }
