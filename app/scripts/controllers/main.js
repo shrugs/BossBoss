@@ -5,7 +5,9 @@ angular.module('bossBossApp')
 
     var isFirstRun = true;
 
-    $scope.searchParams = localStorageService.get('searchParams') || {};
+    $scope.searchParams = localStorageService.get('searchParams') || {
+        terms: [1]
+    };
     $scope.results = localStorageService.get('results') || undefined;
 
     $scope.$watch('searchParams', debounce(function(p) {
@@ -33,21 +35,21 @@ angular.module('bossBossApp')
         $location.path(url);
     };
 
-    $scope.$watch('searchParams.buildings', function(bids) {
-        if (bids === undefined || bids.length === 0) {
-            return;
-        }
-        var r = [];
-        angular.forEach(bids, function(bid) {
-            var thisBuilding = where($scope.params.buildings, 'id', parseInt(bid, 10));
-            if (!angular.isUndefined(thisBuilding)) {
-                angular.forEach(thisBuilding.rooms, function(room) {
-                    r.push(room);
-                });
-            }
-        });
-        $scope.possibleRooms = r;
-    });
+    // $scope.$watch('searchParams.buildings', function(bids) {
+    //     if (bids === undefined || bids.length === 0) {
+    //         return;
+    //     }
+    //     var r = [];
+    //     angular.forEach(bids, function(bid) {
+    //         var thisBuilding = where($scope.params.buildings, 'id', parseInt(bid, 10));
+    //         if (!angular.isUndefined(thisBuilding)) {
+    //             angular.forEach(thisBuilding.rooms, function(room) {
+    //                 r.push(room);
+    //             });
+    //         }
+    //     });
+    //     $scope.possibleRooms = r;
+    // });
 
     $scope.addCourse = function(id) {
         var otherClass = where($rootScope.state.cart, 'id', id);
