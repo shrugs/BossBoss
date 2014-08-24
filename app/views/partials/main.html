@@ -19,7 +19,6 @@
             <!-- SUBJECTS -->
             <div class="col-xs-6 col-sm-4">
                 <select ui-select2 ng-model="searchParams.subjects" class="param" data-placeholder="Subject" multiple>
-                    <option value=""></option>
                     <option ng-repeat="opt in params.subjects" ng-value="opt.id">{{opt.name}}</option>
                 </select>
             </div>
@@ -32,28 +31,24 @@
             <!-- TEACHERS -->
             <div class="col-xs-6 col-sm-4">
                 <select ui-select2 ng-model="searchParams.teachers" class="param" data-placeholder="Teacher" multiple>
-                    <option value=""></option>
                     <option ng-repeat="opt in params.teachers" ng-value="opt.id">{{opt.name}}</option>
                 </select>
             </div>
             <!-- TERMS -->
             <div class="col-xs-6 col-sm-4">
                 <select ui-select2 ng-model="searchParams.terms" class="param" data-placeholder="Term" multiple>
-                    <option value=""></option>
                     <option ng-repeat="opt in params.terms" ng-value="opt.id">{{opt.name}}</option>
                 </select>
             </div>
             <!-- JUST BUILDING -->
             <div class="col-xs-6 col-sm-4">
                 <select ui-select2 ng-model="searchParams.buildings" class="param" data-placeholder="Building" multiple>
-                    <option value=""></option>
                     <option ng-repeat="opt in params.buildings" ng-value="opt.id">{{opt.name}}</option>
                 </select>
             </div>
             <!-- DEPTS -->
 <!--             <div class="col-xs-6 col-sm-4">
                 <select ui-select2 ng-model="searchParams.depts" class="param" data-placeholder="Depts" multiple>
-                    <option value=""></option>
                     <option ng-repeat="opt in params.depts" ng-value="opt.id">{{opt.name}}</option>
                 </select>
             </div> -->
@@ -62,12 +57,10 @@
                 <div class="row"> -->
                     <!-- BUILDINGS -->
 <!--                     <select ui-select2 ng-model="searchParams.buildings" class="col-xs-6" data-placeholder="Building" multiple>
-    <option value=""></option>
                         <option ng-repeat="opt in params.buildings" ng-value="opt.id">{{opt.name}}</option>
                     </select> -->
                     <!-- ROOMS -->
 <!--                     <select ui-select2 ng-model="searchParams.rooms" class="col-xs-6" data-placeholder="Room" multiple ng-disabled="possibleRooms.length === 0">
-    <option value=""></option>
                         <option ng-repeat="opt in possibleRooms" ng-value="opt.id">{{opt.building_name}} - {{opt.name}}</option>
                     </select>
                 </div>
