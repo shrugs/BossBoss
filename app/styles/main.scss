@@ -33,29 +33,21 @@ h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
     margin-left: 10px;
 }
 
-.navbar-nav > li.btn-facebook {
+.navbar-nav > li > a.btn-facebook {
     background-color: $fb-blue;
+    color: #FFF;
     margin-top: 4px;
-    margin-bottom: 4px;
-    margin-right: 10px;
+    margin-bottom: 1px;
+    margin-right: 14px;
+    padding-bottom: 8px;
+    padding-top: 8px;
 
 
-    :hover {
+    &:hover {
+        background-color: $fb-blue;
         box-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125);
+        color: #FFF;
     }
-
-    :active {
-        box-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125);
-    }
-
-    a {
-        padding-top: 11px;
-        padding-bottom: 11px;
-    }
-}
-
-.fb-icon {
-    height: 20px;
 }
 
 .navbar-default .navbar-nav > .active > a,
