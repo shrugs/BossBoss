@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('bossBossApp')
-.directive('bbDrawer', function ($rootScope, $window, debounce, Course, where, $location) {
+.directive('bbDrawer', function ($rootScope, $window, Course, where, $location) {
     return {
         templateUrl: 'partials/bbdrawer.html',
         restrict: 'AE',
@@ -65,22 +65,20 @@ angular.module('bossBossApp')
                 }
             });
 
-            $rootScope.$watch('state.cart', debounce(function() {
+            $rootScope.$watch('state.cart', function() {
                 angular.forEach($scope.state.cart, function(c) {
-                    if ($rootScope.classes[c.id] === undefined) {
-                        // @TODO(Shrugs) this is called multiple times because it doesn't wait for the original request to finish
-                        Course.get({id: c.id}).$promise.then(function(course) {
+                    if ($rootScope.cachedCourseResult[c.id] === undefined) {
+                        $rootScope.cachedCourseResult[c.id] = Course.get({id: c.id}).$promise.then(function(course) {
                             var classes_by_id = {};
                             angular.forEach(course.classes, function(c) {
                                 classes_by_id[c.id] = c;
                             });
                             $rootScope.classes[course.id] = classes_by_id;
-                            console.log($rootScope.classes);
                             $rootScope.courses[course.id] = course;
                         });
                     }
                 });
-            }, 200), true);
+            }, true);
 
         }
     };

@@ -66,10 +66,11 @@ angular.module('bossBossApp', [
         };
     }]);
 })
-.run(function ($rootScope, $location, Auth, State, uiSelect2Config, localStorageService) {
+.run(function ($rootScope, $location, Auth, State, uiSelect2Config) {
 
     uiSelect2Config.allowClear = true;
     State.start();
+    $rootScope.cachedCourseResult = {};
 
     // Auth.currentUser().$promise.then(function(user) {
     //     if (user.state.route) {
