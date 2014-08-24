@@ -29,9 +29,12 @@ angular.module('bossBossApp')
 
             $scope.open = function() {
                 $scope.drawerState = true;
+                // show backdrop
+                angular.element('.backdrop').show();
             };
             $scope.close = function() {
                 $scope.drawerState = false;
+                angular.element('.backdrop').hide();
             };
 
             $scope.toggle = function() {

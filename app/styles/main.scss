@@ -6,6 +6,7 @@ $latech-blue: #0052CC;
 
 body {
     font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    position: relative;
 }
 
 h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
@@ -21,6 +22,7 @@ h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
 
 .navbar-bossboss {
     margin-top: 5px;
+    margin-bottom: 0;
     background-color: #FFF;
     border-radius: 0;
     border-color: #FFF;
@@ -172,6 +174,15 @@ h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
 
 .label-danger {
     background-color: #F2660F;
+}
+
+.backdrop {
+    display: none;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    // z-index: 200;
+    background-color: rgba(0,0,0,0.5);
 }
 
 /* Extra small devices (phones, less than 768px) */
