@@ -51,7 +51,7 @@
                 <div class="row class" ng-repeat="class in course.classes">
                     <div class="col-xs-2">
                         <div class="row">
-                            <div bb-indicator positive="true" class="col-xs-6 indicator">
+                            <div bb-indicator status="{{class.seats_status}}" class="col-xs-6 indicator">
 
                             </div>
                             <div bb-add-course class="col-xs-6 col-add-course" ng-click="addClass($index)">
