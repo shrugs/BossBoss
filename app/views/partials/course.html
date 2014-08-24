@@ -54,7 +54,7 @@
                             <div bb-indicator status="{{class.seats_status}}" class="col-xs-6 indicator">
 
                             </div>
-                            <div bb-add-course class="col-xs-6 col-add-course" ng-click="addClass($index)">
+                            <div bb-add-course status="{{class.seats_status}}" class="col-xs-6 col-add-course" ng-click="addClass($index)">
 
                             </div>
                         </div>
@@ -83,6 +83,9 @@
                                 <span class="label label-default">{{class.callnum}}</span>
                             </div>
                         </div>
+                    </div>
+                    <div class="col-xs-12">
+                        <hr>
                     </div>
                 </div>
             </div>

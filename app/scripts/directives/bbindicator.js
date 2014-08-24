@@ -21,8 +21,6 @@ angular.module('bossBossApp')
                 return $scope.$apply();
             });
 
-            //
-
             if ($scope.color === undefined) {
                 // intepret status
                 $scope.bgColor = ($scope.status === 'Closed' || $scope.status === 'Cancelled') ? '#999999' : '#5cb85c';

@@ -24,6 +24,11 @@ angular.module('bossBossApp')
         if (angular.isUndefined(c)) {
             return;
         }
+
+        if (c.info !== undefined) {
+            return c.info;
+        }
+
         var days = Object.keys(c);
         var firstDay = days[0];
         return days.join('') + ' ' + milToNorm(c[firstDay].start) + '-' + milToNorm(c[firstDay].end);
