@@ -13,33 +13,11 @@ angular.module('bossBossApp')
             return;
         }
         localStorageService.set('searchParams', p);
-        // make sure at least one thing has values
-        var hasParams = false;
-        var ks = Object.keys(p);
-        for (var i = 0; i < ks.length; i++) {
-            var k = ks[i],
-                v = p[k];
-            if (k === 'q' && v !== '') {
-                hasParams = true;
-                break;
-            } else if (k === 'shouldFilter') {
-                continue;
-            } else if (v.length !== 0) {
-                hasParams = true;
-                break;
-            }
-        }
-
-        if (!hasParams) {
-            return;
-        }
-
 
         if (!isFirstRun || $scope.results === undefined) {
             console.log('Searching...', p);
-            Search.get(p).$promise.then(function(results) {
+            $scope.results = Search.get(p).$promise.then(function(results) {
                 console.log(results);
-                $scope.results = results;
                 localStorageService.set('results', results);
             });
         }

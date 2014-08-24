@@ -21,7 +21,7 @@ angular.module('bossBossApp')
 
     ];
 
-    $scope.hours = ['7a', '8a', '9a', '10a', '11a', '12p', '1p', '2p', '3p', '4p', '5p', '6p', '7p', '8p'];
+    $scope.hours = ['7am', '8am', '9am', '10am', '11am', '12pm', '1pm', '2pm', '3pm', '4pm', '5pm', '6pm', '7pm', '8pm'];
 
     // 7am
     var startTime = new Date(0,0,0, 7, 0, 0, 0);

@@ -3,6 +3,9 @@
 angular.module('bossBossApp')
 .filter('times', function () {
     function milToNorm(mil, shouldAmPm) {
+        if (mil === undefined) {
+            return;
+        }
         var t = mil.split(':'),
             hours = parseInt(t[0], 10),
             minutes = t[1];
