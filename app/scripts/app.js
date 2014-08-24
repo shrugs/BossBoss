@@ -28,10 +28,6 @@ angular.module('bossBossApp', [
             templateUrl: 'partials/schedule',
             controller: 'ScheduleCtrl'
         })
-        .when('/Schedule', {
-            templateUrl: 'partials/schedule',
-            controller: 'ScheduleCtrl'
-        })
         .when('/course/:id', {
           templateUrl: 'partials/course',
           controller: 'CourseCtrl'
