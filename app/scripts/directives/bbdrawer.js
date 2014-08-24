@@ -18,10 +18,10 @@ angular.module('bossBossApp')
             };
 
             $scope.handleWindow();
-            angular.element($window).bind('resize', function() {
-                $scope.handleWindow();
-                return $scope.$apply();
-            });
+            // angular.element($window).bind('resize', function() {
+            //     $scope.handleWindow();
+            //     return $scope.$apply();
+            // });
 
             $scope.removeCourse = function(i) {
                 $rootScope.state.cart.splice(i, 1);
