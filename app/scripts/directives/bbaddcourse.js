@@ -21,11 +21,13 @@ angular.module('bossBossApp')
                 return $scope.$apply();
             });
 
-            element.find('span').tooltip({
-                placement: 'right',
-                title: 'Class' + $scope.status,
-                trigger: 'hover'
-            });
+            if ($scope.status !== undefined) {
+                element.find('span').tooltip({
+                    placement: 'right',
+                    title: 'Class ' + $scope.status,
+                    trigger: 'hover'
+                });
+            }
         }
     };
 });

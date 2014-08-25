@@ -17,7 +17,7 @@
                 <li ng-class="{active: isActive('/about')}"><a href="/about" ng-click="hideNav()">About</a></li>
             </ul>
             <ul class="nav navbar-nav pull-right">
-                <li ng-hide="currentUser" ng-click="login()"><a class="btn btn-xs btn-facebook">Connect Facebook</a></li>
+                <li ng-hide="currentUser" ng-click="login()" data-toggle="tooltip"><a class="btn btn-xs btn-facebook">Connect Facebook</a></li>
                 <li class="dropdown" ng-show="currentUser">
                     <a class="dropdown-toggle" data-toggle="dropdown">{{ currentUser.name }} <span class="caret"></span></a>
                     <ul class="dropdown-menu" role="menu">
