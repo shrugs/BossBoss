@@ -181,6 +181,7 @@ for subject in subjects:
                 teacher_name = find_key('Instructor', this_class)
                 building_name = normalize(find_key('Building', this_class))
                 is_www = 'www' in course_notes.lower()
+                is_credit_exam = section.find('E') == 0
 
                 if '<br' in teacher_name:
                     teacher_name = teacher_name.split('<br')[0]

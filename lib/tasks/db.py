@@ -100,6 +100,7 @@ class Class(BaseModel):
     date_from = DateTimeField(null=True, default=None)      # When the class is offered from.
     date_to = DateTimeField(null=True, default=None)        # When the class stops being offered.
     is_www = BooleanField(default=False)
+    is_credit_exam = BooleanField(default=False)
 
     course = ForeignKeyField(Course, related_name='classes')
     term = ForeignKeyField(Term, related_name='classes')
