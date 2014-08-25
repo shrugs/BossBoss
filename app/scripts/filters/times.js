@@ -31,6 +31,10 @@ angular.module('bossBossApp')
 
         var days = Object.keys(c);
         var firstDay = days[0];
-        return days.join('') + ' ' + milToNorm(c[firstDay].start) + '-' + milToNorm(c[firstDay].end);
+        days = days.join('');
+        if (days === 'RT') {
+            days = 'TR';
+        }
+        return days + ' ' + milToNorm(c[firstDay].start) + '-' + milToNorm(c[firstDay].end);
     };
 });
