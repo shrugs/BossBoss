@@ -10,12 +10,12 @@
                 <th>F</th>
             </tr>
             <tr class="events"> <!-- COLUMNS -->
-
                 <td class="times-col">
                     <div class="col-hour-header" ng-repeat="hour in hours">{{hour}}</div>
                 </td>
                 <td>
                     <div class="cal-col">
+                        <hr class="hr-divider" ng-repeat="hh in hourHeights" ng-style="{'top': hh}">
                         <div class="cal-event cal-fade-in-out" ng-repeat="event in calEvents['M']" ng-style="getStyle('M', $index)">
                             <div class="cal-event-title">
                                 <span class="hidden-xs visible-sm visible-md visible-lg">{{event.title}}</span>
@@ -28,6 +28,7 @@
                 </td>
                 <td>
                     <div class="cal-col">
+                        <hr class="hr-divider" ng-repeat="hh in hourHeights" ng-style="{'top': hh}">
                         <div class="cal-event cal-fade-in-out" ng-repeat="event in calEvents['T']" ng-style="getStyle('T', $index)">
                             <div class="cal-event-title">
                                 <span class="hidden-xs visible-sm visible-md visible-lg">{{event.title}}</span>
@@ -40,6 +41,7 @@
                 </td>
                 <td>
                     <div class="cal-col">
+                        <hr class="hr-divider" ng-repeat="hh in hourHeights" ng-style="{'top': hh}">
                         <div class="cal-event cal-fade-in-out" ng-repeat="event in calEvents['W']" ng-style="getStyle('W', $index)">
                             <div class="cal-event-title">
                                 <span class="hidden-xs visible-sm visible-md visible-lg">{{event.title}}</span>
@@ -52,6 +54,7 @@
                 </td>
                 <td>
                     <div class="cal-col">
+                        <hr class="hr-divider" ng-repeat="hh in hourHeights" ng-style="{'top': hh}">
                         <div class="cal-event cal-fade-in-out" ng-repeat="event in calEvents['R']" ng-style="getStyle('R', $index)">
                             <div class="cal-event-title">
                                 <span class="hidden-xs visible-sm visible-md visible-lg">{{event.title}}</span>
@@ -64,6 +67,7 @@
                 </td>
                 <td>
                     <div class="cal-col">
+                        <hr class="hr-divider" ng-repeat="hh in hourHeights" ng-style="{'top': hh}">
                         <div class="cal-event cal-fade-in-out" ng-repeat="event in calEvents['F']" ng-style="getStyle('F', $index)">
                             <div class="cal-event-title">
                                 <span class="hidden-xs visible-sm visible-md visible-lg">{{event.title}}</span>
@@ -83,8 +87,7 @@
     <div class="col-xs-12">
         <div class="row" ng-repeat="alert in alerts">
             <div class="col-xs-12">
-                <div class="alert alert-info alert-dismissible" role="alert">
-                  <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                <div class="alert alert-info">
                   <strong>{{alert.title}}</strong> {{alert.desc}}
                 </div>
             </div>

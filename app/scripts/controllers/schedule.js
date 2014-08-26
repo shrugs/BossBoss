@@ -55,6 +55,11 @@ angular.module('bossBossApp')
                 'F': []
             };
 
+            $scope.hourHeights = [];
+            for (var i = 0; i < $scope.hours.length; i++) {
+                $scope.hourHeights.push(hourHeight*i + 'px');
+            }
+
             angular.forEach(courses, function(course) {
                 $rootScope.cachedCourseResult[course.id].then(function() {
                     if (course.class === undefined) {

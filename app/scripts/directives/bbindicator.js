@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('bossBossApp')
-.directive('bbIndicator', function ($window, $timeout) {
+.directive('bbIndicator', function ($window, $interval) {
     return {
         template: '<div style="padding: 0 2px; height: 80%; width: 20%;" ng-style="{\'background-color\': bgcolor}"></div>',
         restrict: 'AE',
@@ -15,7 +15,7 @@ angular.module('bossBossApp')
                 element.height(element.parents('.class').height());
             };
 
-            $timeout($scope.handleWindow, 400);
+            var p = $interval($scope.handleWindow, 400);
             angular.element($window).bind('resize', function() {
                 $scope.handleWindow();
                 return $scope.$apply();
@@ -25,6 +25,10 @@ angular.module('bossBossApp')
                 // intepret status
                 $scope.bgcolor = ($scope.status === 'Closed' || $scope.status === 'Cancelled') ? '#999999' : '#5cb85c';
             }
+
+            $scope.$on('$destroy', function() {
+                $interval.cancel(p);
+            });
 
         }
     };
