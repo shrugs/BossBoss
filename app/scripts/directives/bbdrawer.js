@@ -68,6 +68,10 @@ angular.module('bossBossApp')
                 }
             });
 
+            $scope.onClassClick = function(id) {
+                angular.element('.course' + id).dropdown('toggle');
+            };
+
             $rootScope.$watch('state.cart', function() {
                 angular.forEach($scope.state.cart, function(c) {
                     if ($rootScope.cachedCourseResult[c.id] === undefined) {

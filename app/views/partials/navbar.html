@@ -14,6 +14,7 @@
             <ul class="nav navbar-nav pull-left">
                 <li ng-class="{active: isActive('/')}"><a href="/" ng-click="hideNav()">Browse</a></li>
                 <li ng-class="{active: isActive('/schedule')}"><a href="/schedule" ng-click="hideNav()">Schedule</a></li>
+                <li ng-class="{active: isActive('/compare')}"><a href="/compare" ng-click="hideNav()">Compare</a></li>
                 <li ng-class="{active: isActive('/about')}"><a href="/about" ng-click="hideNav()">About</a></li>
             </ul>
             <ul class="nav navbar-nav pull-right">
@@ -21,8 +22,6 @@
                 <li class="dropdown" ng-show="currentUser">
                     <a class="dropdown-toggle" data-toggle="dropdown">{{ currentUser.name }} <span class="caret"></span></a>
                     <ul class="dropdown-menu" role="menu">
-                        <li><a href="/settings">Settings</a></li>
-                        <li class="divider"></li>
                         <li><a ng-click="logout()">Logout</a></li>
                     </ul>
                 </li>

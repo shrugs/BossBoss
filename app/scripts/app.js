@@ -40,6 +40,10 @@ angular.module('bossBossApp', [
           templateUrl: 'partials/about',
           controller: 'AboutCtrl'
         })
+        .when('/compare', {
+          templateUrl: 'partials/compare',
+          controller: 'CompareCtrl'
+        })
         .otherwise({
             redirectTo: '/'
         });

@@ -85,6 +85,10 @@ h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
     .btn-show-calendar {
         margin-top: 15px;
     }
+
+    .class {
+        cursor: pointer;
+    }
 }
 
 .max {
@@ -130,6 +134,11 @@ h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
         //     background-color: #DDDDDD;
         // }
     }
+}
+
+.hr-class-divider {
+    margin-top: 0;
+    margin-bottom: 0;
 }
 
 .course {

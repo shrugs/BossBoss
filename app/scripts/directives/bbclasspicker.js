@@ -7,7 +7,8 @@ angular.module('bossBossApp')
         restrict: 'AE',
         scope: {
             classes: '=',
-            onChoice: '='
+            onChoice: '=',
+            pickerId: '@'
         },
         link: function postLink($scope, element) {
 

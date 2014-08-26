@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('bossBossApp')
-.controller('ScheduleCtrl', function ($scope, $rootScope, $timeout) {
+.controller('ScheduleCtrl', function ($scope, $rootScope, $timeout, Course) {
 
     $scope.getStyle = function(day, i) {
         if ($scope.calEvents !== undefined && i < $scope.calEvents[day].length) {
@@ -61,6 +61,16 @@ angular.module('bossBossApp')
             }
 
             angular.forEach(courses, function(course) {
+                if ($rootScope.cachedCourseResult[course.id] === undefined) {
+                    $rootScope.cachedCourseResult[course.id] = Course.get({id: course.id}).$promise.then(function(course) {
+                        var classes_by_id = {};
+                        angular.forEach(course.classes, function(c) {
+                            classes_by_id[c.id] = c;
+                        });
+                        $rootScope.classes[course.id] = classes_by_id;
+                        $rootScope.courses[course.id] = course;
+                    });
+                }
                 $rootScope.cachedCourseResult[course.id].then(function() {
                     if (course.class === undefined) {
                         return;
@@ -79,7 +89,7 @@ angular.module('bossBossApp')
                     }
                     if (c.is_credit_exam) {
                         $scope.alerts.push({
-                            title: 'Whoa Nelly!',
+                            title: 'Heads up!',
                             desc: 'You\'ve selected a credit exam for ' + course.code + ', so it won\'t show on the calendar!'
                         });
                         return;
