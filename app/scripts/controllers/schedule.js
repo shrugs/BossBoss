@@ -39,6 +39,7 @@ angular.module('bossBossApp')
     }
 
     $rootScope.$watch('state.cart', function(courses) {
+        $scope.alerts = [];
         $timeout(function() {
             // every time selectedClasses changes, we want to update the calendar
             var h = angular.element('.calendar').find('tr.events').first().height();
@@ -65,7 +66,17 @@ angular.module('bossBossApp')
                     // for each class, we want to make an element on the calendar for each day that it's in
                     if (c.times.info !== undefined) {
                         // no time :(
-                            // @TODO(Shrugs) show info note below calendar
+                        $scope.alerts.push({
+                            title: 'Heads up!',
+                            desc: 'Unknown time for ' + course.code + '!'
+                        });
+                        return;
+                    }
+                    if (c.is_credit_exam) {
+                        $scope.alerts.push({
+                            title: 'Whoa Nelly!',
+                            desc: 'You\'ve selected a credit exam for ' + course.code + ', so it won\'t show on the calendar!'
+                        });
                         return;
                     }
                     angular.forEach(c.times, function(time, day) {
