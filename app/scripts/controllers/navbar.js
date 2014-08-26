@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('bossBossApp')
-.controller('NavbarCtrl', function ($scope, $location, Auth, $timeout) {
+.controller('NavbarCtrl', function ($scope, $location, Auth) {
     $scope.logout = function() {
         Auth.logout().then(function() {
             $location.path('/');
@@ -20,12 +20,10 @@ angular.module('bossBossApp')
         return route === $location.path();
     };
 
-    $timeout(function() {
-        angular.element('.btn-facebook').first().parent().tooltip({
-            placement: 'left',
-            title: 'Sync your schedule across devices and compare with friends!',
-            trigger: 'hover'
-        });
+    angular.element('.btn-facebook').first().parent().tooltip({
+        placement: 'left',
+        title: 'Sync your schedule across devices and compare with friends!',
+        trigger: 'hover'
     });
 
 });

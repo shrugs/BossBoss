@@ -27,10 +27,6 @@ angular.module('bossBossApp')
         isFirstRun = false;
     }, 500, true), true);
 
-    $scope.addCourse = function(i) {
-        $rootScope.data.courses.push($scope.results[i]);
-    };
-
     $scope.goTo = function(url) {
         $location.path(url);
     };

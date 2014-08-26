@@ -109,6 +109,11 @@
                         <span class="glyphicon glyphicon-chevron-right course-chevron"></span>
                     </div>
                 </div>
+                <div class="row no-results-row" ng-if="results.courses.lenth === 0 && results.teachers.length === 0">
+                    <div class="col-xs-12 text-center text-muted">
+                        <span>No results, try making your search less specific.</span>
+                    </div>
+                </div>
             </div>
         </div>
     </div>

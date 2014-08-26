@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('bossBossApp')
-.controller('ScheduleCtrl', function ($scope, $rootScope, $timeout, $interval, $q) {
+.controller('ScheduleCtrl', function ($scope, $rootScope, $timeout) {
 
     $scope.getStyle = function(day, i) {
         if ($scope.calEvents !== undefined && i < $scope.calEvents[day].length) {
@@ -55,21 +55,17 @@ angular.module('bossBossApp')
             };
 
             angular.forEach(courses, function(course) {
-                var classesLoaded = $q.defer();
-                var didLoadClasses = $interval(function() {
-                    if ($rootScope.classes !== undefined && $rootScope.classes[course.id] !== undefined && $rootScope.classes[course.id][course.class.id] !== undefined) {
-                        $interval.cancel(didLoadClasses);
-                        classesLoaded.resolve(course);
+                $rootScope.cachedCourseResult[course.id].then(function() {
+                    if (course.class === undefined) {
+                        return;
                     }
-                }, 100);
-
-                classesLoaded.promise.then(function(course) {
                     var c = $rootScope.classes[course.id][course.class.id];
                     course = $rootScope.courses[course.id];
-                    $rootScope.courses[course.id].color = colors[count];
+                    $rootScope.courses[course.id].bgcolor = colors[count];
                     // for each class, we want to make an element on the calendar for each day that it's in
                     if (c.times.info !== undefined) {
                         // no time :(
+                            // @TODO(Shrugs) show info note below calendar
                         return;
                     }
                     angular.forEach(c.times, function(time, day) {
