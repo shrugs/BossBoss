@@ -7,9 +7,10 @@ angular.module('bossBossApp', [
     'ngRoute',
     'ui.select2',
     'debounce',
-    'LocalStorageModule'
+    'LocalStorageModule',
+    'facebook'
 ])
-.config(function ($routeProvider, $locationProvider, $httpProvider, localStorageServiceProvider) {
+.config(function ($routeProvider, $locationProvider, $httpProvider, localStorageServiceProvider, FacebookProvider) {
     $routeProvider
         .when('/', {
             templateUrl: 'partials/main',
@@ -66,6 +67,8 @@ angular.module('bossBossApp', [
             }
         };
     }]);
+
+    FacebookProvider.init('895105880503569');
 })
 .run(function ($rootScope, $location, Auth, State, uiSelect2Config) {
 

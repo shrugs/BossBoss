@@ -1,4 +1,42 @@
-
-<p>This is the compare view.</p>
-
-{{courses}}
+<div class="row compare">
+    <div class="col-xs-11">
+        <div class="row" ng-repeat="course in mutualCourses">
+            <div class="col-xs-12">
+                <div class="row compare-course-header">
+                    <div class="col-xs-12">
+                        <h3>{{courses[course.id].name}}</h3>
+                        <span class="label label-info">{{courses[course.id].code}}-{{classes[course.id][course.class.id].section}}</span>
+                        <span class="label label-success">{{classes[course.id][course.class.id].teacher_name}}</span>
+                        <span class="label label-danger">{{classes[course.id][course.class.id].times | times}}</span>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-12 col-sm-4" ng-repeat="friend in course.mutual">
+                        <div class="row">
+                            <div class="col-xs-4">
+                                <img ng-src="{{friend.pic}}" class="img-circle">
+                            </div>
+                            <div class="col-xs-8">
+                                <a ng-href="{{friend.link}}"><h5>{{friend.name}}</h5></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <hr>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row" ng-if="mutualCourses.length === 0">
+    <div ng-hide="fail" class="col-xs-12 text-center text-muted">
+        Loading friends on Facebook that are in your classes...
+    </div>
+    <div ng-show="fail" class="col-xs-12 text-center text-muted">
+        Could not find any classmates that use Boss'Boss.
+    </div>
+</div>
+<div class="row">
+    <div class="col-xs-12">
+        <button class="btn btn-info" ng-click="getMutuals()">Refresh</button>
+    </div>
+</div>
