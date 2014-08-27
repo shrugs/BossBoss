@@ -48,6 +48,11 @@ angular.module('bossBossApp')
     // });
 
     $scope.addCourse = function(id) {
+        if ($rootScope.state === undefined) {
+            $rootScope.state = {
+                cart: []
+            };
+        }
         var otherClass = where($rootScope.state.cart, 'id', id);
         if (otherClass === undefined) {
             $rootScope.state.cart.push({

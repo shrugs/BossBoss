@@ -73,7 +73,12 @@ angular.module('bossBossApp')
             };
 
             $rootScope.$watch('state.cart', function() {
-                angular.forEach($scope.state.cart, function(c) {
+                if ($rootScope.state === undefined) {
+                    $rootScope.state = {
+                        cart: []
+                    };
+                }
+                angular.forEach($rootScope.state.cart, function(c) {
                     if ($rootScope.cachedCourseResult[c.id] === undefined) {
                         $rootScope.cachedCourseResult[c.id] = Course.get({id: c.id}).$promise.then(function(course) {
                             var classes_by_id = {};

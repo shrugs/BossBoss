@@ -42,7 +42,8 @@ angular.module('bossBossApp', [
         })
         .when('/compare', {
           templateUrl: 'partials/compare',
-          controller: 'CompareCtrl'
+          controller: 'CompareCtrl',
+          authenticate: true
         })
         .otherwise({
             redirectTo: '/'

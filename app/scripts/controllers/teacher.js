@@ -6,6 +6,11 @@ angular.module('bossBossApp')
 
     $scope.addClass = function(i) {
         var thisClass = $scope.teacher.classes[i];
+        if ($rootScope.state === undefined) {
+            $rootScope.state = {
+                cart: []
+            };
+        }
         var otherClass = where($rootScope.state.cart, 'id', thisClass.course_id);
         if (otherClass !== undefined) {
             $rootScope.state.cart.splice($rootScope.state.cart.indexOf(otherClass), 1);
