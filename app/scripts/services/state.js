@@ -23,8 +23,10 @@ angular.module('bossBossApp')
                 if (Auth.isLoggedIn()) {
                     // if the user is logged in, save the state to Mongo
                     Auth.currentUser().$promise.then(function(user) {
-                        user.state = state;
-                        User.update(user);
+                        if (user) {
+                            user.state = state;
+                            User.update(user);
+                        }
                     });
                 }
             }, true);
