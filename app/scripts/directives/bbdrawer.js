@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('bossBossApp')
-.directive('bbDrawer', function ($rootScope, $window, Course, where, $location) {
+.directive('bbDrawer', function ($rootScope, $window, Course, where, $location, $timeout) {
     return {
         templateUrl: 'partials/bbdrawer.html',
         restrict: 'AE',
@@ -69,7 +69,9 @@ angular.module('bossBossApp')
             });
 
             $scope.onClassClick = function(id) {
-                angular.element('.course' + id).dropdown('toggle');
+                $timeout(function() {
+                    angular.element('.course' + id).parent('.dropdown').addClass('open')
+                });
             };
 
             $rootScope.$watch('state.cart', function() {
