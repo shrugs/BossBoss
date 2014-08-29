@@ -13,7 +13,50 @@
                 <div class="row">
                     <!-- TITLE -->
                     <div class="col-xs-12">
-                        <h2 class="text-center no-top-margin">{{teacher.name}}</h2>
+                        <h2 ng-if="!teacher.rmp_name" class="text-center no-top-margin">{{teacher.name}}</h2>
+                        <h2 ng-if="teacher.rmp_name" class="text-center no-top-margin">{{teacher.rmp_name}}</h2>
+                    </div>
+                </div>
+                <div ng-if="teacher.rmp_quality" class="row text-center">
+                    <!-- RATE MY PROFESSOR STUFF -->
+                    <div class="col-xs-6 col-sm-3 text-">
+                        <!-- Quality -->
+                        <div class="row">
+                            <h2>{{teacher.rmp_quality}}</h2>
+                        </div>
+                        <div class="row">
+                            <h4>Quality</h4>
+                        </div>
+                    </div>
+
+                    <div class="col-xs-6 col-sm-3">
+                        <!-- Helpfulness -->
+                        <div class="row">
+                            <h2>{{teacher.rmp_helpfulness}}</h2>
+                        </div>
+                        <div class="row">
+                            <h4>Helpfulness</h4>
+                        </div>
+                    </div>
+
+                    <div class="col-xs-6 col-sm-3">
+                        <!-- Clarity -->
+                        <div class="row">
+                            <h2>{{teacher.rmp_clarity}}</h2>
+                        </div>
+                        <div class="row">
+                            <h4>Clarity</h4>
+                        </div>
+                    </div>
+
+                    <div class="col-xs-6 col-sm-3">
+                        <!-- Easiness -->
+                        <div class="row">
+                            <h2>{{teacher.rmp_easiness}}</h2>
+                        </div>
+                        <div class="row">
+                            <h4>Easiness</h4>
+                        </div>
                     </div>
                 </div>
                 <!-- FACTS -->
@@ -28,6 +71,11 @@
                     <div class="col-xs-6 col-md-4 text-center">
                         <span class="label label-success" ng-repeat="class in teacher.classes | unique:'course_code'">{{class.course_code}}</span>
                     </div>
+                </div>
+
+                <!-- Check them out. -->
+                <div ng-if="teacher.rmp_quality" class="row text-center">
+                    <a ng-href="http://www.ratemyprofessors.com/ShowRatings.jsp?tid={{teacher.rmp_id}}">Check {{teacher.rmp_name}} out on RateMyProfessor!</a>
                 </div>
             </div>
 

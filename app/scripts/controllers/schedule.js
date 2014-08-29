@@ -57,7 +57,7 @@ angular.module('bossBossApp')
 
             $scope.hourHeights = [];
             for (var i = 0; i < $scope.hours.length; i++) {
-                $scope.hourHeights.push(hourHeight*i + 'px');
+                $scope.hourHeights.push(10+hourHeight*i + 'px');
             }
 
             angular.forEach(courses, function(course) {
