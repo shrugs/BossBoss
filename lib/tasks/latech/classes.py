@@ -298,7 +298,8 @@ for subject in subjects:
                         term=term,
                         room=db_room,
                         teacher=db_teacher,
-                        is_www=is_www
+                        is_www=is_www,
+                        is_credit_exam=is_credit_exam
                     )
 
                 # update relevant info in the event of a re-scrape
@@ -313,6 +314,8 @@ for subject in subjects:
                 db_class.date_to = date_to
                 db_class.room = db_room
                 db_class.save()
+
+                print db_course.name, db_class.section
 
         finally:
             # return to course listing
