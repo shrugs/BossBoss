@@ -82,15 +82,22 @@ angular.module('bossBossApp')
                     if (c.times.info !== undefined) {
                         // no time :(
                         $scope.alerts.push({
-                            title: 'Heads up!',
+                            title: 'Uh Oh!',
                             desc: 'Unknown time for ' + course.code + '!'
                         });
                         return;
                     }
                     if (c.is_credit_exam) {
                         $scope.alerts.push({
-                            title: 'Heads up!',
+                            title: 'Yo, yo, yo!',
                             desc: 'You\'ve selected a credit exam for ' + course.code + ', so it won\'t show on the calendar!'
+                        });
+                        return;
+                    }
+                    if (c.is_www) {
+                        $scope.alerts.push({
+                            title: 'Heads up!',
+                            desc: 'You\'ve selected an online course for ' + course.code + ', so it won\'t show up on the calendar!'
                         });
                         return;
                     }

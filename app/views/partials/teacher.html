@@ -111,8 +111,14 @@
                             </div>
                         </div>
                         <div class="row class-labels">
-                            <div class="col-xs-12">
+                            <div class="col-xs-4">
                                 <span class="label label-default">{{class.callnum}}</span>
+                            </div>
+                            <div ng-if="class.is_www" class="col-xs-4">
+                                <span class="label label-warning">Online</span>
+                            </div>
+                            <div ng-if="class.is_credit_exam" class="col-xs-4">
+                                <span class="label label-warning">Credit Exam</span>
                             </div>
                         </div>
                     </div>
