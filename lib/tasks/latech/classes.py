@@ -10,6 +10,36 @@ from selenium.common.exceptions import NoSuchElementException
 from .common import find_key, find_all_keys, select_and_submit, get_short_name, get_driver, get_debug, remove_dupe_space, normalize
 from ..db import School, Term, Course, College, Department, Subject, Campus, Course, Teacher, Building, Room, Class
 
+
+def parse_time_str(time_str):
+    times = {}
+
+    if 'arrange' in time_str.lower():
+        times = {
+            "info": "To be Arranged"
+        }
+    elif time_str != '':
+        time_start, time_end = time_str.split('-')
+        time_start += 'AM' if (7 < int(time_start[:2]) < 12) else 'PM'
+        time_start = time.strftime('%H:%M', time.strptime(time_start, '%I:%M%p'))
+        try:
+            time_end = time.strftime('%H:%M', time.strptime(time_end, '%I:%M%p'))
+        except ValueError:
+            time_end = ''
+
+        for day in days:
+            times[day] = {
+                "start": time_start,
+                "end": time_end
+            }
+    else:
+        times = {
+            "info": "Unknown time"
+        }
+
+    return json.dumps(times)
+
+
 # VARS
 debug = get_debug()
 term_key = None
@@ -111,6 +141,10 @@ for subject in subjects:
 
                 course_code = find_key('CrsID', this_class).strip().replace(' ', '')
                 if course_code == '':
+                    # this information may belong to previous class. Need to make sure this is the case, though
+                    print 'CHECK OUT PREVIOUS CLASS FOR DOUBLE TIMES'
+                    import pdb
+                    pdb.set_trace()
                     continue
 
                 subject_code = course_code.split('-')[0]
@@ -120,39 +154,7 @@ for subject in subjects:
                 days = find_key('Days', this_class)
                 time_str = find_key('Time', this_class)
 
-                times = {}
-
-                if 'arrange' in time_str.lower():
-                    times = {
-                        "info": "To be Arranged"
-                    }
-                elif time_str != '':
-                    if '\n' in time_str:
-                        print time_str
-                        import pdb
-                        pdb.set_trace()
-                        # @TODO(Shrugs) handle classes with multiple times on multiple days
-                        # seems to be delimited by \n
-                    else:
-                        time_start, time_end = time_str.split('-')
-                        time_start += 'AM' if (7 < int(time_start[:2]) < 12) else 'PM'
-                        time_start = time.strftime('%H:%M', time.strptime(time_start, '%I:%M%p'))
-                        try:
-                            time_end = time.strftime('%H:%M', time.strptime(time_end, '%I:%M%p'))
-                        except ValueError:
-                            time_end = ''
-
-                        for day in days:
-                            times[day] = {
-                                "start": time_start,
-                                "end": time_end
-                            }
-                else:
-                    times = {
-                        "info": "Unknown time"
-                    }
-
-                times = json.dumps(times)
+                times = parse_time_str(time_str)
 
                 seats_status = normalize(find_key('Status', this_class))
 
