@@ -45,6 +45,7 @@ for teacher in Teacher.select():
             teacher.rmp_name = possible_teachers[0]['teacherfullname_s']
         elif len(possible_teachers) > 1:
             # prompt me for choice, I suppose
+            print teacher.name
             print possible_teachers
             i = int(raw_input('Choose the index of the correct teacher.'))
             if i == -1:
