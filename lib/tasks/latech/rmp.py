@@ -25,7 +25,12 @@ RMP_TEACHER_PAGE_URL = 'http://www.ratemyprofessors.com/ShowRatings.jsp'
 for teacher in Teacher.select():
     if not teacher.rmp_id:
         RMP_SEARCH_PARAMS['q'] = teacher.name
-        r = requests.get(RMP_SEARCH_ENDPOINT, params=RMP_SEARCH_PARAMS).json()
+        r = requests.get(RMP_SEARCH_ENDPOINT, params=RMP_SEARCH_PARAMS)
+        try:
+            r = r.json()
+        except ValueError:
+            print r.text
+            continue
 
         possible_teachers = r['response']['docs']
         # filter for teachers at latech
