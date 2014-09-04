@@ -54,6 +54,5 @@ for teacher in Teacher.select().where(Teacher.name == 'Swanbom M'):
     teacher.rmp_clarity = int(float(soup.find(id='clarity').strong.text) * 10)
     teacher.rmp_easiness = int(float(soup.find(id='easiness').strong.text) * 10)
     # teacher.rmp_hotness = int(soup.find(id='hot').strong.text)
-    print soup.prettify()
 
     teacher.save()
