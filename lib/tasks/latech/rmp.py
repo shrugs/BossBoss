@@ -22,7 +22,7 @@ RMP_TEACHER_PAGE_URL = 'http://www.ratemyprofessors.com/ShowRatings.jsp'
 
 # after we have their tid, go directly to their page and scrape values with bs4
 
-for teacher in Teacher.select().where(Teacher.name == 'Swanbom M'):
+for teacher in Teacher.select():
     if not teacher.rmp_id:
         RMP_SEARCH_PARAMS['q'] = teacher.name
         r = requests.get(RMP_SEARCH_ENDPOINT, params=RMP_SEARCH_PARAMS).json()
