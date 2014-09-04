@@ -33,6 +33,7 @@ for teacher in Teacher.select().where(Teacher.name == 'Swanbom M'):
 
         if len(possible_teachers) == 0:
             # no teachers at latech :(
+            print 'No RMP for %s' % teacher.name
             continue
         elif len(possible_teachers) == 1:
             teacher.rmp_id = possible_teachers[0]['pk_id']
