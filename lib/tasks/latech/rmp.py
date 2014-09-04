@@ -47,6 +47,8 @@ for teacher in Teacher.select():
             # prompt me for choice, I suppose
             print possible_teachers
             i = int(raw_input('Choose the index of the correct teacher.'))
+            if i == -1:
+                continue
             teacher.rmp_id = possible_teachers[i]['pk_id']
             teacher.rmp_name = possible_teachers[i]['teacherfullname_s']
 
