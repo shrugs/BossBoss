@@ -57,10 +57,16 @@ for teacher in Teacher.select():
     teacher_page = requests.get(RMP_TEACHER_PAGE_URL, params={'tid': teacher.rmp_id}).text
 
     soup = BS(teacher_page)
-    teacher.rmp_quality = int(float(soup.find(id='quality').strong.text) * 10)
+    try:
+        teacher.rmp_quality = int(float(soup.find(id='quality').strong.text) * 10)
+    except AttributeError:
+        pass
     teacher.rmp_helpfulness = int(float(soup.find(id='helpfulness').strong.text) * 10)
     teacher.rmp_clarity = int(float(soup.find(id='clarity').strong.text) * 10)
     teacher.rmp_easiness = int(float(soup.find(id='easiness').strong.text) * 10)
-    # teacher.rmp_hotness = int(soup.find(id='hot').strong.text)
+    try:
+        teacher.rmp_hotness = int(soup.find(id='hot').strong.text)
+    except AttributeError:
+        pass
 
     teacher.save()
