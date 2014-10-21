@@ -176,17 +176,34 @@ for subject in subjects:
 
                 course_notes = find_key('CourseNotes', this_class).replace('<br />', ', ')
                 course_notes = normalize(course_notes)
+
                 session = normalize(find_key('Sess', this_class))
                 campus_name = normalize(find_key('Site', this_class))
+
                 building_name = normalize(find_key('Building', this_class))
+                building_name = 'Unknown' if building_name == '' else building_name
+
                 room_name = normalize(find_key('Room', this_class))
+                room_name = '404' if room_name == '' else room_name
+
                 teacher_name = find_key('Instructor', this_class)
-                building_name = normalize(find_key('Building', this_class))
+                teacher_name = 'STAFF T' if teacher_name == '' else teacher_name
+
                 is_www = 'www' in course_notes.lower()
                 is_credit_exam = section.find('E') == 0
 
                 if '<br' in teacher_name:
-                    teacher_name = teacher_name.split('<br')[0]
+                    teacher_name = teacher_name.split('<br />')[0]
+                    xlist_indication = teacher_name.split('<br />')[1]
+                    # ELEN437
+                    # <br />XLST MSE401/501
+                    # PHYS512
+                    # <br />XLIST PHYS412
+                    # split on space,
+                    # split on first number,  check numbers for slash and associate with course string
+                    # create those objects in db and associate IDs with this course
+                    import pdb
+                    pdb.set_trace()
 
                 teacher_name = normalize(teacher_name).title()
 
@@ -331,3 +348,26 @@ for subject in subjects:
 
 
 driver.close()
+
+
+# ASSIGN NULL TO TEACH ROOM 404
+n = Teacher.get(Teacher.name == 'Null R')
+c = Course.get(Course.name == 'Unknown')
+b = Building.get(Building.name == 'Unknown')
+r = Room.get((Room.name == 404),
+             (Room.building == b))
+Class.create(
+    section='404',
+    callnum='404',
+    seats_status='Closed',
+    seats_max=404,
+    seats_available=404,
+    session='Normal Academic Term',
+    times='{}',
+    course=c,
+    term=term,
+    room=r,
+    teacher=n,
+    is_www=False,
+    is_credit_exam=False
+)
