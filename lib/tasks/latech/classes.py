@@ -96,7 +96,12 @@ time.sleep(1)
 subjects_select = driver.find_element_by_css_selector('select[name="Subject"]')
 subjects = [x.get_attribute("value") for x in subjects_select.find_elements_by_tag_name("option")]
 
-for subject in subjects:
+subjects = subjects[90:]
+
+# @TODO(Shrugs) add some logic here to get the last checked subject
+# i.e. get classes by term, use class with highest id's subject as the most recent subject
+
+for sub_num, subject in enumerate(subjects):
     # for each subject, select it and then do some stuff
     select_and_submit(driver, subject)
 
@@ -143,8 +148,10 @@ for subject in subjects:
                 if course_code == '':
                     # this information may belong to previous class. Need to make sure this is the case, though
                     print 'CHECK OUT PREVIOUS CLASS FOR DOUBLE TIMES'
-                    import pdb
-                    pdb.set_trace()
+                    # Applied Animal Nutrition 001
+                    # Beef Production 001
+                    # import pdb
+                    # pdb.set_trace()
                     continue
 
                 subject_code = course_code.split('-')[0]
@@ -193,17 +200,28 @@ for subject in subjects:
                 is_credit_exam = section.find('E') == 0
 
                 if '<br' in teacher_name:
-                    teacher_name = teacher_name.split('<br />')[0]
-                    xlist_indication = teacher_name.split('<br />')[1]
+                    t_s = teacher_name.split('<br />')
+                    teacher_name = t_s[0]
+                    xlist_indication = t_s[1] if len(t_s) > 1 else None
+                    # for some fucking reason, they put 'WWW' in the goddamn teacher field in some classes
+                    # this is fucking rediculous
                     # ELEN437
                     # <br />XLST MSE401/501
                     # PHYS512
                     # <br />XLIST PHYS412
+                    # ACCT-084 -> XLS ACCT202-084
+                    # ACCT-507 -> XLIST ACCT607
+                    # ACCT-607 -> XLIST ACCT507
+                    # ANSC-312 -> HONORS ONLY
+                    # ANS-289C -> GREEN W
+                    # ARCH-450C -> XLIST ARCH550C
+                    # ARCH-550C -> XLIST ARCH450C
                     # split on space,
                     # split on first number,  check numbers for slash and associate with course string
                     # create those objects in db and associate IDs with this course
-                    import pdb
-                    pdb.set_trace()
+                    if xlist_indication != 'WWW':
+                        print 'CHECK THIS THIS OUT'
+                        print course_code, '->', xlist_indication
 
                 teacher_name = normalize(teacher_name).title()
 
@@ -274,7 +292,7 @@ for subject in subjects:
                 except Subject.DoesNotExist, e:
                     print "ugh..."
                     print subject_code
-                    raise e
+                    continue
 
                 # COURSE
                 try:
@@ -342,6 +360,7 @@ for subject in subjects:
                 driver.find_element_by_xpath("html/body/div[3]/form/table[1]/tbody/tr/td/span/a[3]").click()
                 time.sleep(1)
 
+    print 'Finsihed Subject # ', sub_num
     # return to subject listing
     driver.find_element_by_xpath("html/body/div[3]/form/table[1]/tbody/tr/td/span/a[2]").click()
     time.sleep(1)
@@ -350,24 +369,24 @@ for subject in subjects:
 driver.close()
 
 
-# ASSIGN NULL TO TEACH ROOM 404
-n = Teacher.get(Teacher.name == 'Null R')
-c = Course.get(Course.name == 'Unknown')
-b = Building.get(Building.name == 'Unknown')
-r = Room.get((Room.name == 404),
-             (Room.building == b))
-Class.create(
-    section='404',
-    callnum='404',
-    seats_status='Closed',
-    seats_max=404,
-    seats_available=404,
-    session='Normal Academic Term',
-    times='{}',
-    course=c,
-    term=term,
-    room=r,
-    teacher=n,
-    is_www=False,
-    is_credit_exam=False
-)
+# # ASSIGN NULL TO TEACH ROOM 404
+# n = Teacher.get(Teacher.name == 'Null R')
+# c = Course.get(Course.name == 'Unknown')
+# b = Building.get(Building.name == 'Unknown')
+# r = Room.get((Room.name == 404),
+#              (Room.building == b))
+# Class.create(
+#     section='404',
+#     callnum='404',
+#     seats_status='Closed',
+#     seats_max=404,
+#     seats_available=404,
+#     session='Normal Academic Term',
+#     times='{}',
+#     course=c,
+#     term=term,
+#     room=r,
+#     teacher=n,
+#     is_www=False,
+#     is_credit_exam=False
+# )
