@@ -2,6 +2,7 @@ from selenium import webdriver
 import re
 import os
 
+
 def find_key(key, text):
     new_re = '\<!-- \"' + key + '\"-->\n\<!-- \"(?P<value>.+)\"--\>'
     m = re.search(new_re, text)
@@ -29,10 +30,12 @@ def get_short_name():
     full_path = os.path.dirname(os.path.realpath(__file__))
     return full_path.split('/')[-1]
 
+
 def get_driver(debug):
     driver = webdriver.Firefox() if debug else webdriver.PhantomJS()
     driver.set_window_size(1024, 768)
     return driver
+
 
 def get_debug():
     if 'BB_DEBUG' in os.environ:
@@ -40,8 +43,10 @@ def get_debug():
 
     return False
 
+
 def remove_dupe_space(str):
     return ' '.join(str.split())
+
 
 def normalize(str):
     return remove_dupe_space(str.strip())

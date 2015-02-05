@@ -70,11 +70,17 @@ angular.module('bossBossApp', [
 
     FacebookProvider.init('895105880503569');
 })
-.run(function ($rootScope, $location, Auth, State, uiSelect2Config) {
+.run(function ($rootScope, $location, Auth, State, uiSelect2Config, School, localStorageService) {
 
     uiSelect2Config.allowClear = true;
     State.start();
     $rootScope.cachedCourseResult = {};
+
+    if (localStorageService.get('lastTerm') !== School.thisTerm) {
+        localStorageService.clearAll();
+    }
+
+    localStorageService.set('lastTerm', School.thisTerm);
 
     // Auth.currentUser().$promise.then(function(user) {
     //     if (user.state.route) {
