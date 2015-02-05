@@ -96,8 +96,6 @@ time.sleep(1)
 subjects_select = driver.find_element_by_css_selector('select[name="Subject"]')
 subjects = [x.get_attribute("value") for x in subjects_select.find_elements_by_tag_name("option")]
 
-subjects = subjects[90:]
-
 # @TODO(Shrugs) add some logic here to get the last checked subject
 # i.e. get classes by term, use class with highest id's subject as the most recent subject
 
