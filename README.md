@@ -1,6 +1,6 @@
 # Boss'Boss
 
-
+> I'm going to leave this around for prosperity, but this is probably some of the worst code I've ever written :D
 
 ## Development
 
